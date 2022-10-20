@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@100;300;400;500&family=Source+Sans+Pro:wght@200;300;400&display=swap');
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+.main{
+    height: 3000px;
+}
+button{
+    cursor: pointer;
+}
+.color-white{
+    color: #fff !important;
+}
+.bg-red{
+    background: linear-gradient(180deg, #FC2F2F 0%, #DA2727 90.62%, #FC2F2F 100%);
+}
+.bg-blue{
+    background: linear-gradient(180deg, #47A2DD 0%, #207CB8 100%);
+}
+.mt-75{
+    margin-top: 75px !important;
+}
+.mr-md-auto, .mx-md-auto {
+    margin-right: auto!important;
+}
+.pt-75{
+    padding-top: 75px !important;
+}
+.pd-10-16{
+    padding: 10px 16px !important;
+}
+.pd-16-0{
+    padding: 16px 0px;
+}
+.pd-8-16{
+    padding: 8px 16px !important;
+}
+.pd-8-12{
+    padding: 8px 12px !important;
+}
+.pd-0-15{
+    padding: 0px 15px !important;
+}
+.container{
+    max-width: 1140px;
+    margin: 0 auto;
+}
+.flex-1{
+    flex: 1;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+}
+.header-home{
+    position: relative;
+    width: 100%;
+    z-index: 99;
+}
+.header{
+    position: relative;
+    background: linear-gradient(256.66deg, #207CB8 -1.09%, #33B44A 96.55%);
+}
+.header-nav{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.header_logo{
+    width: 167px;
+    aspect-ratio: auto 167 / 43;
+    height: 43px;
+}
+.header-nav_list{
+    list-style-type: none;
+
+}
+.header-nav_item a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+
+}
+
+.btn-login{
+    border-radius: 4px;
+    padding: 8px 10px;
+    background: transparent;
+    border: 1px solid #fff;
+}
+.btn-regis{
+    border-radius: 4px;
+    padding: 8px 12px;
+    background: linear-gradient(256.66deg, #33B44A -1.09%, #096812 96.55%);
+    border: 1px solid #096812;
+    color: #fff;
+}
+.btn-login:hover , .btn-regis:hover{
+    opacity: 0.85;
+}
+.header-bg-container{
+    margin-top: -75px;
+}
+.header-bg-img{
+    background: url(https://trace.icheck.vn/assets/images2/bg-slider-home.png) center no-repeat;
+    height: 650px;
+}
+.banner{
+    padding-top: 120px;
+    position: relative;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.banner-left{
+    flex: 1;
+}
+.banner-right{
+    flex: 1;
+}
+.banner-right img{
+    height: 500px;
+    margin-right: 15px;
+    float: right;
+}
+.banner_title{
+    margin: 24px 0px;
+    font-size: 18px;
+    line-height: 1.5;
+    font-weight: 400;
+}
+.banner_btn{
+    color: #fff;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 4px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+}
+.banner_btn:hover{
+    opacity: 0.9;
+}
+.banner_btn:last-child{
+    margin-left: 20px;
+}
+.widget-container{
+    position: absolute;
+    bottom: -14%;
+    width: 100%;
+}
+.widget{
+    padding: 24px;
+    background-color: #fff;
+    box-shadow: 0px 10px 20px rgb(0 0 0 / 10%);
+    border-radius: 8px;
+    height: 116px;
+    align-items: center;
+}
+.widget_img{
+    width: 44px;
+}
+.widget_info{
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+}
+.widget_title{
+    font-size: 30px;
+    font-weight: 700;
+    color: #33B44A;
+}
+.widget_des{
+    font-size: 14px;
+
+}
+.home{
+    margin-top: 60px;
+}
+.intro-home{
+    padding-top: 65px;
+}
+.intro-home_bgimg{
+    background-image: url(https://trace.icheck.vn/assets/images2/bg-intro-home.png);
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+
+.intro-home_left-img{
+    margin-top: 65px;
+
+}
+.text-info-home {
+    line-height: 1.6;
+    margin-top: 24px;
+    font-size: 18px;
+}
