@@ -5,6 +5,5 @@ class homeController {
         res.render('home');
     }
     
-
 }
 module.exports = new homeController;

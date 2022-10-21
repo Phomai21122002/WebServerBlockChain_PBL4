@@ -8,14 +8,27 @@
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
 }
+a{
+    text-decoration: none;
+}
 .main{
-    height: 3000px;
+    min-height: 10000px;
 }
 button{
     cursor: pointer;
 }
+.col{
+    display: flex;
+    flex-direction: column;
+}
+.y-center{
+    justify-content: center;
+}
 .color-white{
     color: #fff !important;
+}
+.color-blue{
+    color: #207CB8 !important;
 }
 .bg-red{
     background: linear-gradient(180deg, #FC2F2F 0%, #DA2727 90.62%, #FC2F2F 100%);
@@ -23,17 +36,38 @@ button{
 .bg-blue{
     background: linear-gradient(180deg, #47A2DD 0%, #207CB8 100%);
 }
+.text-center{
+    text-align: center;
+}
+.text-green{
+    color: #33B44A !important;
+}
 .mt-75{
     margin-top: 75px !important;
+}
+.mt-25{
+    margin-top: 25px !important;
 }
 .mr-md-auto, .mx-md-auto {
     margin-right: auto!important;
 }
+.pt-65{
+    padding-top: 65px !important;
+}
 .pt-75{
     padding-top: 75px !important;
 }
+.pd-35{
+    padding: 35px !important;
+}
+.pd-15{
+    padding: 15px !important;
+}
 .pd-10-16{
     padding: 10px 16px !important;
+}
+.pd-10-0{
+    padding: 10px 0px !important;
 }
 .pd-16-0{
     padding: 16px 0px;
@@ -95,6 +129,7 @@ button{
     padding: 8px 10px;
     background: transparent;
     border: 1px solid #fff;
+    font-size: 14px;
 }
 .btn-regis{
     border-radius: 4px;
@@ -102,6 +137,7 @@ button{
     background: linear-gradient(256.66deg, #33B44A -1.09%, #096812 96.55%);
     border: 1px solid #096812;
     color: #fff;
+    font-size: 14px;
 }
 .btn-login:hover , .btn-regis:hover{
     opacity: 0.85;
@@ -194,13 +230,134 @@ button{
     background-position: right;
 }
 
-
 .intro-home_left-img{
     margin-top: 65px;
-
 }
 .text-info-home {
     line-height: 1.6;
     margin-top: 24px;
     font-size: 18px;
+    text-align: justify;
+}
+.intro-home_title{
+    text-align: center;
+}
+.intro-home_title h1{
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    color: #207CB8;
+    margin-bottom: 8px;
+}
+.intro-home_des-container{
+    margin-top: 35px;
+}
+.intro-home_des-container h4{
+    font-size: 20px;
+    color: #1A1A1A;
+    line-height: 1.2;
+    margin-bottom: 8px;
+}
+.intro-home_des-content{
+    margin-top: 20px;
+}
+
+.intro-home_right img{
+    width: 100%;
+}
+.intro-home_des-item img{
+    width: 22px;
+    height: 22px;
+}
+.intro-home_des-item p {
+    margin-bottom: 0;
+    margin-left: 15px;
+    font-weight: 400;
+    font-size: 16px;
+    color: #828282;
+}
+
+.btn-reg-demo {
+    margin-top: 25px;
+    display: inline-block;
+    background: linear-gradient(180deg, #FC2F2F 0%, #DA2727 90.62%, #FC2F2F 100%);
+    color: #fff;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 15px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+
+.home-regis_bg {
+    background: url('https://trace.icheck.vn/assets/images2/bg-form-reg-home.png'), linear-gradient(256.66deg, #207CB8 -1.09%, #33B44A 96.55%);
+    margin-top: 85px;
+    padding-top: 65px;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: 100% 100% !important;
+}
+.home-regis_title{
+    font-weight: 700 !important;
+    font-size: 32px !important;
+    color: #F9F331 !important;
+    margin-bottom: 8px !important;
+} 
+.home-reigs_item img{
+    width: 75px;
+
+}
+.home-regis_text-one{
+    font-weight: 700;
+    font-size: 20px;
+    color: #FFFFFF;
+    line-height: 1.5;
+}
+.home-regis_text-two{
+    font-weight: 400;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+}
+.home-regis_content{
+    padding-bottom: 60px;
+}
+.form-regis-container{
+    padding: 32px 32px 48px 32px;
+    background: #fff;
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.25);
+    border-radius: 20px 20px 20px 20px;
+}
+.form-regis_header{
+    font-weight: 700;
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+.form-regis_input-contain{
+    margin-bottom: 5px;
+    padding-bottom: 15px;
+    position: relative;
+}
+.form-regis_input-contain input{
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.form-regis_button {
+    cursor: pointer;
+    background: linear-gradient(180deg, #FC2F2F 0%, #DA2727 90.62%, #FC2F2F 100%);
+    border-radius: 4px;
+    color: #fff;
+    display: block;
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 20px;
+    width: 100%;
+    border: none;
+    outline: none;
 }
