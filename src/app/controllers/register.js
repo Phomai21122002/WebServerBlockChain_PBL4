@@ -2,7 +2,7 @@ class registerController {
 
     //GET /news
     index(req, res){
-        res.render('register', {
+        res.render('login_regis/register', {
             layout: false
         });
     }

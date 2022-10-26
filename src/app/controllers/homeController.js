@@ -2,7 +2,9 @@ class homeController {
 
     //GET /news
     index(req, res){
-        res.render('home');
+        res.render('home/home.hbs', {
+            layout: 'main'
+        });
     }
     
 }

@@ -27,6 +27,9 @@ button{
 .color-white{
     color: #fff !important;
 }
+.color-black {
+    color: #000 !important;
+}
 .color-blue{
     color: #207CB8 !important;
 }
@@ -36,6 +39,9 @@ button{
 .bg-blue{
     background: linear-gradient(180deg, #47A2DD 0%, #207CB8 100%);
 }
+.bg-green{
+    background: linear-gradient(112.4deg, #5AB847 14.83%, #298D3F 92.67%);
+}
 .text-center{
     text-align: center;
 }
@@ -44,6 +50,9 @@ button{
 }
 .mt-75{
     margin-top: 75px !important;
+}
+.mt-60{
+    margin-top: 60px !important;
 }
 .mt-25{
     margin-top: 25px !important;
@@ -80,6 +89,9 @@ button{
 }
 .pd-0-15{
     padding: 0px 15px !important;
+}
+.pl-8{
+    padding-left: 8px !important;
 }
 .container{
     max-width: 1140px;
@@ -122,6 +134,9 @@ button{
     font-weight: 500;
     font-size: 14px;
 
+}
+.header_group-btn{
+    padding: 10px 0px;
 }
 
 .btn-login{
@@ -360,4 +375,67 @@ button{
     width: 100%;
     border: none;
     outline: none;
+}
+
+.breadcrumb{
+    padding: 5px 0px;
+    background-color: #F2F4F5;
+
+}
+.breadcrumb-left{
+    padding: 12px 16px;
+    display: flex;
+    margin-right: auto;
+    list-style: none;
+}
+.breadcrumb-left_items:first-child::before{
+    content: "" !important;
+}
+
+.breadcrumb-left_items::before{
+    content: ">";
+    display: inline-block;
+    padding-right: 0.5rem;
+    color: #6c757d;
+}
+.breadcrumb-left_items i {
+    font-size: 14px;
+    color: #333;
+}
+.breadcrumb-left_items a {
+    color: #333 ;
+    font-size: 14px;
+}
+.breadcrumb-left_items a:hover{
+    color: #FF7B17; 
+}
+.breadcrumb-right{
+    width: 304px;
+    height: 36px;
+    padding: 5px 0 0 10px;
+    background: #fff;
+    border: 1px solid #E0E0E0;
+    border-radius: 18px;
+    position: relative;
+    margin: 5px 0 0;
+}
+.breadcrumb-right_input{
+    width: 90%;
+    background: none;
+    height: 25px;
+    outline: none;
+    border: none;
+}
+.breadcrumb-right_searchbtn{
+    background: none;
+    border: none;
+}
+.product-header {
+    padding: 48px 15px;
+}
+.product-header h1{
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    font-size: 40px;
 }
