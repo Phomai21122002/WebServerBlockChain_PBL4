@@ -1,6 +1,6 @@
 const homeRouter = require('./home')
 const loginRouter = require('./login')
-const register = require('./registe')
+const register = require('./register')
 const admin = require('./admin')
 const business = require('./business')
 const product = require('./product')
