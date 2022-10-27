@@ -439,3 +439,169 @@ button{
     line-height: 1.2;
     font-size: 40px;
 }
+
+
+/* product */
+
+.form-list {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.form-item {
+    flex: 0 0 25%;
+    max-width: 25%;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 30px;
+}
+
+.form-item_product {
+    position: relative;
+}
+
+.form-item_product:hover .form-item_position{
+    display: block;
+}
+
+.form-item_position {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    line-height: 204px;
+    text-align: center;
+    display: none;
+}
+
+.form-item_position-link {
+
+    font-size: 16px;
+    color: #FFFFFF;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    padding: 8px 12px;
+}
+
+.form-item_img {
+    width: 100%;
+    height: 200px;
+    border-radius: 3px;
+}
+
+.form-item_heading {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 4px 0;
+}
+
+.form-item_desc {
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 8px;
+}
+
+.form-page_next {
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.page-next_btn {
+    padding: 8px 12px;
+    background-color: #56af44;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.footer {
+    margin-top: 30px;
+    padding: 40px 0;
+    box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.05);
+}
+
+.footer-list {
+    display: flex;
+}
+
+.footer-form {
+    width: 50%;
+    padding: 0 10px;
+}
+
+.footer-logo img{
+    height: 52px;
+    width: auto;
+}
+
+.footer-qr {
+    margin: 16px 0;
+}
+
+.qr_type {
+    font-size: 14px;
+}
+
+.form-qr_img {
+    display: flex;
+    align-items: center;
+}
+
+.form-qr_img img{
+    width: 70px;
+    margin: 4px 4px 0 0;
+}
+
+.footer-qr_link img{
+    height: 40px;
+    width: auto;
+}
+
+.footer-form_item {
+    display: flex;
+    padding: 8px 0;
+}
+
+.footer-form_item img{
+    width: 20px;
+    height: 20px;
+    margin-right: 20px;
+    margin-top: 1px;
+}
+
+.footer-form_heading {
+    color: #33b44a;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.footer-form_desc {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.4;
+    width: 90%;
+}
+
+.footer-form_btn {
+    width: 100%;
+    margin-top: 24px;
+}
+
+.footer-form_download {
+    text-align: center;
+    display: block;
+    padding: 14px 40px;
+    text-decoration: none;
+    background-color: #33b44a ;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 30px;
+}
