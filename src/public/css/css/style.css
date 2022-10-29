@@ -460,6 +460,8 @@ button{
 
 .form-item_product {
     position: relative;
+    width: 100%;
+    height: 200px;
 }
 
 .form-item_product:hover .form-item_position{
@@ -471,10 +473,13 @@ button{
     top: 0;
     bottom: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
+    background: linear-gradient(112.4deg,
+     rgba(90, 184, 71, 0.75) 14.83%,
+      rgba(41, 141, 63, 0.75) 92.67%);
     line-height: 204px;
     text-align: center;
     display: none;
+    border-radius: 3px;
 }
 
 .form-item_position-link {
@@ -484,8 +489,8 @@ button{
     font-weight: 500;
     text-decoration: none;
     border: 1px solid #fff;
-    border-radius: 10px;
-    padding: 8px 12px;
+    border-radius: 50px;
+    padding: 12px 28px;
 }
 
 .form-item_img {
@@ -520,7 +525,7 @@ button{
     border-radius: 5px;
 }
 
-.footer {
+.container_shadow {
     margin-top: 30px;
     padding: 40px 0;
     box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.05);
@@ -604,4 +609,118 @@ button{
     font-size: 16px;
     font-weight: 500;
     border-radius: 30px;
+}
+
+
+/* productDetail */
+
+.header-detail {
+    text-align: center;
+    padding-top: 50px;
+}
+
+.header-detail_img {
+    width: 600px;
+    height: 400px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 3px;
+}
+
+.header-detail_product {
+    margin: 20px 150px;
+    border-bottom: 1px solid #ebebeb ;
+}
+
+.header-detail_name {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.header-detail_price {
+    display: block;
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 12px;
+    color: #56af44;
+    margin-bottom: 40px;
+}
+
+.subheader-detail {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-bottom: 40px;
+}
+
+.detail-code {
+    padding: 20px 0;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.detail-code .detail-code_name {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.detail-address {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.detail-address .detail-address_name {
+    text-transform: uppercase;
+}
+
+/* form-detail_icon */
+
+.form-deatail_link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    text-align: center;
+    padding: 16px 0;
+}
+
+.form-detail_icon {
+    width: 110px;
+    height: 110px;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.form-detail_nameicon {
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+/* form-detail_content */
+.form-detail_content {
+    padding: 20px 0;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.form-detail_heading {
+    font-size: 18px;
+    font-weight: 500;
+    color: #000;
+    margin-bottom: 24px;
+}
+
+.form-detail_desc {
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+    line-height: 1.6;
 }
