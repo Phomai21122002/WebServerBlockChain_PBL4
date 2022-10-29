@@ -14,6 +14,10 @@ var nextBtn = document.getElementById('nextBtn')
 nextBtn.addEventListener('click' , function() {
     formInfo.style.display = 'none'
     formBusinessName.style.display = 'block'
-
 })
-// formInfo.style.display = 'none'
+
+var backBtn = document.querySelector('.back-btn')
+backBtn.addEventListener('click', function() {  
+    formInfo.style.display = 'block'
+    formBusinessName.style.display = 'none'
+})

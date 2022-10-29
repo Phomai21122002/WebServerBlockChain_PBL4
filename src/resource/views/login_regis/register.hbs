@@ -11,7 +11,7 @@
     {{!-- <link rel="icon" type="image/png" sizes="16x16" href="/template/images/favicon.png"> --}}
     <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
     <link href="/template/css/style.css" rel="stylesheet">
-    
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body class="h-100">
@@ -64,7 +64,10 @@
                                 </div>
                             </div>
                             
-                            <div class="card login-form mb-0" id="form-business-name">
+                            <div class="card login-form mb-0" id="form-business-name" style="position: relative;">
+                                <span class="back-btn" style="">
+                                    <i style="" class="fa-solid fa-arrow-left"></i>
+                                </span>
                                 <div class="card-body pt-5">
                                     <a class="text-center" href=""> <h4>Nhập Tên Doanh Nghiệp</h4></a>
                                     <form class="mt-5 mb-3 login-input">
@@ -94,6 +97,34 @@
     <script src="/template/js/gleek.js"></script>
     <script src="/template/js/styleSwitcher.js"></script>
     <script src="/js/main.js"></script>
+
+    <style>
+        .back-btn{
+            position: absolute; top: 15px;left: 20px; background-color: #ccc;  width: 30px; height: 30px; border-radius: 100%;
+            cursor: pointer;
+        }   
+        .back-btn:hover{
+            opacity: 0.8;
+        }
+        .back-btn i {
+            margin-top: 6px; margin-left: 7px; font-size: 18px;
+        }
+        #form-business-name{
+            animation: fade-down 0.5s ease;
+        }
+
+
+        @keyframes fade-down {
+            from{
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to{
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
 </body>
 </html>
 
