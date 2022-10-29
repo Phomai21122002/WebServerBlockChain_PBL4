@@ -6,6 +6,14 @@ let arrow = document.querySelectorAll(".arrow");
             });
         }
 
-const formBusinessName = document.getElementById('form-business-name')
+var formBusinessName = document.getElementById('form-business-name')
 formBusinessName.style.display = 'none'
-const formInfo = document.getElementById('')
+var formInfo = document.getElementById('form-info')
+
+var nextBtn = document.getElementById('nextBtn')
+nextBtn.addEventListener('click' , function() {
+    formInfo.style.display = 'none'
+    formBusinessName.style.display = 'block'
+
+})
+// formInfo.style.display = 'none'
