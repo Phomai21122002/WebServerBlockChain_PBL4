@@ -11,6 +11,7 @@ class loginController {
         });
     }
 
+    //GET /login/checklogin
     checkLogin(req,response)
     {
         var email = req.body.email

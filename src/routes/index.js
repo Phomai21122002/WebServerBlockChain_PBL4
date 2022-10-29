@@ -17,7 +17,7 @@ function route(app){
     app.use('/register',register);
     app.use('/product', product)
 
-    app.use('/admin',adminMiddleware.requireAuth,admin);
+    app.use('/admin',admin);
     app.use('/business',businessMiddleware.requireAuth,business)
     app.use('/center',centerMiddleware.requireAuth,center)
     app.use('/',homeRouter);

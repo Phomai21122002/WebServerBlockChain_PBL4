@@ -5,3 +5,7 @@ let arrow = document.querySelectorAll(".arrow");
                 arrowParent.classList.toggle("showMenu");
             });
         }
+
+const formBusinessName = document.getElementById('form-business-name')
+formBusinessName.style.display = 'none'
+const formInfo = document.getElementById('')
