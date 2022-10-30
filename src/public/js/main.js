@@ -5,3 +5,19 @@ let arrow = document.querySelectorAll(".arrow");
                 arrowParent.classList.toggle("showMenu");
             });
         }
+
+var formBusinessName = document.getElementById('form-business-name')
+formBusinessName.style.display = 'none'
+var formInfo = document.getElementById('form-info')
+
+var nextBtn = document.getElementById('nextBtn')
+nextBtn.addEventListener('click' , function() {
+    formInfo.style.display = 'none'
+    formBusinessName.style.display = 'block'
+})
+
+var backBtn = document.querySelector('.back-btn')
+backBtn.addEventListener('click', function() {  
+    formInfo.style.display = 'block'
+    formBusinessName.style.display = 'none'
+})
