@@ -22,9 +22,10 @@ class loginController {
 
         request('http://localhost:3000/api/users', { json: true }, (err, res, body) => {
             if (err) {
-                res.render('error/error500.hbs', {
+                response.render('error/error500.hbs', {
                     layout: false
                 })
+                return
             }
             const result = res.body
 
