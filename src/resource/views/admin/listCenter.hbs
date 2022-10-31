@@ -1,0 +1,44 @@
+<div class="row page-titles mx-0">
+    <div class="col p-md-0">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+            <li class="breadcrumb-item active"><a href="/admin/danhsachttkđ">Danh Sách Trung Tâm Kiểm Định</a></li>
+        </ol>
+    </div>
+</div>
+
+<div class="col">
+    <div class="card">
+
+        <div class="card-body">
+            <h4 class="card-title">Danh Sách Trung Tâm Kiểm Định</h4>
+            <div class="table-responsive">
+                <table class="table header-border">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Tên Trung Tâm</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Địa Chỉ</th>
+                            <th scope="col">Số Điện Thoại</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each data}}
+
+                        <tr>
+                            <th></th>
+                            <td>{{this.UserName}}</td>
+                            <td>{{this.Email}}</td>
+                            <td>{{this.Address}}</td>
+                            <td>{{this.PhoneNumber}}</td>
+                        </tr>
+
+                        {{/each}}
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
