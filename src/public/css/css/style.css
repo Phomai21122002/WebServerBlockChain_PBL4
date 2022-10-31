@@ -11,9 +11,7 @@
 a{
     text-decoration: none;
 }
-.main{
-    min-height: 10000px;
-}
+
 button{
     cursor: pointer;
 }
