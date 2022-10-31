@@ -43,6 +43,19 @@ class adminController {
             layout: 'adminLayout.hbs'
         })
     }
+    
+    danhsachsanpham(req,response)
+    {
+        response.render('admin/listProduct.hbs',{
+            layout: 'adminLayout.hbs'
+        })
+    }
+    danhsachnguyenlieu(req,response)
+    {
+        response.render('admin/listMaterial.hbs',{
+            layout: 'adminLayout.hbs'
+        })
+    }
 
     themttkd(req,res){
         res.render('admin/themttkd.hbs',{
