@@ -57,6 +57,19 @@ class adminController {
         })
     }
 
+    danhsachdonkiemdinh(req,response)
+    {
+        response.render('admin/listApplication.hbs',{
+            layout: 'adminLayout.hbs'
+        })
+    }
+    danhsachquytrinhsx(req,response)
+    {
+        response.render('admin/listProcedure.hbs',{
+            layout:'adminLayout.hbs'
+        })
+    }
+
     themttkd(req,res){
         res.render('admin/themttkd.hbs',{
             layout: 'adminLayout.hbs'
@@ -65,6 +78,24 @@ class adminController {
 
     themdoanhnghiep(req,res){
         res.render('admin/themdoanhnghiep.hbs',{
+            layout: 'adminLayout.hbs'
+        })
+    }
+
+    xemthongtindoanhnghiep(req,response)
+    {
+        const id = req.params.id
+        response.render('admin/infoBusiness.hbs',{
+            layout: 'adminLayout.hbs',
+            id: id
+        })
+
+    }
+
+    xemthongtinsanpham(req, response)
+    {
+        const id = req.params.id
+        response.render('admin/infoProduct.hbs',{
             layout: 'adminLayout.hbs'
         })
     }
