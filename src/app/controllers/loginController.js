@@ -15,10 +15,7 @@ class loginController {
     checkLogin(req,response)
     {
         var email = req.body.email
-        var password = req.body.password
-        console.log(email)
-        console.log(password)
-
+        var password = hash(req.body.password).toString()
 
         request('http://localhost:3000/api/users', { json: true }, (err, res, body) => {
             if (err) {

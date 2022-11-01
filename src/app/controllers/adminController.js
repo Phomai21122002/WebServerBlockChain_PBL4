@@ -122,6 +122,20 @@ class adminController {
             phoneNumbe: phoneNumber,
         })
     }
+
+    themnguyenlieu(req,response)
+    {
+
+        var listTinh = subvn.getProvinces()
+        var listHuyen = subvn.getDistricts()
+        var listXa = subvn.getWards()
+        response.render('admin/addMaterial.hbs',{
+            layout: 'adminLayout.hbs',
+            listTinh: listTinh,
+            listHuyen: listHuyen,
+            listXa: listXa,
+        })
+    }
     
 }
 module.exports = new adminController;

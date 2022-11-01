@@ -12,7 +12,7 @@ router.get('/danhsachnguyenlieu',adminController.danhsachnguyenlieu)
 router.get('/danhsachdonkd',adminController.danhsachdonkiemdinh)
 router.get('/quytrinhsanxuat',adminController.danhsachquytrinhsx)
 router.get('/sanpham/:id',adminController.xemthongtinsanpham)
-
+router.get('/addMaterial',adminController.themnguyenlieu)
 
 router.get('/doanhnghiep/:id',adminController.xemthongtindoanhnghiep)
 
