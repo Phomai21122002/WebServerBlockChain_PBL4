@@ -9,6 +9,13 @@ class adminController {
         })
     }
 
+    profile(req, response)
+    {
+        response.render('admin/profile.hbs', {
+            layout: 'adminLayout.hbs'
+        })
+    }
+
     //GET /admin/danhsachttkd
     danhsachttkd(req,response){
 
@@ -81,6 +88,13 @@ class adminController {
             layout: 'adminLayout.hbs'
         })
     }
+    
+    themsanpham(req,response)
+    {
+        response.render('admin/addProduct.hbs',{
+            layout:'adminLayout.hbs'
+        })
+    }
 
     xemthongtindoanhnghiep(req,response)
     {
@@ -136,6 +150,18 @@ class adminController {
             listXa: listXa,
         })
     }
+
+
+    addproduct(res,response)
+    {
+        response.send({
+            tensp: res.body.tenSP,
+            mota: res.body.mota,
+            congdung: res.body.congdung,
+            thanhphan: res.body.array
+        })
+    }
+
     
 }
 module.exports = new adminController;
