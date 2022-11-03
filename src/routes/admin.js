@@ -21,4 +21,5 @@ router.get('/doanhnghiep/:id',adminController.xemthongtindoanhnghiep)
 
 router.post('/addttkd',adminController.addttkd)
 router.post('/addproduct',adminController.addproduct)
+router.post('/insertmaterial',adminController.insertMaterial)
 module.exports = router;

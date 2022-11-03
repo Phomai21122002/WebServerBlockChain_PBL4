@@ -1,5 +1,6 @@
 const request = require('request')
-
+const session = require('express-session')
+const { response, json } = require('express')
 class adminController { 
 
     //GET /admin
@@ -137,18 +138,25 @@ class adminController {
         })
     }
 
+
+    //GET admin/addmaterial
     themnguyenlieu(req,response)
     {
 
-        var listTinh = subvn.getProvinces()
-        var listHuyen = subvn.getDistricts()
-        var listXa = subvn.getWards()
         response.render('admin/addMaterial.hbs',{
             layout: 'adminLayout.hbs',
-            listTinh: listTinh,
-            listHuyen: listHuyen,
-            listXa: listXa,
         })
+    }
+
+    //POST admin/insertmaterial
+    insertMaterial(req, response)
+    {
+        var TenNguyenLieu = req.body.tennguyenlieu
+        var DiaChi = req.body.DiaChi
+
+       
+
+        
     }
 
 
