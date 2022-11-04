@@ -72,6 +72,7 @@
     .form-item {
         flex: 0 0 50%;
         max-width: 50%;
+        padding: 0 16px;
     }
 
     .banner-right img {
@@ -85,5 +86,196 @@
     }
     .pd-0-15 {
         padding: 0px 20px !important;
+    }
+
+    /* nav show */
+    .container__header-bar {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        background-color: #348441;
+    }
+
+    .header_group-btn {
+        display: none;
+    }
+
+    .header__nav-bars {
+        font-size: 28px;
+        color: #fff;
+        padding: 0 24px;
+        line-height: 43px;
+        display: block;
+    }
+
+    .header-nav-mobile_container {
+        position: fixed;
+        top: 75px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #348441;
+        transform: translateX(100%);
+        opacity: 0;
+        transition: all linear 0.4s;
+        display: block;
+    }
+    .header-nav-mobile_list {
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+    }
+    .header-nav-mobile_item {
+        padding: 16px 0;
+        margin: 0 16px;
+        border-bottom: 1px solid rgb(224, 224, 224);
+    }
+    .header-nav-mobile_link {
+        color: #fff;
+        font-size: 16px;
+        font-weight: 500;
+    }
+    .header-mobile_group-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 40px;
+    }
+    .btn-mobile {
+        border: 1px solid #fff;
+        border-radius: 40px;
+        padding: 12px 80px;
+        min-width: 300px;
+        text-align: center;
+        margin-bottom: 16px;
+    }
+    .nav__input:checked ~ .header-nav-mobile_container {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    .banner {
+        padding-top: 160px;
+    }
+    /* san pham */
+    
+    .breadcrumb {
+        margin-top: 75px;
+    }
+
+    .breadcrumb__flex {
+        display: flex;
+        flex-direction: column;
+    }
+    .breadcrumb-right {
+        margin: 0 24px;
+        width: auto;
+    }
+    .form-item {
+        flex: 0 0 100%;
+        max-width: 100%;
+        text-align: center;
+        margin-top: 24px;
+    }
+    .page-next_btn {
+        padding: 12px 100px;
+        border-radius: 20px;
+    }
+
+    /* tin tuc */
+    .header-news {
+        display: flex;
+        flex-direction: column;
+    }
+    .header-news_left-img {
+        width: 100%;
+        padding: 0 12px;
+    }
+    .header-news_box {
+        width: 100%;
+        padding: 16px;
+    }
+    .header-news_heading-link {
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 1.4;
+    }
+    .form-item_heading {
+        margin: 12px 0;
+    }
+    /* chi tiet */
+    .header-detail_img {
+        width: 100%;
+        padding: 0 16px;
+    }
+    .container_shadow {
+        padding: 0 20px 12px 20px;
+    }
+    .container .form-detail_content:last-child {
+        border: none;
+    }
+
+    /* vung san xuat detail */
+    .nav-origin {
+        max-width: 100%;
+        overflow-x: auto;
+    }
+    .nav-origin::-webkit-scrollbar {
+        display: none;
+    }
+    .nav-origin_item {
+        flex-shrink: 0;
+        margin-right: 8px;
+        border-radius: 5px;
+    }
+    .nav-origin_item:nth-of-type(2n+1) {
+        background-color: #87afd8;
+    }
+    .nav-origin_item:nth-of-type(2n+2) {
+        background-color: #88cf81;
+    }
+    .nav-origin_link {
+        display: block;
+        padding: 8px 12px;
+    }
+
+    .newsdetail_content-img {
+        width: 100%;
+    }
+    .form-item_col8  {    
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding: 0 20px;
+    }
+
+    .newsdetail_desc,
+    .form-detail_desc,
+    .footer-form_desc,
+    .header-news_heading-link,
+    .header-news_desc,
+    .form-item_heading {
+        text-align: justify;
+    }
+
+    .form-item_col4,
+    .form-item_col3-shadow,
+    .form-item_col3   {    
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding: 0 16px;
+    }
+    .form-newsdetail_content {
+        padding: 0;
+    }
+    .breadcrumb-left {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .color-mobile_white {
+        background-color: #fff;
+    }
+    .color-mobile_green {
+        color: #000;
     }
 }
