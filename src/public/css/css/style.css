@@ -454,8 +454,8 @@ button{
 .form-item {
     flex: 0 0 25%;
     max-width: 25%;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 12px;
+    padding-right: 12px;
     margin-bottom: 30px;
 }
 
@@ -1418,4 +1418,9 @@ button{
 
 .form-item_heading:hover {
     color: #ff7b17;
+}
+
+.header__nav-bars,
+.header-nav-mobile_container {
+    display: none;
 }
