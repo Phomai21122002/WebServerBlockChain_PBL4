@@ -73,4 +73,17 @@
         flex: 0 0 50%;
         max-width: 50%;
     }
+
+    .banner-right img {
+        height: auto;
+        margin-right: 0;
+        float: right;
+        width: 100%;
+    }
+    .footer{
+        padding: 20px  !important;
+    }
+    .pd-0-15 {
+        padding: 0px 20px !important;
+    }
 }
