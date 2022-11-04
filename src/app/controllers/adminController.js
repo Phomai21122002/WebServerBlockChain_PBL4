@@ -1,6 +1,8 @@
 const request = require('request')
 const session = require('express-session')
 const { response, json } = require('express')
+const database = require('../modal/DB')
+
 class adminController { 
 
     //GET /admin
@@ -54,15 +56,39 @@ class adminController {
     
     danhsachsanpham(req,response)
     {
-        response.render('admin/listProduct.hbs',{
-            layout: 'adminLayout.hbs'
-        })
+        database.connectDB()
+            .then((connection) => {
+                var getProductQuery = `select * from sanpham`
+                connection.query(getProductQuery, (err,data) =>{
+                    const result = data
+                    database.closeDB(connection)
+                    response.render('admin/listProduct.hbs', {
+                        layout: 'adminLayout.hbs',
+                        data: result
+                    })
+                })
+            })
+            .catch((err) => {
+                response.render('error/error500.hbs', {layout: false})
+            })
+
     }
     danhsachnguyenlieu(req,response)
-    {
-        response.render('admin/listMaterial.hbs',{
-            layout: 'adminLayout.hbs'
-        })
+    {   
+        database.connectDB()
+            .then((connection) => {
+                var getNguyenLieuQuery = `select * from nguyenlieu`
+                connection.query(getNguyenLieuQuery, (err, data) => {
+                    response.render('admin/listMaterial.hbs',{layout: 'adminLayout.hbs', data: data})
+                })
+            })
+            .catch((err) => {
+                console.log(err)
+                response.render('error/error500.hbs',{
+                    layout: false
+                })
+            })
+        
     }
 
     danhsachdonkiemdinh(req,response)
@@ -92,6 +118,7 @@ class adminController {
     
     themsanpham(req,response)
     {
+
         response.render('admin/addProduct.hbs',{
             layout:'adminLayout.hbs'
         })
@@ -153,21 +180,47 @@ class adminController {
     {
         var TenNguyenLieu = req.body.tennguyenlieu
         var DiaChi = req.body.DiaChi
+        var IDUser = req.session.userid
 
-       
+        database.connectDB()
+            .then((connection) => {
+                var insertQuery = `insert into nguyenlieu (TenNguyenLieu,DiaChi,IDUser) values ('${TenNguyenLieu}','${DiaChi}','${IDUser}')`
+                connection.query(insertQuery, (err, data) => {
+                    response.redirect('/admin/danhsachnguyenlieu')
+                })
+            })
+            .catch((err) => {
+                console.log(err)
+                response.render('error/error500.hbs',{
+                    layout:false
+                })
+            })
+     
 
-        
     }
 
 
-    addproduct(res,response)
+    addproduct(req,response)
     {
-        response.send({
-            tensp: res.body.tenSP,
-            mota: res.body.mota,
-            congdung: res.body.congdung,
-            thanhphan: res.body.array
-        })
+        var TenSanPham = req.body.TenSanPham
+        var MoTa = req.body.MoTa
+        var CongDung = req.body.CongDung
+        var ThanhPhan = req.body.ThanhPhan 
+        var IDUser = req.session.userid
+
+        database.connectDB()
+            .then((connection) => {
+                var insertQuery = `insert into sanpham (TenSanPham,MoTa, CongDung, IDUser) values ('${TenSanPham}' , '${MoTa}' , '${CongDung}' , ${IDUser})`
+    
+                connection.query(insertQuery, (err,data) => {
+                    database.closeDB(connection)
+                    response.redirect('/admin/danhsachsanpham')
+                })
+            })
+            .catch((err) => {
+                console.log(err)
+                response.render('error/error500.hbs', {layout: false})
+            })
     }
 
     

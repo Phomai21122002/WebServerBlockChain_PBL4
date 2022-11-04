@@ -23,18 +23,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Air Conditioner</td>
-                            <td>
-                                Doanh nghiệp A
-                            </td>
-                            <td><span class="badge badge-success px-2">Sale</span></td>
-                            <td>Huyện A Lưới, Tỉnh Thừa Thiên Huế</td>
-                            <td style="text-align: center;"><span><a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                            </td>
-                        </tr>
 
-                        <tr>
+                        {{#each data}}
+                            <tr>
+                                <td>{{this.TenSanPham}}</td>
+                                <td>
+                                    Doanh nghiệp A
+                                </td>
+                                <td><span class="badge badge-success px-2">Sale</span></td>
+                                <td>Huyện A Lưới, Tỉnh Thừa Thiên Huế</td>
+                                <td style="text-align: center;"><span><a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
+                                </td>
+                            </tr>
+                        {{/each}}
+                       
+
+                        {{!-- <tr>
                             <td>Air Conditioner</td>
                             <td>
                                 Doanh nghiệp A
@@ -43,7 +47,7 @@
                             <td>Huyện A Lưới, Tỉnh Thừa Thiên Huế</td>
                             <td style="text-align: center;"><span><a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
                             </td>
-                        </tr>
+                        </tr> --}}
                     </tbody>
                 </table>
             </div>

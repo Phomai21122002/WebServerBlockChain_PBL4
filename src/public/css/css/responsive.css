@@ -1,0 +1,76 @@
+/* PC */
+@media (min-width: 1024px ){
+
+}
+
+/* Tablet */
+@media (min-width:740px ) and (max-width:1023px){
+}
+
+/* Mobile */
+@media (max-width:740px ){
+    .header-nav_container{
+        display: none;
+    }
+    .banner{
+        display: flex;
+        flex-direction: column !important;
+    }
+    .banner-right{
+        display: flex;
+        justify-content: center;
+
+    }
+    .header-bg-img{
+        height: auto;
+    }
+    .intro-home-container{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .widget-container {
+        position: absolute;
+        bottom: -27% !important;
+        flex-wrap: wrap;
+        margin-left: -15px;
+    }
+    .widget{
+        margin-bottom: 15px;
+        flex-direction: column !important;
+        height: auto;
+        padding: 15px 5px;
+        text-align: center;
+    }
+    .widget-container{
+        bottom: -18%;
+    }
+    .widget_item{
+        width: 50% !important;
+    }
+    .home{
+        margin-top: 170px;
+    }
+    .form-regis-container{
+        margin-bottom: 36px;
+    }
+    .footer-list {
+        display: flex;
+        flex-direction: column;
+    }
+    .footer-form {
+        width: 100%;
+        padding: 0 10px;
+    }
+    .header_group-btn{
+        margin-right: 16px;
+    }
+    .header-nav{
+        margin-left: 16px;
+    }
+
+    .form-item {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}

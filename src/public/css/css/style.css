@@ -214,6 +214,9 @@ button{
     height: 116px;
     align-items: center;
 }
+.widget_item{
+    width: 100%;
+}
 .widget_img{
     width: 44px;
 }
@@ -567,6 +570,7 @@ button{
 }
 
 .page-next_btn {
+    border: none;
     padding: 8px 12px;
     background-color: #56af44;
     text-decoration: none;
