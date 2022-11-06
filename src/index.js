@@ -5,6 +5,8 @@ const path = require('path')
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const route = require('./routes')
+const db = require('./config/db')
+db.connect()
 
 
 
@@ -36,3 +38,4 @@ route(app);
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
+

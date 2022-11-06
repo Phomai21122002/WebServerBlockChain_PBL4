@@ -1,8 +1,10 @@
 const request = require('request')
 const session = require('express-session')
 const { response, json } = require('express')
-const database = require('../modal/DB')
-
+const database = require('../models/DB')
+const SanPham = require('../models/sanpham')
+const {multipleMongooseToObject} = require ('../../util/mongoose')
+const {mongooseToObject} = require('../../util/mongoose')
 class adminController { 
 
     //GET /admin
@@ -56,21 +58,20 @@ class adminController {
     
     danhsachsanpham(req,response)
     {
-        database.connectDB()
-            .then((connection) => {
-                var getProductQuery = `select * from sanpham`
-                connection.query(getProductQuery, (err,data) =>{
-                    const result = data
-                    database.closeDB(connection)
-                    response.render('admin/listProduct.hbs', {
-                        layout: 'adminLayout.hbs',
-                        data: result
-                    })
+
+        SanPham.find({}, function (err, sanphams) {
+            if(err){
+                console.log(err)
+            }
+            else{
+                response.render('admin/listProduct.hbs',{
+                    layout: 'adminLayout.hbs',
+                    data: multipleMongooseToObject(sanphams)
                 })
-            })
-            .catch((err) => {
-                response.render('error/error500.hbs', {layout: false})
-            })
+            }
+        })
+
+
 
     }
     danhsachnguyenlieu(req,response)
@@ -137,9 +138,21 @@ class adminController {
     xemthongtinsanpham(req, response)
     {
         const id = req.params.id
-        response.render('admin/infoProduct.hbs',{
-            layout: 'adminLayout.hbs'
+
+        SanPham.findById(id, function(err, docs) {
+            if( !err){
+                response.render('admin/infoProduct.hbs',{
+                    layout: 'adminLayout.hbs',
+                    data: mongooseToObject(docs)
+                })
+            }
+            else{
+                response.render('error/error500.hbs',{
+                    layout: false
+                })
+            }
         })
+        
     }
 
     // POST admin/addttkd

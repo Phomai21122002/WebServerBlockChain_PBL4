@@ -17,7 +17,6 @@
                         <tr>
                             <th scope="col">Tên Sản Phẩm</th>
                             <th scope="col">Tên Doanh Nghiệp</th>
-                            <th scope="col">Trạng Thái</th>
                             <th scope="col">Nơi Sản Xuất</th>
                             <th style="text-align:center ;" scope="col">Action</th>
                         </tr>
@@ -28,26 +27,14 @@
                             <tr>
                                 <td>{{this.TenSanPham}}</td>
                                 <td>
-                                    Doanh nghiệp A
+                                    {{this.NhaSanXuat}}
                                 </td>
-                                <td><span class="badge badge-success px-2">Sale</span></td>
-                                <td>Huyện A Lưới, Tỉnh Thừa Thiên Huế</td>
-                                <td style="text-align: center;"><span><a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
+                                <td>{{this.NoiSanXuat}}</td>
+                                <td style="text-align: center;"><span><a href="/admin/sanpham/{{this._id}}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="/admin/sanpham/{{this._id}}" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
                                 </td>
                             </tr>
                         {{/each}}
-                       
-
-                        {{!-- <tr>
-                            <td>Air Conditioner</td>
-                            <td>
-                                Doanh nghiệp A
-                            </td>
-                            <td><span class="badge badge-danger px-2">Close</span></td>
-                            <td>Huyện A Lưới, Tỉnh Thừa Thiên Huế</td>
-                            <td style="text-align: center;"><span><a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                            </td>
-                        </tr> --}}
+ 
                     </tbody>
                 </table>
             </div>
