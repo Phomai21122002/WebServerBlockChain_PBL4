@@ -1,6 +1,10 @@
 const hash = require('crypto-js/sha256');
 const session = require('express-session')
 const request = require('request')
+const user = require('../models/user')
+
+const {multipleMongooseToObject} = require ('../../util/mongoose')
+const {mongooseToObject} = require('../../util/mongoose')
 
 class loginController { 
 
@@ -15,46 +19,41 @@ class loginController {
     checkLogin(req,response)
     {
         var email = req.body.email
-        var password = hash(req.body.password).toString()
+        var password = req.body.password
 
-        request('http://localhost:3000/api/users', { json: true }, (err, res, body) => {
-            if (err) {
-                response.render('error/error500.hbs', {
-                    layout: false
-                })
-                return
-            }
-            const result = res.body
+        user.find({} , (err , data) => {
 
-            for (let i = 0; i < result.length; i++) {
-                const element = result[i];
-                if(element.Email == email && element.Password == password)
-                {
-                    req.session.userid = element.IDUser
-                    req.session.email = element.Email
-                    req.session.permission = element.Quyen
+            if(!err){
+                
+                const result = multipleMongooseToObject(data)
 
-                    if(element.Quyen == 0)
-                    {
-                        response.redirect('/admin')
-                        return
-                    }
-                    if(element.Quyen == 1){
-                        response.redirect('/center')
-                        return
-                    }
-                    if(element.Quyen == 2){
+                for (let i = 0; i < result.length; i++) {
+                    if(result[i].Email == email && result[i].Password == password){
+                        req.session.userid = result[i]._id
+                        req.session.email = result[i].Email
+                        req.session.permission = result[i].Quyen
 
-                        response.redirect('/business')
-                        return
+                        if(result[i].Quyen == 0){
+                            response.redirect('/admin')
+                        }
+                        if(result[i].Quyen == 1){
+                            response.redirect('/center')
+                        }
+                        if(result[i].Quyen == 2){
+
+                            response.redirect('/business')
+                        }
                     }
                 }
             }
+            else{
+                response.render('error/error500.hbs',{
+                    layout:false
+                })
+            }
+            
 
-            return response.redirect('/login')
-
-            });
-
+        })
     }
 
 
