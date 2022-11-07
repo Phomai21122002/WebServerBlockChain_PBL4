@@ -124,10 +124,20 @@ class adminController {
     
     themsanpham(req,response)
     {
+        const UserID = req.session.userid
 
-        response.render('admin/addProduct.hbs',{
-            layout:'adminLayout.hbs'
+        NguyenLieu.find({UserID: UserID}, (err, data) => {
+            if(!err){
+                response.render('admin/addProduct.hbs',{
+                    layout:'adminLayout.hbs',
+                    data: multipleMongooseToObject(data)
+                })
+            }
+            else{
+                response.render('error/error500.hbs', {layout:false })
+            }
         })
+       
     }
 
     xemthongtindoanhnghiep(req,response)

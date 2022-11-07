@@ -36,27 +36,39 @@
                                 <label class="col-lg-4 col-form-label" for="val-username">Công Dụng<span class="text-danger">*</span>
                                 </label>
                                 <div class="col-lg-6">
-                                    <input name="CongDung"  type="text" class="form-control" id="val-username" name="userName"  required>
+                                    <textarea name="MoTa" class="form-control h-150px" rows="6" id="comment"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for="val-username">Hướng Dẫn Sử Dụng<span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-6">
+                                    <textarea name="MoTa" class="form-control h-150px" rows="6" id="comment"></textarea>
                                 </div>
                             </div>
 
 
                             <h4 class="card-title">Thành Phần</h4>
                             <div class="basic-form">
-                                <div class="form-group">
-                                    <div class="form-check mb-3">
-                                        <label class="form-check-label">
-                                            <input name="array" type="checkbox" class="form-check-input" value="1">Option 1</label>
-                                    </div>
-                                    <div class="form-check mb-3">
-                                        <label class="form-check-label">
-                                            <input name="array" type="checkbox" class="form-check-input" value="2">Option 2</label>
-                                    </div>
-                                        <div class="form-check mb-3">
-                                        <label class="form-check-label">
-                                            <input name="array" type="checkbox" class="form-check-input" value="3">Option 2</label>
-                                    </div>
+                                <div class="form-group" style="display:flex; flex-wrap:wrap;">
+                                    {{#each data}}
+                                        <div class="form-check mb-3" style="padding: 0 20px;">
+                                            <label class="form-check-label">
+                                            <input name="array" type="checkbox" class="form-check-input" value="{{this._id}}">{{this.TenNguyenLieu}}</label>
+                                        </div>
+                                    {{/each}}
+                                    
                                 </div>
+                            </div>
+
+                            <h4 class="card-title">Tải Ảnh Lên</h4>
+                            <div class="basic-form">
+                                <form>
+                                    <div class="form-group">
+                                        <input type="file" class="form-control-file">
+                                    </div>
+                                </form>
                             </div>
 
 
