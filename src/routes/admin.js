@@ -15,6 +15,7 @@ router.get('/quytrinhsanxuat',adminController.danhsachquytrinhsx)
 router.get('/sanpham/:id',adminController.xemthongtinsanpham)
 router.get('/addMaterial',adminController.themnguyenlieu)
 router.get('/themsanpham',adminController.themsanpham)
+router.get('/themdonkiemdinh',adminController.themdonkiemdinh)
 
 router.get('/doanhnghiep/:id',adminController.xemthongtindoanhnghiep)
 

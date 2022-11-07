@@ -1,8 +1,12 @@
 const request = require('request')
 const session = require('express-session')
 const { response, json } = require('express')
+const mongoose = require('mongoose')
+
 const database = require('../models/DB')
 const SanPham = require('../models/sanpham')
+const NguyenLieu = require('../models/nguyenlieu')
+
 const {multipleMongooseToObject} = require ('../../util/mongoose')
 const {mongooseToObject} = require('../../util/mongoose')
 class adminController { 
@@ -76,19 +80,20 @@ class adminController {
     }
     danhsachnguyenlieu(req,response)
     {   
-        database.connectDB()
-            .then((connection) => {
-                var getNguyenLieuQuery = `select * from nguyenlieu`
-                connection.query(getNguyenLieuQuery, (err, data) => {
-                    response.render('admin/listMaterial.hbs',{layout: 'adminLayout.hbs', data: data})
+
+        NguyenLieu.find({}, (err,data) => {
+            if(!err){
+                response.render('admin/listMaterial.hbs',{
+                    layout: 'adminLayout.hbs',
+                    data: multipleMongooseToObject(data)
                 })
-            })
-            .catch((err) => {
-                console.log(err)
-                response.render('error/error500.hbs',{
+            }
+            else{
+                request.render('error/error500.hbs',{
                     layout: false
                 })
-            })
+            }
+        })
         
     }
 
@@ -193,22 +198,19 @@ class adminController {
     {
         var TenNguyenLieu = req.body.tennguyenlieu
         var DiaChi = req.body.DiaChi
-        var IDUser = req.session.userid
+        var  UserID = req.session.userid
 
-        database.connectDB()
-            .then((connection) => {
-                var insertQuery = `insert into nguyenlieu (TenNguyenLieu,DiaChi,IDUser) values ('${TenNguyenLieu}','${DiaChi}','${IDUser}')`
-                connection.query(insertQuery, (err, data) => {
-                    response.redirect('/admin/danhsachnguyenlieu')
-                })
+        var newNguyenLieu = new NguyenLieu({TenNguyenLieu: TenNguyenLieu, VungSanXuat: DiaChi, UserID: UserID});
+        newNguyenLieu.save()
+            .then(()=> {
+                response.redirect('/admin/danhsachnguyenlieu')
             })
-            .catch((err) => {
-                console.log(err)
-                response.render('error/error500.hbs',{
+            .catch(err => {
+                response.render('error/error500.hbs', {
                     layout:false
                 })
             })
-     
+
 
     }
 
@@ -234,6 +236,13 @@ class adminController {
                 console.log(err)
                 response.render('error/error500.hbs', {layout: false})
             })
+    }
+
+
+    themdonkiemdinh(req,res){
+        res.render('admin/themdonkiemdinh.hbs',{
+            layout: 'adminLayout.hbs'
+        })
     }
 
     

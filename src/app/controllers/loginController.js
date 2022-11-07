@@ -20,7 +20,8 @@ class loginController {
     {
         var email = req.body.email
         var password = req.body.password
-
+        var checked = false
+        var quyen = null
         user.find({} , (err , data) => {
 
             if(!err){
@@ -29,21 +30,29 @@ class loginController {
 
                 for (let i = 0; i < result.length; i++) {
                     if(result[i].Email == email && result[i].Password == password){
+                        checked = true
+                        quyen = result[i].Quyen
+
                         req.session.userid = result[i]._id
                         req.session.email = result[i].Email
                         req.session.permission = result[i].Quyen
-
-                        if(result[i].Quyen == 0){
-                            response.redirect('/admin')
-                        }
-                        if(result[i].Quyen == 1){
-                            response.redirect('/center')
-                        }
-                        if(result[i].Quyen == 2){
-
-                            response.redirect('/business')
-                        }
                     }
+                }
+
+                if(checked == true){
+                    if(quyen == 0){
+                        response.redirect('/admin')
+                    }
+                    if(quyen == 1){
+                        response.redirect('/center')
+                    }
+                    if(quyen == 2){
+
+                        response.redirect('/business')
+                    }
+                }
+                else{
+                    response.redirect('/login')
                 }
             }
             else{
