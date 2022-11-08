@@ -255,6 +255,11 @@ class adminController {
         })
     }
 
+    insertdonkiemdinh(req,res)
+    {
+        
+    }
+
     
 }
 module.exports = new adminController;
