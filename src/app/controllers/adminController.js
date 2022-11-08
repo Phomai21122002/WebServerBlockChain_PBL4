@@ -6,9 +6,11 @@ const mongoose = require('mongoose')
 const database = require('../models/DB')
 const SanPham = require('../models/sanpham')
 const NguyenLieu = require('../models/nguyenlieu')
+const User = require('../models/user')
 
 const {multipleMongooseToObject} = require ('../../util/mongoose')
 const {mongooseToObject} = require('../../util/mongoose')
+const sanpham = require('../models/sanpham')
 class adminController { 
 
     //GET /admin
@@ -121,6 +123,15 @@ class adminController {
             layout: 'adminLayout.hbs'
         })
     }
+
+    // POST /admin/addbusiness
+    addbusiness(req, response)
+    {
+        var newUser = new User(req.body)
+        newUser.save();
+        response.redirect('/admin/danhsachdoanhnghiep')
+       
+    }
     
     themsanpham(req,response)
     {
@@ -139,6 +150,8 @@ class adminController {
         })
        
     }
+
+
 
     xemthongtindoanhnghiep(req,response)
     {
@@ -225,27 +238,20 @@ class adminController {
     }
 
 
+
+    //POST /admin/addproduct
     addproduct(req,response)
     {
-        var TenSanPham = req.body.TenSanPham
-        var MoTa = req.body.MoTa
-        var CongDung = req.body.CongDung
-        var ThanhPhan = req.body.ThanhPhan 
-        var IDUser = req.session.userid
+        var newSanPham = new SanPham(req.body);
+        var UserID = req.session.userid;
+        User.findById(UserID , (err, data) => {
+            var result = mongooseToObject(data)
+            newSanPham.NhaSanXuat = result.UserName
+            newSanPham.save();
+            response.redirect('/admin/danhsachsanpham');
+        })
 
-        database.connectDB()
-            .then((connection) => {
-                var insertQuery = `insert into sanpham (TenSanPham,MoTa, CongDung, IDUser) values ('${TenSanPham}' , '${MoTa}' , '${CongDung}' , ${IDUser})`
-    
-                connection.query(insertQuery, (err,data) => {
-                    database.closeDB(connection)
-                    response.redirect('/admin/danhsachsanpham')
-                })
-            })
-            .catch((err) => {
-                console.log(err)
-                response.render('error/error500.hbs', {layout: false})
-            })
+        
     }
 
 
