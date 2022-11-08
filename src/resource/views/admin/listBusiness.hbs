@@ -25,15 +25,17 @@
                         </tr>
                     </thead>
                     <tbody>
-
-                        <tr>
-                            <th>1</th>
-                            <td><a href="/admin/doanhnghiep/1">Doanh Nghiệp A</a></td>
-                            <td>Email</td>
-                            <td>Loại Hình Kinh Doanh</td>
-                            <td>Địa Chỉ</td>
-                            <td>Số Điện Thoại</td>
-                        </tr>
+                        {{#each data}}
+                            <tr>
+                                <th>{{this.index}}</th>
+                                <td><a href="/admin/doanhnghiep/{{this._id}}">{{this.UserName}}</a></td>
+                                <td>{{this.Email}}</td>
+                                <td>{{this.LoaiHinhKinhDoanh}}</td>
+                                <td>{{this.Address}}</td>
+                                <td>{{this.PhoneNumber}}</td>
+                            </tr>
+                        {{/each}}
+                        
 
                         
                     </tbody>

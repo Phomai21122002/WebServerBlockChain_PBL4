@@ -2,7 +2,7 @@
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active"><a href="/admin/themdonkiemdinh">Thêm Đơn Kiểm Định</a></li>
                     </ol>
                 </div>
             </div>
@@ -21,18 +21,9 @@
                                             </label>
                                             <div class="col-lg-6">
                                                 <select class="form-control" id="val-skill" name="val-skill">
-                                                    <option value="">Please select</option>
-                                                    <option value="html">HTML</option>
-                                                    <option value="css">CSS</option>
-                                                    <option value="javascript">JavaScript</option>
-                                                    <option value="angular">Angular</option>
-                                                    <option value="angular">React</option>
-                                                    <option value="vuejs">Vue.js</option>
-                                                    <option value="ruby">Ruby</option>
-                                                    <option value="php">PHP</option>
-                                                    <option value="asp">ASP.NET</option>
-                                                    <option value="python">Python</option>
-                                                    <option value="mysql">MySQL</option>
+                                                    {{#each products}}
+                                                        <option value="">{{this.TenSanPham}}</option>
+                                                    {{/each}}
                                                 </select>
                                             </div>
                                         </div>

@@ -11,6 +11,7 @@ const User = require('../models/user')
 const {multipleMongooseToObject} = require ('../../util/mongoose')
 const {mongooseToObject} = require('../../util/mongoose')
 const sanpham = require('../models/sanpham')
+const user = require('../models/user')
 class adminController { 
 
     //GET /admin
@@ -49,7 +50,7 @@ class adminController {
             })
             .catch((err) => {
                 return response.render('error/error500.hbs', {
-                    layout: false
+                    layout: false 
                 })
             })
 
@@ -57,9 +58,22 @@ class adminController {
 
     danhsachdoanhnghiep(req, response)
     {
-        response.render('admin/listBusiness.hbs',{
-            layout: 'adminLayout.hbs'
+        user.find({Quyen: 2}, (err, data) =>{
+            if(!err){
+                var result = multipleMongooseToObject(data) ;
+                for (let i = 0; i < result.length; i++) {
+                    result[i].index = i+1;
+                }
+                response.render('admin/listBusiness.hbs',{
+                    layout: 'adminLayout.hbs',
+                    data: result,
+                })
+            }
+            else{
+                response.render('error,error500.hbs',{ layout: false})
+            }
         })
+        
     }
     
     danhsachsanpham(req,response)
@@ -128,6 +142,7 @@ class adminController {
     addbusiness(req, response)
     {
         var newUser = new User(req.body)
+        newUser.Quyen = 2;
         newUser.save();
         response.redirect('/admin/danhsachdoanhnghiep')
        
@@ -152,14 +167,22 @@ class adminController {
     }
 
 
-
+    //GET /admin/doanhnghiep/id
     xemthongtindoanhnghiep(req,response)
     {
         const id = req.params.id
-        response.render('admin/infoBusiness.hbs',{
-            layout: 'adminLayout.hbs',
-            id: id
+        user.findById(id, (err, data) => {
+            if(!err){
+                response.render('admin/infoBusiness.hbs',{
+                    layout: 'adminLayout.hbs',
+                    data: mongooseToObject(data)
+                })
+            }
+            else{
+                response.render('error/error500.hbs', {layout: false})
+            }
         })
+        
 
     }
 
@@ -254,11 +277,23 @@ class adminController {
         
     }
 
-
+    //GET /admin/themdonkiemdinh
     themdonkiemdinh(req,res){
-        res.render('admin/themdonkiemdinh.hbs',{
-            layout: 'adminLayout.hbs'
+        const UserID = req.session.userid
+        sanpham.find({UserID: UserID}, (err, data) => {
+            if(!err) {
+                res.render('admin/themdonkiemdinh.hbs',{
+                    layout: 'adminLayout.hbs',
+                    products: multipleMongooseToObject(data)
+                })
+            }
+            else{
+                res.render('error/error500.hbs',{
+                    layout: false
+                })
+            }
         })
+       
     }
 
     insertdonkiemdinh(req,res)

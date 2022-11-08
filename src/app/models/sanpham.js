@@ -7,6 +7,7 @@ const sanpham = new Schema ({
     ThanhPhan: {type: Array},
     NoiSanXuat: {type: String, default: '' },
     NhaSanXuat: {type: String, default: '' },
+    UserID: {type: String , require: true},
 });
 
 module.exports = mongoose.model('sanpham', sanpham)

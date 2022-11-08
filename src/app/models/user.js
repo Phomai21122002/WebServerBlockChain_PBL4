@@ -8,6 +8,7 @@ const user = new Schema ({
     Quyen: {type: Number},
     Address: {type: String, default: ''},
     PhoneNumber: {type: String, default: ''},
+    LoaiHinhKinhDoanh: {type: String, default: ''},
 });
 
 module.exports = mongoose.model('user', user)
