@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const morgan = require('morgan');
 const hbs  = require('express-handlebars');
@@ -7,7 +9,6 @@ const session = require('express-session');
 const route = require('./routes')
 const db = require('./config/db')
 db.connect()
-
 
 
 const app = express();
