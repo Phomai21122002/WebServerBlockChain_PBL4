@@ -20,7 +20,7 @@
                                 <label class="col-lg-4 col-form-label" for="val-username">Tên Sản Phẩm<span class="text-danger">*</span>
                                 </label>
                                 <div class="col-lg-6">
-                                    <input  type="text" class="form-control" id="val-username" name="TenSanPham" placeholder="Enter a username.." required>
+                                    <input  type="text" class="form-control" id="val-username" name="TenSanPham" required>
                                 </div>
                             </div>
 
@@ -36,7 +36,7 @@
                                 <label class="col-lg-4 col-form-label" for="val-username">Công Dụng<span class="text-danger">*</span>
                                 </label>
                                 <div class="col-lg-6">
-                                    <textarea name="MoTa" class="form-control h-150px" rows="6" id="comment"></textarea>
+                                    <textarea name="CongDung" class="form-control h-150px" rows="6" id="comment"></textarea>
                                 </div>
                             </div>
 
@@ -44,7 +44,7 @@
                                 <label class="col-lg-4 col-form-label" for="val-username">Hướng Dẫn Sử Dụng<span class="text-danger">*</span>
                                 </label>
                                 <div class="col-lg-6">
-                                    <textarea name="MoTa" class="form-control h-150px" rows="6" id="comment"></textarea>
+                                    <textarea name="HuongDanSuDung" class="form-control h-150px" rows="6" id="comment"></textarea>
                                 </div>
                             </div>
 
@@ -55,20 +55,29 @@
                                     {{#each data}}
                                         <div class="form-check mb-3" style="padding: 0 20px;">
                                             <label class="form-check-label">
-                                            <input name="array" type="checkbox" class="form-check-input" value="{{this._id}}">{{this.TenNguyenLieu}}</label>
+                                            <input name="ThanhPhan" type="checkbox" class="form-check-input" value="{{this._id}}">{{this.TenNguyenLieu}}</label>
                                         </div>
                                     {{/each}}
                                     
                                 </div>
                             </div>
 
+
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for="val-username">Nơi Sản Xuất<span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-6">
+                                    <input  type="text" class="form-control" id="val-username" name="NoiSanXuat" required>
+                                </div>
+                            </div>
+
                             <h4 class="card-title">Tải Ảnh Lên</h4>
                             <div class="basic-form">
-                                <form>
+                                <div>
                                     <div class="form-group">
                                         <input type="file" class="form-control-file">
                                     </div>
-                                </form>
+                                </div>
                             </div>
 
 
