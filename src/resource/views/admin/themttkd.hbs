@@ -2,7 +2,7 @@
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-                        <li class="breadcrumb-item active"><a href="/admin/themttkd">Thêm TT Kiểm Định</a></li>
+                        <li class="breadcrumb-item active"><a href="/admin/insertttkd">Thêm TT Kiểm Định</a></li>
                     </ol>
                 </div>
             </div>
@@ -15,34 +15,26 @@
                             <div class="card-body">
                                 <h4 class="card-title">Thêm Trung Tâm Kiểm Định</h4>
                                 <div class="form-validation">
-                                    <form class="form-valide" action="/admin/addttkd" method="post">
+                                    <form class="form-valide" action="/admin/insertttkd" method="post">
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-username">Username<span class="text-danger">*</span>
+                                            <label class="col-lg-4 col-form-label" for="val-username">Tên Trung Tâm Kiểm Định<span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input required type="text" class="form-control" id="val-username" name="userName" placeholder="Enter a username..">
+                                                <input required type="text" class="form-control" id="val-username" name="UserName" placeholder="Enter a username..">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="val-email">Email <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input required type="text" class="form-control" id="val-email" name="email" placeholder="Your valid email..">
+                                                <input required type="text" class="form-control" id="val-email" name="Email" placeholder="Your valid email..">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="val-password">Password <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input required type="password" class="form-control" id="val-password" name="password" placeholder="Choose a safe one..">
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-confirm-password">Tên TT Kiểm Định<span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input required type="text" class="form-control" id="val-confirm-password" name="centerName" placeholder="Center's Name">
+                                                <input required type="password" class="form-control" id="val-password" name="Password" placeholder="Choose a safe one..">
                                             </div>
                                         </div>
 
@@ -50,7 +42,7 @@
                                             <label class="col-lg-4 col-form-label" for="val-confirm-password">Địa Chỉ<span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input required type="text" class="form-control" id="val-confirm-password" name="address" placeholder="Address">
+                                                <input required type="text" class="form-control" id="val-confirm-password" name="Address" placeholder="Address">
                                             </div>
                                         </div>
 
@@ -58,7 +50,7 @@
                                             <label class="col-lg-4 col-form-label" for="val-confirm-password">Số Điện Thoại<span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input required type="text" class="form-control" id="val-confirm-password" name="phone" placeholder="054321...">
+                                                <input required type="text" class="form-control" id="val-confirm-password" name="PhoneNumber" placeholder="054321...">
                                             </div>
                                         </div>
 

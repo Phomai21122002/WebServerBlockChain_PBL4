@@ -16,11 +16,10 @@ router.get('/sanpham/:id',adminController.xemthongtinsanpham)
 router.get('/addMaterial',adminController.themnguyenlieu)
 router.get('/themsanpham',adminController.themsanpham)
 router.get('/themdonkiemdinh',adminController.themdonkiemdinh)
-
 router.get('/doanhnghiep/:id',adminController.xemthongtindoanhnghiep)
 
 
-router.post('/addttkd',adminController.addttkd)
+router.post('/insertttkd',adminController.insertTtkd)
 router.post('/addbusiness',adminController.addbusiness)
 router.post('/addproduct',adminController.addproduct)
 router.post('/insertmaterial',adminController.insertMaterial)

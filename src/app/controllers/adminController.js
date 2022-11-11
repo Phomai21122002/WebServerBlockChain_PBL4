@@ -3,10 +3,11 @@ const session = require('express-session')
 const { response, json } = require('express')
 const mongoose = require('mongoose')
 
-const database = require('../models/DB')
 const SanPham = require('../models/sanpham')
 const NguyenLieu = require('../models/nguyenlieu')
 const User = require('../models/user')
+const Application = require('../models/application')
+
 
 const {multipleMongooseToObject} = require ('../../util/mongoose')
 const {mongooseToObject} = require('../../util/mongoose')
@@ -30,30 +31,19 @@ class adminController {
 
     //GET /admin/danhsachttkd
     danhsachttkd(req,response){
-
-        fetch('http://localhost:3000/api/ttkiemdinh')
-            .then(res => {
-                if(res.ok){
-                    return res.json()
-                }
-                else{
-                    return response.render('error/error500.hbs', {
-                        layout: false
-                    })
-                }
-            })
-            .then((data) => {
+        user.find({Quyen: 1}, (err,data) => {
+            if(!err){
+                var result = multipleMongooseToObject(data)
                 response.render('admin/listCenter.hbs', {
                     layout: 'adminLayout',
-                    data: data
+                    data: result
                 })
-            })
-            .catch((err) => {
-                return response.render('error/error500.hbs', {
-                    layout: false 
-                })
-            })
+            }
+            else{
 
+            }
+        })
+       
     }
 
     danhsachdoanhnghiep(req, response)
@@ -113,11 +103,20 @@ class adminController {
         
     }
 
+    // GET /admin/danhsachdonkd
     danhsachdonkiemdinh(req,response)
     {
-        response.render('admin/listApplication.hbs',{
-            layout: 'adminLayout.hbs'
+        Application.find({}, (err, data) => {
+            if(!err){
+                const listApplication = multipleMongooseToObject(data)
+                response.render('admin/listApplication.hbs',{
+                    layout: 'adminLayout.hbs',
+                    data: listApplication,
+                })
+            }
         })
+
+        
     }
     danhsachquytrinhsx(req,response)
     {
@@ -126,10 +125,26 @@ class adminController {
         })
     }
 
+    // GET /admin/themttkd
     themttkd(req,res){
         res.render('admin/themttkd.hbs',{
             layout: 'adminLayout.hbs'
         })
+    }
+
+    // POST /admin/addttkd
+    insertTtkd(req, res){
+        
+        var newUser = new user(req.body)
+        newUser.Quyen = 1 ;
+        newUser.save()
+            .then(()=>{
+                res.redirect('/admin/danhsachttkd')
+            })
+            .catch((err) => {
+                res.render('error/error500.hbs',{layout:false})
+            })
+
     }
 
     themdoanhnghiep(req,res){
@@ -206,29 +221,6 @@ class adminController {
         
     }
 
-    // POST admin/addttkd
-    addttkd(req,response)
-    {
-        const userName = req.body.userName
-        const email = req.body.email
-        const password = req.body.password
-        const confirmPassword = req.body.confirmPassword
-        const centerName = req.body.centerName
-        const address = req.body.address
-        const phoneNumber = req.body.phone
-
-
-        response.send({
-            userName: userName,
-            email: email,
-            password: password,
-            confirmPassword: confirmPassword,
-            centerName: centerName,
-            address: address,
-            phoneNumbe: phoneNumber,
-        })
-    }
-
 
     //GET admin/addmaterial
     themnguyenlieu(req,response)
@@ -295,6 +287,7 @@ class adminController {
         })
        
     }
+
 
     insertdonkiemdinh(req,res)
     {
