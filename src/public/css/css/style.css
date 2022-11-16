@@ -1424,3 +1424,89 @@ button{
 .header-nav-mobile_container {
     display: none;
 }
+
+/* relationship */
+
+.form-item_1 {
+    flex: 0 0 25%;
+    max-width: 25%;
+    padding: 0 12px 24px 12px;
+}
+
+.form-relationship {
+    border-radius: 5px;
+    box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    position: relative;
+}
+
+.form-relationship_category {
+    font-size: 20px;
+    font-weight: 500;
+    padding: 24px;
+}
+
+.relationship-container {
+    padding: 0 48px;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.relationship-cart{
+    display: flex;  
+    position: relative;
+    transition: transform 0.25s linear;
+}
+
+.text-centers {
+    min-height: 300px;
+    text-align: center;
+    border-radius: 8px;
+    padding: 0;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.05);
+}
+
+.text-center .form-item_position {
+    border-radius: 8px;
+}
+
+.text-center .form-item_img {
+    border-radius: 8px;
+}
+
+.text-center .form-item_desc {
+    font-size: 12px;
+    font-weight: 400;
+    padding-bottom: 16px;
+}
+.text-center .form-item_heading {
+    margin-top: 12px;
+}
+
+.left-btn,
+.right-btn {
+    position: absolute;
+    padding: 0 24px;
+    font-size: 20px;
+    width: 12px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    background: linear-gradient(90deg, rgba(255,255,255, 0) 0%, #fff);
+}
+
+.left-btn {
+    transform: rotate(180deg);
+    top: 0px;
+}
+.right-btn {
+    right: 0;
+}
