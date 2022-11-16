@@ -23,4 +23,5 @@ router.post('/insertttkd',adminController.insertTtkd)
 router.post('/addbusiness',adminController.addbusiness)
 router.post('/addproduct',adminController.addproduct)
 router.post('/insertmaterial',adminController.insertMaterial)
+router.post('/insertdonkiemdinh',adminController.insertdonkiemdinh)
 module.exports = router;

@@ -8,7 +8,7 @@ const sanpham = new Schema ({
     NoiSanXuat: {type: String, default: '' },   
     CongDung: {type: String, default: '' },   
     NhaSanXuat: {type: String, default: '' },
-    UserID: {type: String , require: true},
+    UserID: {type: String , default: ''},
 });
 
 module.exports = mongoose.model('sanpham', sanpham)

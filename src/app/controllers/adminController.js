@@ -11,7 +11,6 @@ const Application = require('../models/application')
 
 const {multipleMongooseToObject} = require ('../../util/mongoose')
 const {mongooseToObject} = require('../../util/mongoose')
-const sanpham = require('../models/sanpham')
 const user = require('../models/user')
 class adminController { 
 
@@ -109,6 +108,9 @@ class adminController {
         Application.find({}, (err, data) => {
             if(!err){
                 const listApplication = multipleMongooseToObject(data)
+                for (let i = 0; i < listApplication.length; i++) {
+                    listApplication[i].index = i + 1 ;
+                }
                 response.render('admin/listApplication.hbs',{
                     layout: 'adminLayout.hbs',
                     data: listApplication,
@@ -272,7 +274,7 @@ class adminController {
     //GET /admin/themdonkiemdinh
     themdonkiemdinh(req,res){
         const UserID = req.session.userid
-        sanpham.find({UserID: UserID}, (err, data) => {
+        SanPham.find({UserID: UserID}, (err, data) => {
             if(!err) {
                 res.render('admin/themdonkiemdinh.hbs',{
                     layout: 'adminLayout.hbs',
@@ -288,10 +290,37 @@ class adminController {
        
     }
 
-
+    // POST admin/insertdonkd
     insertdonkiemdinh(req,res)
     {
-        
+        const IDSanPham = req.body.IDSanPham
+        const UserID = req.session.userid
+
+        SanPham.findById(IDSanPham, (err,data) => {
+            const result = mongooseToObject(data)
+            var newApplication = new Application({
+                IDSanPham: result._id,
+                TenSanPham: result.TenSanPham,
+                TrangThai: false,
+            })
+            newApplication.save()
+
+            User.findById(UserID,(err, data) => {
+                const user = mongooseToObject(data)
+                Application.updateOne({IDSanPham: IDSanPham}, {UserID: user._id, UserName: user.UserName}, (err,data) =>{
+                    if(!err){
+                        res.redirect('/admin/danhsachdonkd')
+                    }
+                    else{
+                        res.render('error/error500.hbs', {layout: false})
+                    }
+
+                })
+                
+            })
+
+        })
+
     }
 
     
