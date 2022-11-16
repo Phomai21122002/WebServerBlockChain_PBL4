@@ -5,5 +5,5 @@ const { route } = require('./home');
 const router = express.Router();
 
 router.get('/', productOriginController.index)
-router.get('/productOriginDetail',productOriginController.detail)
+router.get('/:id',productOriginController.detail)
 module.exports = router;

@@ -17,6 +17,7 @@ router.get('/addMaterial',adminController.themnguyenlieu)
 router.get('/themsanpham',adminController.themsanpham)
 router.get('/themdonkiemdinh',adminController.themdonkiemdinh)
 router.get('/doanhnghiep/:id',adminController.xemthongtindoanhnghiep)
+router.get('/donkiemdinh/:id',adminController.thongtindonkiemdinh)
 
 
 router.post('/insertttkd',adminController.insertTtkd)
@@ -24,4 +25,5 @@ router.post('/addbusiness',adminController.addbusiness)
 router.post('/addproduct',adminController.addproduct)
 router.post('/insertmaterial',adminController.insertMaterial)
 router.post('/insertdonkiemdinh',adminController.insertdonkiemdinh)
+router.post('/resoleapplication/:id', adminController.resoleApplication)
 module.exports = router;

@@ -10,7 +10,7 @@
                     <a href="/productOrigin">Vùng Sản phẩm</a>
                 </li>
                 <li class="breadcrumb-left_items pl-8">
-                    <a href="/productOrigin/productOriginDetail">Hợp Tác Xã Đoàn Kết</a>
+                    <a href="/productOrigin/{{data._id}}">{{data.VungSanXuat}}</a>
                 </li>
             </ol>
         </div>
@@ -20,9 +20,9 @@
 
 <div class="container">
     <div class="header-detail">
-        <img class="header-detail_img" src="/img/img/origin1.jpg" alt="">
+        <img class="header-detail_img" src="/img/img/{{data.Image}}" alt="">
         <div class="header-detail_product">
-            <h3 class="header-detail_name header-origindetail_name">Na dứa Đài Loan</h3>
+            <h3 class="header-detail_name header-origindetail_name">{{data.TenNguyenLieu}}</h3>
         </div>
     </div>
 </div>

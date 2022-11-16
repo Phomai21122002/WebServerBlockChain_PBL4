@@ -10,6 +10,7 @@ const sanpham = new Schema ({
     NhaSanXuat: {type: String, default: '' },
     UserID: {type: String , default: ''},
     Image: {type: String, default: ''},
+    HuongDanSuDung: {type: String , default: ''}
 });
 
 module.exports = mongoose.model('sanpham', sanpham)

@@ -32,85 +32,24 @@
 
 <div class="container">
     <div class="form-list">
-        <div class="form-item">
-            <div class="form-item_product">
-                <img src="/img/img/origin1.jpg" alt="anh" class="form-item_img">
-                <div class="form-item_position">
-                    <a href="/productOrigin/productOriginDetail" class="form-item_position-link">Chi tiết</a>
+        {{#each data}}
+            <div class="form-item">
+                <div class="form-item_product">
+                    <img src="/img/img/{{this.Image}}" alt="anh" class="form-item_img">
+                    <div class="form-item_position">
+                        <a href="/productOrigin/{{this._id}}" class="form-item_position-link">Chi tiết</a>
+                    </div>
                 </div>
-            </div>
-            <h3 class="form-item_heading">Hợp Tác Xã Đoàn Kết</h3>
-        </div> 
-        <div class="form-item">
-            <div class="form-item_product">
-                <img src="/img/img/origin2.jpg" alt="anh" class="form-item_img">
-                <div class="form-item_position">
-                    <a href="/productOrigin/productOriginDetail" class="form-item_position-link">Chi tiết</a>
-                </div>
-            </div>
-            <h3 class="form-item_heading">Vùng sản xuất Đạ Ròn, Đơn Đương, Đức Trọng, Lâm Đồng, Việt Nam</h3>
-        </div> 
-        <div class="form-item">
-            <div class="form-item_product">
-                <img src="/img/img/origin3.png" alt="anh" class="form-item_img">
-                <div class="form-item_position">
-                    <a href="/productOrigin/productOriginDetail" class="form-item_position-link">Chi tiết</a>
-                </div>
-            </div>
-            <h3 class="form-item_heading">Cánh đồng Mường Chanh, Mai Sơn, Sơn La</h3>
-        </div> 
-        <div class="form-item">
-            <div class="form-item_product">
-                <img src="/img/img/origin4.png" alt="anh" class="form-item_img">
-                <div class="form-item_position">
-                    <a href="/productOrigin/productOriginDetail" class="form-item_position-link">Chi tiết</a>
-                </div>
-            </div>
-            <h3 class="form-item_heading">Nông Trường WinEco Củ Chi</h3>
-        </div> 
-        <div class="form-item">
-            <div class="form-item_product">
-                <img src="/img/img/origin5.jpg" alt="anh" class="form-item_img">
-                <div class="form-item_position">
-                    <a href="/productOrigin/productOriginDetail" class="form-item_position-link">Chi tiết</a>
-                </div>
-            </div>
-            <h3 class="form-item_heading">Vùng Dược Liệu Hợp Hòa, Sơn Dương, Tuyên Quang</h3>
-        </div> 
-        <div class="form-item">
-            <div class="form-item_product">
-                <img src="/img/img/origin.jpg" alt="anh" class="form-item_img">
-                <div class="form-item_position">
-                    <a href="/productOrigin/productOriginDetail" class="form-item_position-link">Chi tiết</a>
-                </div>
-            </div>
-            <h3 class="form-item_heading">Trang trại hữu cơ Thanh Tùng NB</h3>
-            <p class="form-item_desc">Đang cập nhật</p>
-        </div> 
-        <div class="form-item">
-            <div class="form-item_product">
-                <img src="/img/img/origin7.jpg" alt="anh" class="form-item_img">
-                <div class="form-item_position">
-                    <a href="/productOrigin/productOriginDetail" class="form-item_position-link">Chi tiết</a>
-                </div>
-            </div>
-            <h3 class="form-item_heading">Hợp Tác Xã Dịch Vụ Nông Sản Bình Sơn</h3>
-        </div> 
-        <div class="form-item">
-            <div class="form-item_product">
-                <img src="/img/img/origin8.jpg" alt="anh" class="form-item_img">
-                <div class="form-item_position">
-                    <a href="" class="form-item_position-link">Chi tiết</a>
-                </div>
-            </div>
-            <h3 class="form-item_heading">Bến Tre-Tiền Giang-Vĩnh Long-Cần Thơ</h3>
-        </div> 
-        </div>
-        <div class="form-page_next">
-            <a href="" class="page-next_btn">
-                Xem thêm
-            </a>
-        </div>
+                <h3 class="form-item_heading">{{this.VungSanXuat}}</h3>
+            </div> 
+        {{/each}}
+    
+    </div>
+    <div class="form-page_next">
+        <a href="" class="page-next_btn">
+            Xem thêm
+        </a>
+    </div>
 </div>
 
 <footer>

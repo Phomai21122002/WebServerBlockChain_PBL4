@@ -8,10 +8,10 @@ const NguyenLieu = require('../models/nguyenlieu')
 const User = require('../models/user')
 const Application = require('../models/application')
 
-
 const {multipleMongooseToObject} = require ('../../util/mongoose')
 const {mongooseToObject} = require('../../util/mongoose')
 const user = require('../models/user')
+const nguyenlieu = require('../models/nguyenlieu')
 class adminController { 
 
     //GET /admin
@@ -120,6 +120,26 @@ class adminController {
 
         
     }
+    // GET /admin/donkiemdinh/:id
+    thongtindonkiemdinh(req,response)
+    {
+        const IDDonKiemDinh = req.params.id
+        Application.findById(IDDonKiemDinh, (err, data) => {
+            if(!err)
+            {
+                var application = mongooseToObject(data)
+                response.render('admin/duyetDon.hbs', {
+                    layout: 'adminLayout.hbs',
+                    application: application
+                })    
+            }
+            else{
+                response.render('error/error500.hbs', {layout: false})
+            }
+        })
+
+    }
+
     danhsachquytrinhsx(req,response)
     {
         response.render('admin/listProcedure.hbs',{
@@ -254,8 +274,6 @@ class adminController {
 
     }
 
-
-
     //POST /admin/addproduct
     addproduct(req,response)
     {
@@ -321,6 +339,57 @@ class adminController {
 
         })
 
+    }
+
+    // POST /admin/resoleApplication
+
+    resoleApplication(req, response ) {
+        var applicationID = req.params.id
+        var agreement = req.body.agreement
+        
+        Application.findById(applicationID, (err,application) => {
+            SanPham.findById(application.IDSanPham, (err, data) => {
+                var newChain = {}
+                var product = mongooseToObject(data)
+
+                newChain.IDSanPham = application.IDSanPham
+                newChain.UserID = product.UserID
+                newChain.ThanhPhan = []
+                newChain.MoTa = product.MoTa
+                newChain.NhaSanXuat = product.NhaSanXuat
+                newChain.Image = product.Image
+                newChain.NoiSanXuat = product.NoiSanXuat
+                newChain.HuongDanSuDung = product.HuongDanSuDung
+                newChain.CongDung = product.CongDung
+                
+                for (let i = 0; i < product.ThanhPhan.length; i++) {
+                    const element = product.ThanhPhan[i];
+                    NguyenLieu.findById(element ,async (err, data) => {
+                        var nguyenlieu = mongooseToObject(data)
+                        newChain.ThanhPhan.push({TenNguyenLieu: nguyenlieu.TenNguyenLieu , IDNguyenLieu :element })
+                    })
+                }
+                setTimeout(() => {
+
+                    request.post({
+                        url: 'http://127.0.0.1:3000/blockchain/mine',
+                        form: {
+                            data: newChain
+                        }
+                    }, (err,res) => {
+                        if(!err){
+                            response.redirect('/admin')
+                        }
+                        else{
+                            response.render('error/error500.hbs', {layout: false})
+                        }
+                    } )
+
+
+                }, 1000);
+
+            })
+        })
     }
 
     
