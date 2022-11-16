@@ -1,18 +1,18 @@
 const { multipleMongooseToObject } = require('../../util/mongoose')
 const { mongooseToObject } = require('../../util/mongoose')
-const sanpham = require('../models/sanpham')
+const SanPham = require('../models/sanpham')
 
 class productController {
     index(req, res)
     {
-        sanpham.find( {}, function(err, data) {
+        SanPham.find( {}, function(err, data) {
             if(!err) {
                 res.render('product/productPage.hbs' ,{
                     layout: 'productLayout.hbs',
                     data: multipleMongooseToObject(data)
                 })
             } else {    
-                request.render('error/error500.hbs',{
+                res.render('error/error500.hbs',{
                     layout: false
                 })
             }
@@ -21,18 +21,24 @@ class productController {
 
     productDetail(req, res)
     {
-        sanpham.findById({ _id: req.params.id }, function(err, data) {
+       
+        SanPham.find({}, (err, data) => {
+            
             if(!err) {
-                res.render('product/productDetail.hbs' ,{
-                    layout: 'productLayout.hbs',
-                    data: mongooseToObject(data)
+                const IDSanPham = req.params.id
+
+                var products = multipleMongooseToObject(data)
+                SanPham.findById(IDSanPham, (err, product) => {
+
+                    res.render('product/productDetail.hbs' , {
+                        layout: 'productLayout.hbs',
+                        data: products,
+                        product: mongooseToObject(product),
+                    })
                 })
+                
             }
-            else {
-                request.render('error/error500.hbs',{
-                    layout: false
-                })
-            }
+
         })
     }
 }

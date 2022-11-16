@@ -10,7 +10,7 @@
                     <a href="/product">Sản phẩm</a>
                 </li>
                 <li class="breadcrumb-left_items pl-8">
-                    <a href="/product/{{data._id}}">{{data.TenSanPham}}</a>
+                    <a href="/product/{{product._id}}">{{product.TenSanPham}}</a>
                 </li>
             </ol>
         </div>
@@ -20,20 +20,20 @@
 
 <div class="container">
     <div class="header-detail">
-        <img class="header-detail_img" src="/img/img/sanpham8.jpg" alt="">
+        <img class="header-detail_img" src="/img/img/{{product.Image}}" alt="">
         <div class="header-detail_product">
-            <h3 class="header-detail_name">{{data.TenSanPham}}</h3>
+            <h3 class="header-detail_name">{{product.TenSanPham}}</h3>
             <span class="header-detail_price">Giá: Liên hệ</span>
         </div>
     </div>
     <div class="subheader-detail">
         <span class="detail-code">
             Mã sản phẩm
-            <span class="detail-code_name">VNC7206655</span>
+            <span class="detail-code_name">{{product._id}}</span>
         </span>
         <span class="detail-address">
             Xuất xứ:
-            <span class="detail-address_name">{{data.NhaSanXuat}}</span>
+            <span class="detail-address_name">{{product.NhaSanXuat}}</span>
         </span>
     </div>
 </div>
@@ -74,13 +74,13 @@
         <div class="form-detail_content">
             <h3 class="form-detail_heading">Mô tả</h3>
             <p class="form-detail_desc">
-                {{data.MoTa}}
+                {{product.MoTa}}
             </p>
         </div>
         <div class="form-detail_content">
             <h3 class="form-detail_heading">Thành phần</h3>
             <p class="form-detail_desc">
-                {{data.ThanhPhan}}
+                {{product.ThanhPhan}}
             </p>
         </div>
         <div class="form-detail_content">
@@ -119,90 +119,21 @@
 
         <div class="relationship-container">
             <div class="relationship-cart">
+                {{#each data}}
                 <div class="form-item_1 ">
                     <div class="text-center">
                         <div class="form-item_product">
-                            <img src="/img/img/sanpham2.jpg" alt="anh" class="form-item_img">
+                            <img src="/img/img/{{this.Image}}" alt="anh" class="form-item_img">
                             <div class="form-item_position">
-                                <a href="/product/productdetail" class="form-item_position-link">Chi tiết</a>
+                                <a href="/product/{{this._id}}" class="form-item_position-link">Chi tiết</a>
                             </div>
                         </div>
-                        <h3 class="form-item_heading">Dưa hấu đỏ</h3>
-                        <p class="form-item_desc">VNC72817831</p>
+                        <h3 class="form-item_heading"><a href="/product/{{this._id}}">{{this.TenSanPham}}</a></h3>
+                        <p class="form-item_desc">{{this._id}}</p>
                     </div>
                 </div> 
-                 <div class="form-item_1 ">
-                    <div class="text-center">
-                        <div class="form-item_product">
-                            <img src="/img/img/sanpham4.jpg" alt="anh" class="form-item_img">
-                            <div class="form-item_position">
-                                <a href="/product/productdetail" class="form-item_position-link">Chi tiết</a>
-                            </div>
-                        </div>
-                        <h3 class="form-item_heading">Ổi Đài Loan</h3>
-                        <p class="form-item_desc">VNC72794286</p>
-                    </div>
-                </div> 
-                 <div class="form-item_1 ">
-                    <div class="text-center">
-                        <div class="form-item_product">
-                            <img src="/img/img/sanpham5.jpg" alt="anh" class="form-item_img">
-                            <div class="form-item_position">
-                                <a href="/product/productdetail" class="form-item_position-link">Chi tiết</a>
-                            </div>
-                        </div>
-                        <h3 class="form-item_heading">Dưa hoàng kim</h3>
-                        <p class="form-item_desc">VNC72773312</p>
-                    </div>
-                </div> 
-                 <div class="form-item_1 ">
-                    <div class="text-center">
-                        <div class="form-item_product">
-                            <img src="/img/img/sanpham6.jpg" alt="anh" class="form-item_img">
-                            <div class="form-item_position">
-                                <a href="/product/productdetail" class="form-item_position-link">Chi tiết</a>
-                            </div>
-                        </div>
-                        <h3 class="form-item_heading">Nhãn da bò</h3>
-                        <p class="form-item_desc">VNC72766753</p>
-                    </div>
-                </div> 
-                 <div class="form-item_1 ">
-                    <div class="text-center">
-                        <div class="form-item_product">
-                            <img src="/img/img/sanpham7.jpg" alt="anh" class="form-item_img">
-                            <div class="form-item_position">
-                                <a href="/product/productdetail" class="form-item_position-link">Chi tiết</a>
-                            </div>
-                        </div>
-                        <h3 class="form-item_heading">Tắc</h3>
-                        <p class="form-item_desc">VNC72754878</p>
-                    </div>
-                </div> 
-                 <div class="form-item_1 ">
-                    <div class="text-center">
-                        <div class="form-item_product">
-                            <img src="/img/img/sanpham8.jpg" alt="anh" class="form-item_img">
-                            <div class="form-item_position">
-                                <a href="/product/productdetail" class="form-item_position-link">Chi tiết</a>
-                            </div>
-                        </div>
-                        <h3 class="form-item_heading">Na dứa Đài Loan</h3>
-                        <p class="form-item_desc">VNC72706655</p>
-                    </div>
-                </div> 
-                 <div class="form-item_1 ">
-                    <div class="text-center">
-                        <div class="form-item_product">
-                            <img src="/img/img/sanpham1.jpg" alt="anh" class="form-item_img">
-                            <div class="form-item_position">
-                                <a href="/product/productdetail" class="form-item_position-link">Chi tiết</a>
-                            </div>
-                        </div>
-                        <h3 class="form-item_heading">Dưa hấu Mỹ</h3>
-                        <p class="form-item_desc">VNC72827421</p>
-                    </div>
-                </div> 
+                {{/each}}
+                
             </div>
         </div>
     </div>        
@@ -315,7 +246,7 @@
         }
         setInterval(() => {
             rightbtn.click();
-        }, 1000)
+        }, 10000)
     })
 
 </script>   
