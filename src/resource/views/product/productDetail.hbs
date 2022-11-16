@@ -10,7 +10,7 @@
                     <a href="/product">Sản phẩm</a>
                 </li>
                 <li class="breadcrumb-left_items pl-8">
-                    <a href="/product/productdetail">Na dứa Đài Loan</a>
+                    <a href="/product/{{data._id}}">{{data.TenSanPham}}</a>
                 </li>
             </ol>
         </div>
@@ -22,7 +22,7 @@
     <div class="header-detail">
         <img class="header-detail_img" src="/img/img/sanpham8.jpg" alt="">
         <div class="header-detail_product">
-            <h3 class="header-detail_name">Na dứa Đài Loan</h3>
+            <h3 class="header-detail_name">{{data.TenSanPham}}</h3>
             <span class="header-detail_price">Giá: Liên hệ</span>
         </div>
     </div>
@@ -33,7 +33,7 @@
         </span>
         <span class="detail-address">
             Xuất xứ:
-            <span class="detail-address_name">hợp tác xã nông sản sạch lạng sơn</span>
+            <span class="detail-address_name">{{data.NhaSanXuat}}</span>
         </span>
     </div>
 </div>
@@ -74,13 +74,13 @@
         <div class="form-detail_content">
             <h3 class="form-detail_heading">Mô tả</h3>
             <p class="form-detail_desc">
-                Na dứa Đài Loan hay còn được gọi là mãng cầu Đài Loan, được ví là "Nữ hoàng của các loại na" bở vị ngọt dễ chịu, thơm mát và chứa nhiều vitamin, khoáng chất tốt cho cơ thể
+                {{data.MoTa}}
             </p>
         </div>
         <div class="form-detail_content">
             <h3 class="form-detail_heading">Thành phần</h3>
             <p class="form-detail_desc">
-                Quả tươi
+                {{data.ThanhPhan}}
             </p>
         </div>
         <div class="form-detail_content">
@@ -109,6 +109,103 @@
             </p>
         </div>
     </div>
+</div>
+
+<div class="container">
+    <div class="form-relationship">
+        <h2 class="form-relationship_category">Sản Phẩm Liên Quan</h2>
+        <button class="left-btn"><i class="fa-solid fa-circle-chevron-right"></i></button>
+        <button class="right-btn"><i class="fa-solid fa-circle-chevron-right"></i></button>
+
+        <div class="relationship-container">
+            <div class="relationship-cart">
+                <div class="form-item_1 ">
+                    <div class="text-center">
+                        <div class="form-item_product">
+                            <img src="/img/img/sanpham2.jpg" alt="anh" class="form-item_img">
+                            <div class="form-item_position">
+                                <a href="/product/productdetail" class="form-item_position-link">Chi tiết</a>
+                            </div>
+                        </div>
+                        <h3 class="form-item_heading">Dưa hấu đỏ</h3>
+                        <p class="form-item_desc">VNC72817831</p>
+                    </div>
+                </div> 
+                 <div class="form-item_1 ">
+                    <div class="text-center">
+                        <div class="form-item_product">
+                            <img src="/img/img/sanpham4.jpg" alt="anh" class="form-item_img">
+                            <div class="form-item_position">
+                                <a href="/product/productdetail" class="form-item_position-link">Chi tiết</a>
+                            </div>
+                        </div>
+                        <h3 class="form-item_heading">Ổi Đài Loan</h3>
+                        <p class="form-item_desc">VNC72794286</p>
+                    </div>
+                </div> 
+                 <div class="form-item_1 ">
+                    <div class="text-center">
+                        <div class="form-item_product">
+                            <img src="/img/img/sanpham5.jpg" alt="anh" class="form-item_img">
+                            <div class="form-item_position">
+                                <a href="/product/productdetail" class="form-item_position-link">Chi tiết</a>
+                            </div>
+                        </div>
+                        <h3 class="form-item_heading">Dưa hoàng kim</h3>
+                        <p class="form-item_desc">VNC72773312</p>
+                    </div>
+                </div> 
+                 <div class="form-item_1 ">
+                    <div class="text-center">
+                        <div class="form-item_product">
+                            <img src="/img/img/sanpham6.jpg" alt="anh" class="form-item_img">
+                            <div class="form-item_position">
+                                <a href="/product/productdetail" class="form-item_position-link">Chi tiết</a>
+                            </div>
+                        </div>
+                        <h3 class="form-item_heading">Nhãn da bò</h3>
+                        <p class="form-item_desc">VNC72766753</p>
+                    </div>
+                </div> 
+                 <div class="form-item_1 ">
+                    <div class="text-center">
+                        <div class="form-item_product">
+                            <img src="/img/img/sanpham7.jpg" alt="anh" class="form-item_img">
+                            <div class="form-item_position">
+                                <a href="/product/productdetail" class="form-item_position-link">Chi tiết</a>
+                            </div>
+                        </div>
+                        <h3 class="form-item_heading">Tắc</h3>
+                        <p class="form-item_desc">VNC72754878</p>
+                    </div>
+                </div> 
+                 <div class="form-item_1 ">
+                    <div class="text-center">
+                        <div class="form-item_product">
+                            <img src="/img/img/sanpham8.jpg" alt="anh" class="form-item_img">
+                            <div class="form-item_position">
+                                <a href="/product/productdetail" class="form-item_position-link">Chi tiết</a>
+                            </div>
+                        </div>
+                        <h3 class="form-item_heading">Na dứa Đài Loan</h3>
+                        <p class="form-item_desc">VNC72706655</p>
+                    </div>
+                </div> 
+                 <div class="form-item_1 ">
+                    <div class="text-center">
+                        <div class="form-item_product">
+                            <img src="/img/img/sanpham1.jpg" alt="anh" class="form-item_img">
+                            <div class="form-item_position">
+                                <a href="/product/productdetail" class="form-item_position-link">Chi tiết</a>
+                            </div>
+                        </div>
+                        <h3 class="form-item_heading">Dưa hấu Mỹ</h3>
+                        <p class="form-item_desc">VNC72827421</p>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>        
 </div>
 
 <footer>
@@ -171,3 +268,54 @@
         </div>
     </div>
 </footer>
+
+
+<script>
+    window.addEventListener('load' , () => {
+        const relationshipForm = document.querySelector('.form-relationship');
+        const relationshipCart = document.querySelector('.relationship-cart');
+        const relationshipItem = document.querySelectorAll('.form-item_1');
+        const leftbtn = document.querySelector('.left-btn');
+        const rightbtn = document.querySelector('.right-btn');
+
+        const itemWidth = 260;
+        const itemLength = relationshipItem.length;
+        let PositionX = 0;
+        let i = 0;
+
+        leftbtn.addEventListener('click', () => {
+            HandleChangeItem(-1);
+        })
+
+        rightbtn.addEventListener('click', () => {
+            HandleChangeItem(1);
+        })
+
+        function HandleChangeItem(dem) {
+            if(dem == 1) {
+                if(i >= itemLength - 4) {
+                    i = 0;
+                    PositionX = 0;
+                    relationshipCart.style = `transform: translateX(${PositionX}px);`
+                } else {
+                    PositionX = PositionX + itemWidth;
+                    relationshipCart.style = `transform: translateX(-${PositionX}px);`
+                    i++;
+                }
+            } else {
+                if(i <= 0 ) {
+                    i = 0;
+                    PositionX = 0;
+                } else {
+                    PositionX = PositionX + itemWidth;
+                    relationshipCart.style = `transform: translateX(${PositionX}px);`
+                    i--;
+                }
+            }
+        }
+        setInterval(() => {
+            rightbtn.click();
+        }, 1000)
+    })
+
+</script>   
