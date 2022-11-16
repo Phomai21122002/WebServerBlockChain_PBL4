@@ -10,8 +10,9 @@ var formBusinessName = document.getElementById('form-business-name')
 formBusinessName.style.display = 'none'
 var formInfo = document.getElementById('form-info')
 
-var inputName = document.getElementById('inputName')
 var inputEmail = document.getElementById('inputEmail')
+var inputAddress = document.getElementById('inputPhone')
+var inputPhone = document.getElementById('inputEmail')
 var inputPassword = document.getElementById('inputPassword')
 var inputConfirm = document.getElementById('inputConfirm')
 var businessName = document.getElementById('businessName')
@@ -21,7 +22,7 @@ var businessName = document.getElementById('businessName')
 var nextBtn = document.getElementById('nextBtn')
 nextBtn.addEventListener('click' , function() {
 
-    if(inputName.value != '' && inputEmail.value != '' && inputPassword.value != '' && inputConfirm.value !='' && inputEmail.value.includes('@gmail.com') == true){
+    if(inputAddress.value != '' && inputPhone.value != '' &&  inputEmail.value != '' && inputPassword.value != '' && inputConfirm.value !='' && inputEmail.value.includes('@gmail.com') == true){
         
         if(inputPassword.value !== inputConfirm.value)
         {

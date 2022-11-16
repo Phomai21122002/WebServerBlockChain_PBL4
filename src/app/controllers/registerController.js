@@ -1,4 +1,10 @@
 const hash = require('crypto-js/sha256')
+const User = require('../models/user')
+
+
+
+const {multipleMongooseToObject} = require ('../../util/mongoose')
+const {mongooseToObject} = require('../../util/mongoose')
 
 class registerController { 
 
@@ -11,48 +17,41 @@ class registerController {
 
     apply(req, res)
     {
-        const name = req.body.name
-        const email = req.body.email
+        const UserName = req.body.UserName
+        const email = req.body.Email
         const password = req.body.password
-        const confirmpassword = req.body.confirmpassword
+        const address = req.body.Address
+        const phoneNumber = req.body.PhoneNumber
 
-        console.log(name)
-        console.log(email)
-        console.log(password)
-        console.log(confirmpassword)
-
-        fetch(`http://localhost:3000/api/users`)
-            .then( (response) => {
-                if(response.ok){
-                    return response.json()
-                }
-                return new Error
-            })  
-
-            .then( rows => {
-                var result = true;
-                rows.forEach(element => {
+        User.find({}, (err,data) => {
+            var users = multipleMongooseToObject(data)
+            var result = true
+                for (let i = 0; i < users.length; i++) {
+                    const element = users[i];
                     if(element.Email == email){
                         result = false
+                        break
                     }
-                });
-                return result
-            })
-            .then((result) =>{
-                if(result == true) {
-                    res.redirect('/admin')
+                }
+                if(result === true) {
+                    var newUser = new User({
+                        UserName: UserName,
+                        Password: password,
+                        Email: email,
+                        Address: address,
+                        PhoneNumber: phoneNumber,
+                        Quyen: 2,
+                    })
+                    newUser.save();
+                    res.redirect('/login')
                 }
                 else{
                     res.redirect('/register')
-
                 }
-            })
-            .catch((err) => {
-                console.log(err)
-                res.render('error/error500.hbs',{
-                    layout: false
-                })
-            } )
+
+        })
+
+        
 
 
     }
