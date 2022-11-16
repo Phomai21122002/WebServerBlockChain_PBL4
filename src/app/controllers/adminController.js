@@ -378,6 +378,7 @@ class adminController {
                         }
                     }, (err,res) => {
                         if(!err){
+                            Application.findByIdAndUpdate(applicationID, {TrangThai: true , UpdateAt: Date.now}, (err, data) => {} )
                             response.redirect('/admin')
                         }
                         else{
@@ -390,6 +391,8 @@ class adminController {
 
             })
         })
+        
+        
     }
 
     

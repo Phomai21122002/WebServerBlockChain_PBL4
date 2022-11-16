@@ -2,7 +2,9 @@
 class businessController{
     index(req, res)
     {
-        res.send('Busniess Page')
+        res.render('business/dashBoard.hbs', {
+            layout: 'businessLayout.hbs'
+        })
     }
     
     info(req,res)

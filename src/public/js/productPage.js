@@ -2,13 +2,18 @@
     var listItem = document.querySelectorAll('.form-item')
     var length = listItem.length
     var currentLength = 8
-
     var listItemUnable = []
+    var moreBtn = document.querySelector('.page-next_btn')
+
+    if(length <= 8)
+    {
+        moreBtn.style.display = 'none'
+    }
+
     for (let i = 8; i < listItem.length; i++) {
         listItem[i].style.display ='none'
     }
 
-    var moreBtn = document.querySelector('.page-next_btn')
     moreBtn.addEventListener('click', function() {  
         
         if(currentLength > length - 4 ){
