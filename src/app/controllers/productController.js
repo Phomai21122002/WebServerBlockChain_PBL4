@@ -1,10 +1,24 @@
+const { response } = require('express');
+const request = require('request')
+
 const { multipleMongooseToObject } = require('../../util/mongoose')
 const { mongooseToObject } = require('../../util/mongoose')
 const SanPham = require('../models/sanpham')
 
+
 class productController {
     index(req, res)
     {
+        request(`http://127.0.0.1:3000/blockchain/chain`, { json: true }, (err, res, body) => {
+            if(!err)
+            {
+                console.log(body)
+            }
+            else{
+                response.render('error/error500.hbs')
+            }
+        });
+
         SanPham.find( {}, function(err, data) {
             if(!err) {
                 res.render('product/productPage.hbs' ,{

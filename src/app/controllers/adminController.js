@@ -94,7 +94,7 @@ class adminController {
                 })
             }
             else{
-                request.render('error/error500.hbs',{
+                response.render('error/error500.hbs',{
                     layout: false
                 })
             }
