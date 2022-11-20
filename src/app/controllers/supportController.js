@@ -1,3 +1,4 @@
+
 class supportController {
     index(req, res)
     {
@@ -5,5 +6,13 @@ class supportController {
             layout: 'productLayout.hbs'
         })
     }
+
+
+    downloadfile(req,response)
+    {
+        const file = `${__dirname}/../../public/document/ebook-TXNG.pdf`;
+        response.download(file); // Set disposition and send it.
+    }
+
 }
 module.exports = new supportController

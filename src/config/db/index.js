@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 async function connect() {
     try {
-        await mongoose.connect(`mongodb://127.0.0.1:27017/nguongocnongsan_dev` ,{
+        await mongoose.connect(`mongodb+srv://nhanbui1512:${process.env.PASS}@cluster0.byylynh.mongodb.net/nguongocnongsan_dev` ,{
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
