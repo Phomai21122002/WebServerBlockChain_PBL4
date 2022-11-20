@@ -16,9 +16,37 @@ class adminController {
 
     //GET /admin
     index(req, res){
-        res.render('admin/adminPage.hbs', {
-            layout: 'adminLayout'
-        })
+        User.find({},(err,data) => {
+            var users = multipleMongooseToObject(data)
+            var businesses = []
+            var centers = []
+
+            for (let i = 0; i < users.length; i++) {
+                const element = users[i];
+                if(element.Quyen == 1 ){
+                    element.index = centers.length + 1
+                    centers.push(element)
+                }
+                if(element.Quyen == 2) {
+                    element.index = businesses.length + 1
+                    businesses.push(element)
+                }
+            }
+
+            SanPham.find({}, (err, sanphams) => {
+                res.render('admin/adminPage.hbs', {
+                    layout: 'adminLayout',
+                    centers: centers,
+                    businesses: businesses,
+                    sanphams: multipleMongooseToObject(sanphams)
+                })
+            })
+
+            
+            
+        } )
+
+        
     }
 
     profile(req, response)

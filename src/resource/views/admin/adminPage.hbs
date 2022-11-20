@@ -31,36 +31,23 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Tên Doanh Nghiệp</th>
-                                                <th>Mã Số Thuế</th>
+                                                <th>Email</th>
                                                 <th>Số ĐT</th>
-                                                <th>Loại Hình</th>
+                                                <th>Địa Chỉ</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th>1</th>
-                                                <td>Kolor Tea Shirt For Man</td>
-                                                <td><span class="badge badge-primary px-2">Sale</span>
-                                                </td>
-                                                <td>January 22</td>
-                                                <td class="color-primary">$21.56</td>
-                                            </tr>
-                                            <tr>
-                                                <th>2</th>
-                                                <td>Kolor Tea Shirt For Women</td>
-                                                <td><span class="badge badge-danger px-2">Tax</span>
-                                                </td>
-                                                <td>January 30</td>
-                                                <td class="color-success">$55.32</td>
-                                            </tr>
-                                            <tr>
-                                                <th>3</th>
-                                                <td>Blue Backpack For Baby</td>
-                                                <td><span class="badge badge-success px-2">Extended</span>
-                                                </td>
-                                                <td>January 25</td>
-                                                <td class="color-danger">$14.85</td>
-                                            </tr>
+
+                                            {{#each businesses}}
+                                                <tr>
+                                                    <th>{{this.index}}</th>
+                                                    <td>{{this.UserName}}</td>
+                                                    <td>{{this.Email}}</td>
+                                                    <td>{{this.PhoneNumber}}</td>
+                                                    <td class="color-primary">{{this.Address}}</td>
+                                                </tr>
+                                            {{/each}}
+                                            
                                         </tbody>
                                     </table>
                                 </div>
@@ -80,31 +67,21 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Tên TT</th>
+                                                <th>Email</th>
                                                 <th>Địa Chỉ</th>
                                                 <th>Số ĐT</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th>1</th>
-                                                <td>Trung Tâm Kiểm Định Nông Sản Miền Trung</td>
-                                                <td>23 Hà Nội tp Huế</td>
-                                                <td>0543811232</td>
-                                            </tr>
-
-                                            <tr>
-                                                <th>2</th>
-                                                <td>Trung Tâm Kiểm Định Nông Sản Miền Trung</td>
-                                                <td>23 Hà Nội tp Huế</td>
-                                                <td>0543811232</td>
-                                            </tr>
-
-                                            <tr>
-                                                <th>3</th>
-                                                <td>Trung Tâm Kiểm Định Nông Sản Miền Trung</td>
-                                                <td>23 Hà Nội tp Huế</td>
-                                                <td>0543811232</td>
-                                            </tr>
+                                            {{#each centers}}
+                                                <tr>
+                                                    <th>{{this.index}}</th>
+                                                    <td>{{this.UserName}}</td>
+                                                    <td>{{this.Address}}</td>
+                                                    <td>{{this.Email}}</td>
+                                                    <td>{{this.PhoneNumber}}</td>
+                                                </tr>
+                                            {{/each}}
                                         </tbody>
                                     </table>
                                 </div>
@@ -122,38 +99,21 @@
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
                                                 <th>Tên Sản Phẩm</th>
                                                 <th>Status</th>
-                                                <th>Date</th>
+                                                <th>Nhà Sản Xuất</th>
                                                 <th>Price</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th>1</th>
-                                                <td>Kolor Tea Shirt For Man</td>
-                                                <td><span class="badge badge-primary px-2">Sale</span>
-                                                </td>
-                                                <td>January 22</td>
-                                                <td class="color-primary">$21.56</td>
-                                            </tr>
-                                            <tr>
-                                                <th>2</th>
-                                                <td>Kolor Tea Shirt For Women</td>
-                                                <td><span class="badge badge-danger px-2">Tax</span>
-                                                </td>
-                                                <td>January 30</td>
-                                                <td class="color-success">$55.32</td>
-                                            </tr>
-                                            <tr>
-                                                <th>3</th>
-                                                <td>Blue Backpack For Baby</td>
-                                                <td><span class="badge badge-success px-2">Extended</span>
-                                                </td>
-                                                <td>January 25</td>
-                                                <td class="color-danger">$14.85</td>
-                                            </tr>
+                                            {{#each sanphams}}
+                                                <tr>
+                                                    <td><a href="">{{this.TenSanPham}}</a></td>
+                                                    <td><span class="badge badge-primary px-2">Sale</span></td>
+                                                    <td>{{this.NhaSanXuat}}</td>
+                                                    <td class="color-primary">$21.56</td>
+                                                </tr>
+                                            {{/each}}
                                         </tbody>
                                     </table>
                                 </div>
