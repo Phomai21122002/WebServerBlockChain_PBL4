@@ -253,8 +253,8 @@
     .form-detail_desc,
     .footer-form_desc,
     .header-news_heading-link,
-    .header-news_desc,
-    .form-item_heading {
+    .header-news_desc
+    {
         text-align: justify;
     }
 
