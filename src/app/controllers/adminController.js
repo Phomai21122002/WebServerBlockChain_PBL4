@@ -312,11 +312,11 @@ class adminController {
         var UserID = req.session.userid;
         var UserName = req.session.username;
         var fileImage = req.file
-        console.log(fileImage.filename)
 
         var newSanPham = new SanPham(req.body);
         newSanPham.NhaSanXuat = UserName;
         newSanPham.UserID = UserID;
+        newSanPham.Image = fileImage.filename;
         newSanPham.save();
         response.redirect('/admin/danhsachsanpham');
         
