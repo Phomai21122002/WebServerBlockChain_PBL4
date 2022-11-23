@@ -15,7 +15,7 @@
                 <div class="card-body">
                     <h4 class="card-title">Thêm Sản Phẩm</h4>
                     <div class="form-validation">
-                        <form class="form-valide" action="/admin/addproduct" method="post">
+                        <form class="form-valide" action="/admin/addproduct" method="post" enctype="multipart/form-data">
                             <div class="form-group row">
                                 <label class="col-lg-4 col-form-label" for="val-username">Tên Sản Phẩm<span class="text-danger">*</span>
                                 </label>
@@ -75,10 +75,12 @@
                             <div class="basic-form">
                                 <div>
                                     <div class="form-group">
-                                        <input type="file" class="form-control-file">
+                                        <input id="inputImg" name="Image" type="file" class="form-control-file">
                                     </div>
                                 </div>
                             </div>
+
+                            <img style="width: 400px;" id="imgPreview" src="" alt="">
 
 
                             <div class="form-group row">
@@ -94,7 +96,19 @@
     </div>
 </div>
 
+<script>
+    
+    var inputImg = document.getElementById('inputImg')
+    var imgPreview = document.getElementById('imgPreview')
+
+    inputImg.onchange = function(e){
+        const file = e.target.files[0]
+        imgPreview.src = (URL.createObjectURL(file))
+
+    }
+
+</script>
 
 
-    <script src="/template/plugins/validation/jquery.validate.min.js"></script>
-    <script src="/template/plugins/validation/jquery.validate-init.js"></script>
+<script src="/template/plugins/validation/jquery.validate.min.js"></script>
+<script src="/template/plugins/validation/jquery.validate-init.js"></script>

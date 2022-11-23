@@ -1,6 +1,18 @@
 const adminController = require('../app/controllers/adminController')
 const express = require('express');
 const router = express.Router();
+const multer = require('multer')
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './src/public/uploads')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now())
+    }
+  })
+   
+  var upload = multer({ storage: storage })
 
 router.get('/', adminController.index)
 router.get('/profile',adminController.profile)
@@ -22,7 +34,7 @@ router.get('/donkiemdinh/:id',adminController.thongtindonkiemdinh)
 
 router.post('/insertttkd',adminController.insertTtkd)
 router.post('/addbusiness',adminController.addbusiness)
-router.post('/addproduct',adminController.addproduct)
+router.post('/addproduct',upload.single('Image'),adminController.addproduct)
 router.post('/insertmaterial',adminController.insertMaterial)
 router.post('/insertdonkiemdinh',adminController.insertdonkiemdinh)
 router.post('/resoleapplication/:id', adminController.resoleApplication)

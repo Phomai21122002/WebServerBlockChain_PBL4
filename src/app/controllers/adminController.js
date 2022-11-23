@@ -3,6 +3,7 @@ const session = require('express-session')
 const { response, json } = require('express')
 const mongoose = require('mongoose')
 
+
 const SanPham = require('../models/sanpham')
 const NguyenLieu = require('../models/nguyenlieu')
 const User = require('../models/user')
@@ -310,7 +311,9 @@ class adminController {
 
         var UserID = req.session.userid;
         var UserName = req.session.username;
-        
+        var fileImage = req.file
+        console.log(fileImage.filename)
+
         var newSanPham = new SanPham(req.body);
         newSanPham.NhaSanXuat = UserName;
         newSanPham.UserID = UserID;
