@@ -32,7 +32,7 @@
             <span class="detail-code_name">{{product._id}}</span>
         </span>
         <span class="detail-address">
-            Xuất xứ:
+            Nhà Sản Xuất:
             <span class="detail-address_name">{{product.NhaSanXuat}}</span>
         </span>
     </div>
@@ -86,28 +86,18 @@
         <div class="form-detail_content">
             <h3 class="form-detail_heading">Công dụng</h3>
             <p class="form-detail_desc">
-                Tốt cho mắt, da: Chứa nhiều Riboflavin và Vitamin C có tác dụng bảo vệ mắt, và làm đẹp da.
-                <br> Tốt cho người bị bệnh hen: Chứa hàm lượng Vitamin B6 có tác dụng làm giảm các triệu chứng viêm phổi và giảm ho hiệu quả
-                <br> Tốt cho tim mạch: Với hàm lượng Magie cao quả Na có tác dụng tốt cho những người bị bệnh tim, ngăn ngừa những cơn đau tim.
-                <br> Tốt cho hệ tiêu hóa, và người bị tiểu đường: Hàm lượng chất xơ có tác dụng tốt cho hệ tiêu hóa, giảm chứng táo bón và làm giảm nguy cơ mắc các bệnh tiểu đường loại 2.
-                <br> Làm giảm cholesterol trong máu: Có tác dụng làm giảm lượng Cholesterol trong máu nhờ hàm lượng chất xơ và niacin chứa trong quả na dồi dào.
-                <br> Tốt cho người bị thiếu máu: Với hàm lượng chất sắt cao, Na dứa rất tốt cho những người bị bệnh thiếu máu
-                <br> Ổn định huyết áp: Trong Na giàu Kali và Magie có tác dụng điều hòa huyết áp, giữ cho huyết áp ổn định.
-                <br> Ngăn ngừa ung thư: Hợp chất Acetogenin có tác dụng rất tốt trong việc điều trị các thương tổn của tiền ung thư da, ngăn ngừa nguy cơ mắc ung thư da cũng như các bệnh ung thư khác.
+                
+                {{product.CongDung}}
+            
             </p>
         </div>
         <div class="form-detail_content">
             <h3 class="form-detail_heading">Hướng dẫn sử dụng</h3>
             <p class="form-detail_desc">
-                Quả chín bóc vỏ ăn trực tiếp hoặc dùng làm sinh tố
+                 {{product.HuongDanSuDung}}
             </p>
         </div>
-        <div class="form-detail_content">
-            <h3 class="form-detail_heading">Điều kiện bảo quản</h3>
-            <p class="form-detail_desc">
-                Bảo quản ở trong ngăn mát tủ lạnh, đựng trong túi bóng, hộp nhựa hoặc giấy báo gói kín
-            </p>
-        </div>
+        
     </div>
 </div>
 
@@ -202,51 +192,37 @@
 
 
 <script>
-    window.addEventListener('load' , () => {
-        const relationshipForm = document.querySelector('.form-relationship');
-        const relationshipCart = document.querySelector('.relationship-cart');
-        const relationshipItem = document.querySelectorAll('.form-item_1');
-        const leftbtn = document.querySelector('.left-btn');
-        const rightbtn = document.querySelector('.right-btn');
 
-        const itemWidth = 260;
-        const itemLength = relationshipItem.length;
-        let PositionX = 0;
-        let i = 0;
-
-        leftbtn.addEventListener('click', () => {
-            HandleChangeItem(-1);
-        })
-
-        rightbtn.addEventListener('click', () => {
-            HandleChangeItem(1);
-        })
-
-        function HandleChangeItem(dem) {
-            if(dem == 1) {
-                if(i >= itemLength - 4) {
-                    i = 0;
-                    PositionX = 0;
-                    relationshipCart.style = `transform: translateX(${PositionX}px);`
-                } else {
-                    PositionX = PositionX + itemWidth;
-                    relationshipCart.style = `transform: translateX(-${PositionX}px);`
-                    i++;
-                }
-            } else {
-                if(i <= 0 ) {
-                    i = 0;
-                    PositionX = 0;
-                } else {
-                    PositionX = PositionX + itemWidth;
-                    relationshipCart.style = `transform: translateX(${PositionX}px);`
-                    i--;
-                }
-            }
+    var slider = document.querySelector('.relationship-cart');
+    var nextbtn = document.querySelector('.right-btn');
+    var backbtn = document.querySelector('.left-btn');
+    var items = document.querySelectorAll('.form-item_1')
+    var count = 0
+    
+    var widthSlider = 260 * (items.length - 4);
+    console.log(widthSlider)
+    nextbtn.addEventListener('click', function(){
+        if(count <= widthSlider){
+        count += 260;
         }
-        setInterval(() => {
-            rightbtn.click();
-        }, 10000)
+        if( count > widthSlider){
+        count = 0;
+        }
+        slider.style.transform = `translateX(-${count}px)`;
     })
+    backbtn.addEventListener('click', function(){
+        if(count >= 0){
+            count -= 260;
+        }
+        if(count < 0){
+            count = 260 * (items.length - 4)
+        }
+        slider.style.transform = `translateX(-${count}px)`;
+
+    })
+
+    setInterval(() => {
+    nextbtn.click();
+    }, 10000);
 
 </script>   

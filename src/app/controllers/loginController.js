@@ -35,6 +35,7 @@ class loginController {
                         req.session.userid = result[i]._id
                         req.session.email = result[i].Email
                         req.session.permission = result[i].Quyen
+                        req.session.username = result[i].UserName
                     }
                 }
 

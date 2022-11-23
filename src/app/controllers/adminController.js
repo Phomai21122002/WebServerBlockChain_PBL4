@@ -93,6 +93,7 @@ class adminController {
         
     }
     
+    // GET /admin/danhsachsanpham
     danhsachsanpham(req,response)
     {
 
@@ -251,6 +252,7 @@ class adminController {
 
     }
 
+    //GET /admin/sanpham/:id
     xemthongtinsanpham(req, response)
     {
         const id = req.params.id
@@ -305,15 +307,15 @@ class adminController {
     //POST /admin/addproduct
     addproduct(req,response)
     {
-        var newSanPham = new SanPham(req.body);
-        var UserID = req.session.userid;
-        User.findById(UserID , (err, data) => {
-            var result = mongooseToObject(data)
-            newSanPham.NhaSanXuat = result.UserName
-            newSanPham.save();
-            response.redirect('/admin/danhsachsanpham');
-        })
 
+        var UserID = req.session.userid;
+        var UserName = req.session.username;
+        
+        var newSanPham = new SanPham(req.body);
+        newSanPham.NhaSanXuat = UserName;
+        newSanPham.UserID = UserID;
+        newSanPham.save();
+        response.redirect('/admin/danhsachsanpham');
         
     }
 
