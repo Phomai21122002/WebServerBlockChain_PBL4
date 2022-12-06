@@ -1,0 +1,69 @@
+ <div class="row page-titles mx-0">
+    <div class="col p-md-0">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+            <li class="breadcrumb-item active"><a href="/admin/themttkd">Thêm Doanh Nghiệp</a></li>
+        </ol>
+    </div>
+</div>
+            <!-- row -->
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Thông Tin Người Dùng</h4>
+                    <div class="form-validation">
+                        <form class="form-valide" action="/admin/updateprofile" method="post">
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for="val-username">Tên Người Dùng<span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-6">
+                                    <input value="{{user.UserName}}"  type="text" class="form-control" id="val-username" name="UserName" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for="val-email">Email <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-6">
+                                    <input value="{{user.Email}}"  type="text" class="form-control" id="val-email" name="Email"  required>
+                                </div>
+                            </div>
+     
+
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for="val-confirm-password">Địa Chỉ<span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-6">
+                                    <input value="{{user.Address}}" type="text" class="form-control" id="val-confirm-password" name="Address" placeholder="Address" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for="val-confirm-password">Số Điện Thoại<span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-6">
+                                    <input value="{{user.PhoneNumber}}" require type="text" class="form-control" id="val-confirm-password" name="PhoneNumber" placeholder="054321..." required>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-lg-8 ml-auto">
+                                    <a href="/admin" class="btn btn-primary">Back</a>
+
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <script src="/template/plugins/validation/jquery.validate.min.js"></script>
+    <script src="/template/plugins/validation/jquery.validate-init.js"></script>

@@ -21,6 +21,7 @@
                             <th scope="col">Email</th>
                             <th scope="col">Địa Chỉ</th>
                             <th scope="col">Số Điện Thoại</th>
+                            <th style="text-align:center ;" scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,10 +29,12 @@
 
                         <tr>
                             <th></th>
-                            <td>{{this.UserName}}</td>
+                            <td> <a href="/admin/ttkd/{{this._id}}"> {{this.UserName}}</a></td>
                             <td>{{this.Email}}</td>
                             <td>{{this.Address}}</td>
                             <td>{{this.PhoneNumber}}</td>
+                            <td style="text-align: center;"><span><a href="/admin/ttkd/{{this._id}}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a onclick="return confirm('Are you sure?')" href="/admin/deletecenter?ID={{this._id}}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-close color-danger"></i></a></span>
+                            </td>
                         </tr>
 
                         {{/each}}

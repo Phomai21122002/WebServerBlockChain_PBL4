@@ -50,11 +50,39 @@ class adminController {
         
     }
 
+    // GET /admin/profile
     profile(req, response)
     {
-        response.render('admin/profile.hbs', {
-            layout: 'adminLayout.hbs'
+
+        var userid = req.session.userid
+        User.findById(userid , (err, data ) => {
+            if(!err){
+                response.render('admin/profile.hbs', {
+                    layout: 'adminLayout.hbs',
+                    user: mongooseToObject(data)
+                })
+            }
         })
+        
+    }
+
+    // POST /admin/updateprofile
+    updateProfile(req,res)
+    {
+        var userid = req.session.userid
+        var UserName = req.body.UserName
+        var Email = req.body.Email
+        var Address = req.body.Address
+        var PhoneNumber = req.body.PhoneNumber
+
+        User.updateOne({_id: userid}, {UserName: UserName, Email: Email,
+            Address: Address, PhoneNumber: PhoneNumber
+        } ,(err,data)=>{
+            if(!err){
+                res.redirect('/admin/profile')
+            }
+        } )
+
     }
 
     //GET /admin/danhsachttkd
@@ -74,6 +102,8 @@ class adminController {
        
     }
 
+
+    // GET /admin/danhsachttkd
     danhsachdoanhnghiep(req, response)
     {
         user.find({Quyen: 2}, (err, data) =>{
@@ -92,6 +122,44 @@ class adminController {
             }
         })
         
+    }
+
+
+    // GET /admin/ttkd/:id
+    xemthongtinttkd(req,res){
+        var ID = req.params.id
+        User.findById(ID, (err,data) => {
+            if(!err){
+                res.render('admin/infoCenter.hbs',{
+                    layout: 'adminLayout.hbs',
+                    data: mongooseToObject(data)
+                })
+            }
+        })
+    }
+
+    // POST /admin/updatecenter
+
+    updateCenter(req,res)
+    {
+        var ID = req.query.ID
+        User.updateOne({_id: ID}, req.body, (err,data) =>{
+            if(!err)
+            {
+                res.redirect('/admin/danhsachttkd')
+            }
+        })
+    }
+
+    //GET /admin/deletecenter?ID=
+
+    deleteCenter(req,res)
+    {
+        var ID = req.query.ID
+        User.deleteOne({_id:ID})
+            .then(()=>{
+                res.redirect('/admin/danhsachttkd') 
+            })
     }
     
     // GET /admin/danhsachsanpham
@@ -135,7 +203,7 @@ class adminController {
     // GET /admin/danhsachdonkd
     danhsachdonkiemdinh(req,response)
     {
-        Application.find({}, (err, data) => {
+        Application.find({TrangThai: false}, (err, data) => {
             if(!err){
                 const listApplication = multipleMongooseToObject(data)
                 for (let i = 0; i < listApplication.length; i++) {
@@ -251,6 +319,18 @@ class adminController {
         })
         
 
+    }
+
+    //GET /admin/deletebusiness?ID=
+
+    deleteBusiness(req,res,next)
+    {
+        var ID = req.query.ID
+        User.deleteOne({_id: ID})
+            .then(()=>{
+                res.redirect('/admin/danhsachdoanhnghiep')
+            })
+            .catch(next)
     }
 
     //GET /admin/sanpham/:id
@@ -371,6 +451,46 @@ class adminController {
             })
 
         })
+
+    }
+
+
+    //POST /admin/updatebusiness
+
+    updateBusiness(req,res){
+        var UserID = req.query.ID
+        var UserName = req.body.userName
+        var Type = req.body.type
+        var Email = req.body.email
+        var Address = req.body.address
+        var PhoneNumber = req.body.phone
+
+        User.updateOne({_id: UserID}, {UserName: UserName, LoaiHinhKinhDoanh: Type, 
+            Email: Email, PhoneNumber: PhoneNumber, Address: Address
+            }, (err,data) =>{
+                if(!err){
+                    res.redirect('/admin/danhsachdoanhnghiep')
+                }
+        })
+        console.log(UserID)
+    }
+
+
+    // GET /admin/password
+
+    password(req,res)
+    {
+        res.render('admin/passWord.hbs',{
+            layout: 'adminLayout.hbs'
+        })
+    }
+
+    // POST / admin/changepassword
+    changePassWord(req,res)
+    {
+        var oldPassWord = req.body.oldPassWord
+        var newPassWord = req.body.newPassWord
+        var confirmPassWord = req.body.confirmPassWord
 
     }
 

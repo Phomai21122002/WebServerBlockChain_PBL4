@@ -22,6 +22,8 @@
                             <th scope="col">Loại Hình Kinh Doanh</th>
                             <th scope="col">Địa Chỉ</th>
                             <th scope="col">Số Điện Thoại</th>
+                            <th style="text-align:center ;" scope="col">Action</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -33,6 +35,8 @@
                                 <td>{{this.LoaiHinhKinhDoanh}}</td>
                                 <td>{{this.Address}}</td>
                                 <td>{{this.PhoneNumber}}</td>
+                                <td style="text-align: center;"><span><a href="/admin/doanhnghiep/{{this._id}}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a onclick="return confirm('Are you sure?')" href="/admin/deletebusiness?ID={{this._id}}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-close color-danger"></i></a></span>
+                                </td>
                             </tr>
                         {{/each}}
                         
