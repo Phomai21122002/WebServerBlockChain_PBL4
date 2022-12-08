@@ -8,7 +8,7 @@ const application = new Schema ({
     UserName: {type: String, default: '' },
     CreateAt: {type: Date, default: Date.now },
     UpdateAt: {type: Date, default: Date.now },
-    TrangThai: {type: Boolean, default: false },
+    TrangThai: {type: Boolean, default: false},
 });
 
 module.exports = mongoose.model('application', application)
