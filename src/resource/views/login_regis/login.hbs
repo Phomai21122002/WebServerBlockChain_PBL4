@@ -43,14 +43,15 @@
                             <div class="card-body pt-5">
                                 <a class="text-center" href="index.html"> <h4>SIGN IN</h4></a>
         
-                                <form action="/login/checklogin" method="post" class="mt-5 mb-5 login-input">
+                                <form class="mt-5 mb-5 login-input">
                                     <div class="form-group">
-                                        <input name="email" type="text" class="form-control" placeholder="Email" required>
+                                        <input id="input_email" name="email" type="text" class="form-control" placeholder="Email" required>
                                     </div>
                                     <div class="form-group">
-                                        <input name="password" type="password" class="form-control" placeholder="Password" required>
+                                        <input id="input_password" name="password" type="password" class="form-control" placeholder="Password" required>
                                     </div>
-                                    <button class="btn login-form__btn submit w-100">Sign In</button>
+                                    <p id="login_fail" style="margin: 0; margin-bottom:10px; text-align: center; color: rgb(255, 65, 65); display: none;">Email hoặc Mật Khẩu không đúng</p>
+                                    <div id="login_btn" class="btn login-form__btn submit w-100">Sign In</div>
                                 </form>
                                 <p class="mt-5 login-form__footer">Dont have account? <a href="/register" class="text-primary">Sign Up</a> now</p>
                             </div>
@@ -60,6 +61,52 @@
             </div>
         </div>
     </div>
+
+    <script>
+
+        var loginBtn = document.getElementById('login_btn')
+        var inputEmail = document.getElementById('input_email')
+        var inputPassWord = document.getElementById('input_password')
+        var loginFail = document.getElementById('login_fail')
+
+        function HandleLogin (){
+            
+            http.open('POST','http://localhost:3005/login/checklogin')
+            http.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+            http.send('email='+inputEmail.value+'&password='+inputPassWord.value)
+
+            http.onreadystatechange = function(){
+                if(this.readyState == 4){
+                    var response = JSON.parse(this.responseText)
+                    if(response.result == true){
+                        if(response.permission == 0 )
+                            window.location.href = "http://localhost:3005/admin"
+                        if(response.permission == 1)
+                            window.location.href = "http://localhost:3005/center"
+                        if(response.permission == 2)
+                            window.location.href = "http://localhost:3005/business"
+                    }
+                    else{
+                        loginFail.style.display = 'block'
+                    }
+                }
+            }
+        }
+    
+        var http = new XMLHttpRequest();
+        loginBtn.addEventListener('click',HandleLogin)
+
+        document.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                HandleLogin()
+            }
+        });
+
+        inputPassWord.addEventListener('input',function(){
+            loginFail.style.display = 'none'
+        })
+
+    </script>
     
 
     

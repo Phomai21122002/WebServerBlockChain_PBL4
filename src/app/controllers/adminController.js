@@ -488,9 +488,32 @@ class adminController {
     // POST / admin/changepassword
     changePassWord(req,res)
     {
-        var oldPassWord = req.body.oldPassWord
-        var newPassWord = req.body.newPassWord
-        var confirmPassWord = req.body.confirmPassWord
+        var oldPassWord = req.body.oldpass
+        var newPassWord = req.body.newpass
+
+        var UserID = req.session.userid
+
+        User.findById(UserID, (err,data) =>{
+            if(!err){
+                
+            
+                if(oldPassWord == data.Password ){
+                    User.updateOne({_id: UserID}, {Password: newPassWord} , (err,data) =>{
+                        if(!err){
+                            res.status(200).json({result: true})
+                        }
+
+                    })
+                }
+                else{
+                    res.status(200).json({result: false})
+
+                }
+            }
+            else{
+                res.status(200).json({result: false})
+            }
+        })
 
     }
 

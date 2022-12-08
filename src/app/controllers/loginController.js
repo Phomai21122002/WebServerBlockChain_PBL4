@@ -15,53 +15,24 @@ class loginController {
         });
     }
 
-    //GET /login/checklogin
-    checkLogin(req,response)
+    //POST /login/checklogin
+    checkLogin(req,res)
     {
         var email = req.body.email
         var password = req.body.password
-        var checked = false
-        var quyen = null
-        user.find({} , (err , data) => {
-
-            if(!err){
-                
-                const result = multipleMongooseToObject(data)
-                for (let i = 0; i < result.length; i++) {
-                    if(result[i].Email == email && result[i].Password == password){
-                        checked = true
-                        quyen = result[i].Quyen
-
-                        req.session.userid = result[i]._id
-                        req.session.email = result[i].Email
-                        req.session.permission = result[i].Quyen
-                        req.session.username = result[i].UserName
-                    }
-                }
-
-                if(checked == true){
-                    if(quyen == 0){
-                        response.redirect('/admin')
-                    }
-                    if(quyen == 1){
-                        response.redirect('/center')
-                    }
-                    if(quyen == 2){
-
-                        response.redirect('/business')
-                    }
-                }
-                else{
-                    response.redirect('/login')
-                }
+                      
+        user.findOne({Email: email, Password: password} , (err , data) => {
+            if(data){
+                var result = mongooseToObject(data)
+                req.session.userid = result._id
+                req.session.email = result.Email
+                req.session.permission = result.Quyen
+                req.session.username = result.UserName
+                res.status(200).json({result: true, permission: result.Quyen})
             }
             else{
-                response.render('error/error500.hbs',{
-                    layout:false
-                })
+                res.status(200).json({result: false})
             }
-            
-
         })
     }
 
