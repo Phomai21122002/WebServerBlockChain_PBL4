@@ -784,6 +784,14 @@ button{
     line-height: 1.6;
 }
 
+.link_material {
+    color: #000;
+}
+
+.link_material:hover {
+    color: #FF7B17;
+}
+
 
 /* origin */
 

@@ -15,48 +15,49 @@
                             <div class="card-body">
                                 <h4 class="card-title">Thêm Trung Tâm Kiểm Định</h4>
                                 <div class="form-validation">
-                                    <form class="form-valide" action="/admin/insertttkd" method="post">
+                                    <form class="form-valide">
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-username">Tên Trung Tâm Kiểm Định<span class="text-danger">*</span>
+                                            <label class="col-lg-4 col-form-label" for="username">Tên Trung Tâm Kiểm Định<span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input required type="text" class="form-control" id="val-username" name="UserName" placeholder="Enter a username..">
+                                                <input required type="text" class="form-control" id="username" name="UserName" placeholder="Enter a username..">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-email">Email <span class="text-danger">*</span>
+                                            <label class="col-lg-4 col-form-label" for="email">Email <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input required type="text" class="form-control" id="val-email" name="Email" placeholder="Your valid email..">
+                                                <input required type="text" class="form-control" id="email" name="Email" placeholder="Your valid email..">
+                                                <p id="fail_email" style="margin:5px 0px; color: red; display: none;">*Email đã tồn tại</p>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-password">Password <span class="text-danger">*</span>
+                                            <label class="col-lg-4 col-form-label" for="password">Password <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input required type="password" class="form-control" id="val-password" name="Password" placeholder="Choose a safe one..">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-confirm-password">Địa Chỉ<span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input required type="text" class="form-control" id="val-confirm-password" name="Address" placeholder="Address">
+                                                <input required type="password" class="form-control" id="password" name="Password" placeholder="Choose a safe one..">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-confirm-password">Số Điện Thoại<span class="text-danger">*</span>
+                                            <label class="col-lg-4 col-form-label" for="address">Địa Chỉ<span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input required type="text" class="form-control" id="val-confirm-password" name="PhoneNumber" placeholder="054321...">
+                                                <input required type="text" class="form-control" id="address" name="Address" placeholder="Address">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" for="phone">Số Điện Thoại<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-6">
+                                                <input required type="text" class="form-control" id="phone" name="PhoneNumber" placeholder="054321...">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <div class="col-lg-8 ml-auto">
-                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                <div id="submit_btn" class="btn btn-primary">Submit</div>
                                             </div>
                                         </div>
                                     </form>
@@ -66,3 +67,49 @@
                     </div>
                 </div>
             </div>
+
+
+    <script>
+        var http = new XMLHttpRequest()
+
+        var failEmail = document.getElementById('fail_email')
+        var submitBtn = document.getElementById('submit_btn')
+
+
+        var inputUserName = document.getElementById('username')
+        var inputEmail = document.getElementById('email')
+        var inputPassWord = document.getElementById('password')
+        var inputAddress = document.getElementById('address')
+        var inputPhone = document.getElementById('phone')
+        
+
+        submitBtn.addEventListener('click', function(){
+            var valUserName = inputUserName.value
+            var valEmail = inputEmail.value
+            var valPassWord = inputPassWord.value
+            var valAddress = inputAddress.value
+            var valPhone = inputPhone.value
+
+            http.open('POST', 'http://localhost:3005/admin/insertttkd')
+            http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            http.send('UserName='+valUserName+'&Email='+valEmail+'&Password='+valPassWord+'&Address='+valAddress+'&PhoneNumber='+valPhone)
+
+            http.onreadystatechange = function(){
+                if(this.readyState == 4){
+                    var response = JSON.parse(this.responseText)
+                    if(response.result == true)
+                    {
+                        window.location.href = "http://localhost:3005/admin/danhsachttkd";
+                    }
+                    else{
+                        failEmail.style.display = 'block'
+                    }
+                }
+            }
+
+
+        })
+
+
+
+    </script>

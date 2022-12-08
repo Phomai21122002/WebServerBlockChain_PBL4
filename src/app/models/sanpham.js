@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const sanpham = new Schema ({
     TenSanPham: {type: String, default: '' },
     MoTa: {type: String, default: '' },
-    ThanhPhan: {type: Array},
+    ThanhPhan: {type: Array, default: []},
     NoiSanXuat: {type: String, default: '' },   
     CongDung: {type: String, default: '' },   
     NhaSanXuat: {type: String, default: '' },

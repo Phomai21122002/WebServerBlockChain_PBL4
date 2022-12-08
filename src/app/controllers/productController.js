@@ -18,8 +18,9 @@ class productController {
         //         response.render('error/error500.hbs')
         //     }
         // });
-
+        
         SanPham.find( {}, function(err, data) {
+            
             if(!err) {
                 res.render('product/productPage.hbs' ,{
                     layout: 'productLayout.hbs',

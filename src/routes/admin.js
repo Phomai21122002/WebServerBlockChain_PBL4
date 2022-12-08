@@ -13,6 +13,7 @@ var storage = multer.diskStorage({
   })
    
   var upload = multer({ storage: storage })
+  var uploadMaterial = multer({storage: storage})
 
 router.get('/', adminController.index)
 router.get('/profile',adminController.profile)
@@ -34,11 +35,12 @@ router.get('/sanpham/:id',adminController.xemthongtinsanpham)
 router.get('/deletecenter',adminController.deleteCenter)
 router.get('/deletebusiness',adminController.deleteBusiness)
 router.get('/password',adminController.password)
+router.get('/nguyenlieu',adminController.thongtinnguyenlieu)
 
 router.post('/insertttkd',adminController.insertTtkd)
 router.post('/addbusiness',adminController.addbusiness)
 router.post('/addproduct',upload.single('Image'),adminController.addproduct)
-router.post('/insertmaterial',adminController.insertMaterial)
+router.post('/insertmaterial',upload.single('Image'),adminController.insertMaterial)
 router.post('/insertdonkiemdinh',adminController.insertdonkiemdinh)
 router.post('/resoleapplication/:id', adminController.resoleApplication)
 router.post('/updatebusiness',adminController.updateBusiness)

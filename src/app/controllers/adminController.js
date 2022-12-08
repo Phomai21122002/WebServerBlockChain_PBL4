@@ -181,6 +181,8 @@ class adminController {
 
 
     }
+
+    // GET /admin/danhsachnguyenlieu
     danhsachnguyenlieu(req,response)
     {   
 
@@ -194,6 +196,22 @@ class adminController {
             else{
                 response.render('error/error500.hbs',{
                     layout: false
+                })
+            }
+        })
+        
+    }
+
+    // GET /admin/nguyenlieu?ID=
+    thongtinnguyenlieu(req,res)
+    {
+        var IDNguyenLieu = req.query.ID
+        NguyenLieu.findById(IDNguyenLieu, (err,data) =>{
+       
+            if(!err){
+                res.render('admin/infoOriginProduct.hbs',{
+                    layout: 'adminLayout.hbs',
+                    data: mongooseToObject(data)
                 })
             }
         })
@@ -255,15 +273,35 @@ class adminController {
     // POST /admin/addttkd
     insertTtkd(req, res){
         
-        var newUser = new user(req.body)
-        newUser.Quyen = 1 ;
-        newUser.save()
-            .then(()=>{
-                res.redirect('/admin/danhsachttkd')
+        var UserName = req.body.UserName
+        var Email = req.body.Email
+        var PassWord = req.body.Password
+        var Address = req.body.Address
+        var PhoneNumber = req.body.PhoneNumber
+
+      
+
+        User.find({Email: Email})
+            .then(doc=>{
+                if(doc.length != 0){
+                    res.status(200).json({result: false})
+                }
+                else{
+                    var newUser = new user()
+                    newUser.Quyen = 1 ;
+                    newUser.UserName = UserName
+                    newUser.Email = Email
+                    newUser.Password = PassWord
+                    newUser.PhoneNumber = PhoneNumber
+                    newUser.Address = Address
+                    newUser.save()
+                    res.status(200).json({result: true})
+                }
             })
-            .catch((err) => {
-                res.render('error/error500.hbs',{layout:false})
+            .catch(err=>{
+                res.render('error/error500.hbs',{layout: false})
             })
+      
 
     }
 
@@ -369,9 +407,10 @@ class adminController {
     {
         var TenNguyenLieu = req.body.tennguyenlieu
         var DiaChi = req.body.DiaChi
+        var fileImage = req.file
         var  UserID = req.session.userid
 
-        var newNguyenLieu = new NguyenLieu({TenNguyenLieu: TenNguyenLieu, VungSanXuat: DiaChi, UserID: UserID});
+        var newNguyenLieu = new NguyenLieu({TenNguyenLieu: TenNguyenLieu, VungSanXuat: DiaChi, UserID: UserID, Image: fileImage.filename});
         newNguyenLieu.save()
             .then(()=> {
                 response.redirect('/admin/danhsachnguyenlieu')
@@ -392,12 +431,63 @@ class adminController {
         var UserID = req.session.userid;
         var UserName = req.session.username;
         var fileImage = req.file
+        
+        var ThanhPhan = req.body.ThanhPhan
+        var TenSanPham = req.body.TenSanPham
+        var MoTa = req.body.MoTa
+        var CongDung = req.body.CongDung
+        var HuongDanSuDung = req.body.HuongDanSuDung
+        var NoiSanXuat = req.body.NoiSanXuat
 
-        var newSanPham = new SanPham(req.body);
-        newSanPham.NhaSanXuat = UserName;
-        newSanPham.UserID = UserID;
-        newSanPham.Image = fileImage.filename;
-        newSanPham.save();
+        var newSanPham = new SanPham()
+        newSanPham.TenSanPham = TenSanPham
+        newSanPham.MoTa = MoTa
+        newSanPham.CongDung = CongDung
+        newSanPham.HuongDanSuDung = HuongDanSuDung
+        newSanPham.NoiSanXuat = NoiSanXuat
+        newSanPham.Image = fileImage.filename
+        newSanPham.UserID = UserID
+        newSanPham.NhaSanXuat = UserName
+
+
+        if(typeof ThanhPhan == 'string'){
+            NguyenLieu.findOne({_id:ThanhPhan})
+            .then((doc)=>{
+                var result = mongooseToObject(doc)
+                newSanPham.ThanhPhan.push({IDNguyenLieu: result._id,
+                    TenNguyenLieu: result.TenNguyenLieu
+                })
+            })
+            .then(()=>{
+                newSanPham.save()
+            })
+            .catch(err=>{
+                response.send('err')
+            })
+
+        }
+        else{
+            for (let i = 0; i < ThanhPhan.length; i++) {
+                NguyenLieu.findOne({_id:ThanhPhan[i]})
+                .then((doc)=>{
+                    var result = mongooseToObject(doc)
+                    newSanPham.ThanhPhan.push({IDNguyenLieu: result._id,
+                        TenNguyenLieu: result.TenNguyenLieu
+                    })
+                    
+                })
+                .then(()=>{
+                    if(i == ThanhPhan.length - 1) {
+                        newSanPham.save()
+                    }
+                })
+                .catch(err=>{
+                    response.send('err')
+                })
+
+               
+            }
+        }
         response.redirect('/admin/danhsachsanpham');
         
     }
@@ -472,7 +562,6 @@ class adminController {
                     res.redirect('/admin/danhsachdoanhnghiep')
                 }
         })
-        console.log(UserID)
     }
 
 
@@ -537,34 +626,30 @@ class adminController {
                 newChain.NoiSanXuat = product.NoiSanXuat
                 newChain.HuongDanSuDung = product.HuongDanSuDung
                 newChain.CongDung = product.CongDung
-                
+
                 for (let i = 0; i < product.ThanhPhan.length; i++) {
-                    const element = product.ThanhPhan[i];
-                    NguyenLieu.findById(element ,async (err, data) => {
-                        var nguyenlieu = mongooseToObject(data)
-                        newChain.ThanhPhan.push({TenNguyenLieu: nguyenlieu.TenNguyenLieu , IDNguyenLieu :element })
-                    })
+                    const element =  product.ThanhPhan[i]
+                    var id = element.IDNguyenLieu.toString()
+                    newChain.ThanhPhan.push({IDNguyenLieu: id, TenNguyenLieu: element.TenNguyenLieu})
+                    if(i == product.ThanhPhan.length -1)
+                    {
+                        request.post({
+                            url: 'http://127.0.0.1:3000/blockchain/mine',
+                            form: {
+                                data: newChain
+                            }
+                        }, (err,res) => {
+                            if(!err){
+                                Application.findByIdAndUpdate(applicationID, {TrangThai: true , UpdateAt: Date.now}, (err, data) => {} )
+                                response.redirect('/admin')
+                            }
+                            else{
+                                response.render('error/error500.hbs', {layout: false})
+                            }
+                        } )
+                    }
                 }
-                setTimeout(() => {
-
-                    request.post({
-                        url: 'http://127.0.0.1:3000/blockchain/mine',
-                        form: {
-                            data: newChain
-                        }
-                    }, (err,res) => {
-                        if(!err){
-                            Application.findByIdAndUpdate(applicationID, {TrangThai: true , UpdateAt: Date.now}, (err, data) => {} )
-                            response.redirect('/admin')
-                        }
-                        else{
-                            response.render('error/error500.hbs', {layout: false})
-                        }
-                    } )
-
-
-                }, 1000);
-
+                
             })
         })
         
