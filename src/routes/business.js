@@ -4,12 +4,32 @@ const express = require('express');
 const { route } = require('./admin');
 const router = express.Router();
 
+
+const multer = require('multer')
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './src/public/uploads')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now())
+    }
+  })
+   
+  var upload = multer({ storage: storage })
+
+
 router.get('/', businessController.index)
-router.get('/businessinfo',businessController.info)
+router.get('/profile',businessController.profile)
 router.get('/businessapplication',businessController.donkiemdinh)
 router.get('/themdonkiemdinh',businessController.themdonkiemdinh)
 router.get('/danhsachsanpham',businessController.danhsachsanpham)
 router.get('/themsanpham',businessController.themsanpham)
 router.get('/danhsachnguyenlieu',businessController.danhsachnguyenlieu)
 router.get('/themnguyenlieu',businessController.themnguyenlieu)
+router.get('/password',businessController.password)
+
+
+router.post('/insertmaterial',upload.single('Image'),businessController.insertMaterial)
+router.post('/insertproduct',upload.single('Image'),businessController.insertProduct)
 module.exports = router;

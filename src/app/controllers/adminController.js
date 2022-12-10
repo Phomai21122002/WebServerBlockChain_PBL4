@@ -11,8 +11,6 @@ const Application = require('../models/application')
 
 const {multipleMongooseToObject} = require ('../../util/mongoose')
 const {mongooseToObject} = require('../../util/mongoose')
-const user = require('../models/user')
-const nguyenlieu = require('../models/nguyenlieu')
 class adminController { 
 
     //GET /admin
@@ -460,6 +458,7 @@ class adminController {
             })
             .then(()=>{
                 newSanPham.save()
+                response.redirect('/admin/danhsachsanpham');
             })
             .catch(err=>{
                 response.send('err')
@@ -479,6 +478,7 @@ class adminController {
                 .then(()=>{
                     if(i == ThanhPhan.length - 1) {
                         newSanPham.save()
+                        response.redirect('/admin/danhsachsanpham');
                     }
                 })
                 .catch(err=>{
@@ -488,7 +488,6 @@ class adminController {
                
             }
         }
-        response.redirect('/admin/danhsachsanpham');
         
     }
 

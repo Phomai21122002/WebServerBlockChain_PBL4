@@ -10,7 +10,7 @@
     <div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Admin</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">{{UserName}}</a></li>
                         <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
                     </ol>
                 </div>
@@ -18,77 +18,6 @@
             <!-- row -->
 
             <div class="container-fluid">
-                
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-title">
-                                <h4>Trung Tâm Kiểm Định</h4>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Tên TT</th>
-                                            <th>Email</th>
-                                            <th>Địa Chỉ</th>
-                                            <th>Số ĐT</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {{#each centers}}
-                                            <tr>
-                                                <th>{{this.index}}</th>
-                                                <td>{{this.UserName}}</td>
-                                                <td>{{this.Email}}</td>
-                                                <td>{{this.Address}}</td>
-                                                <td>{{this.PhoneNumber}}</td>
-                                            </tr>
-                                        {{/each}}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="card-title">
-                                    <h4>Doanh Nghiệp</h4>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Tên Doanh Nghiệp</th>
-                                                <th>Email</th>
-                                                <th>Số ĐT</th>
-                                                <th>Địa Chỉ</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            {{#each businesses}}
-                                                <tr>
-                                                    <th>{{this.index}}</th>
-                                                    <td> <a href="/admin/doanhnghiep/{{this._id}}">{{this.UserName}}</a> </td>
-                                                    <td>{{this.Email}}</td>
-                                                    <td>{{this.PhoneNumber}}</td>
-                                                    <td class="color-primary">{{this.Address}}</td>
-                                                </tr>
-                                            {{/each}}
-                                            
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-
                 
                 <div class="row">
                     
@@ -112,7 +41,7 @@
                                         <tbody>
                                             {{#each sanphams}}
                                                 <tr>
-                                                    <td><a href="/admin/sanpham/{{this._id}}">{{this.TenSanPham}}</a></td>
+                                                    <td><a href="/business/sanpham/{{this._id}}">{{this.TenSanPham}}</a></td>
                                                     <td><span class="badge badge-primary px-2">Sale</span></td>
                                                     <td>{{this.NhaSanXuat}}</td>
                                                     <td class="color-primary">$21.56</td>
@@ -129,7 +58,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="card-title">
-                                    <h4>Chứng Chỉ Kiểm Định</h4>
+                                    <h4>Nguyên Liệu</h4>
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-hover">

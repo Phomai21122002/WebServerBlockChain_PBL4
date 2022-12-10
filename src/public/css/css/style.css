@@ -109,7 +109,7 @@ button{
 }
 .header{
     position: relative;
-    /* background: linear-gradient(256.66deg, #207CB8 -1.09%, #33B44A 96.55%); */
+    background: linear-gradient(256.66deg, #207CB8 -1.09%, #33B44A 96.55%);
 }
 .header-nav{
     position: relative;

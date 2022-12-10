@@ -13,7 +13,6 @@ var storage = multer.diskStorage({
   })
    
   var upload = multer({ storage: storage })
-  var uploadMaterial = multer({storage: storage})
 
 router.get('/', adminController.index)
 router.get('/profile',adminController.profile)
