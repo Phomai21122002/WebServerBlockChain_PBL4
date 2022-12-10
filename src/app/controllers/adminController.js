@@ -641,10 +641,13 @@ class adminController {
                             }
                         }, (err,res) => {
                             if(!err){
-                                Application.updateOne({_id: applicationID}, {TrangThai: true , UpdateAt: Date.now}, (err,data)=>{
-                                    
-                                } )
-                                response.redirect('/admin')
+                                Application.updateOne({_id: applicationID}, {TrangThai: true})
+                                .then(()=>{
+                                    response.redirect('/admin')
+                                })
+                                .catch(()=>{
+                                    response.render('error/error500.hbs', {layout: false})
+                                })
                             }
                             else{
                                 response.render('error/error500.hbs', {layout: false})

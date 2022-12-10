@@ -36,7 +36,7 @@
             <div class="container h-100">
                 <div class="row justify-content-center h-100">
                     <div class="col-xl-6">
-                        <form action="/register/apply" method="POST" class="form-input-content">
+                        <form  class="form-input-content">
                             <div class="card login-form mb-0" id="form-info">
                             <div class="card-body pt-5">
                                 
@@ -46,21 +46,33 @@
                                     
                                     <div class="form-group">
                                         <input id="inputEmail" name="Email" type="email" class="form-control"  placeholder="Email" required>
-                                    </div>
+                                        <p  style="color: red; margin-top: 5px; display:none;">*Dữ Liệu Chưa Được Điền</p>
+                                        <p id="email_isvalid" style="color: red; margin-top: 5px; display:none;">*Email đã tồn tại</p>
+                                        <p id="err_email" style="color: red; margin-top: 5px; display:none;">*Email không hợp lệ</p>
+                                    </div>  
 
                                     <div class="form-group">
                                         <input id="inputAddress" name="Address" type="text" class="form-control"  placeholder="Adderss" required>
+                                        <p style="color: red; margin-top: 5px; display:none;">*Dữ Liệu Chưa Được Điền</p>
+
                                     </div>
 
                                      <div class="form-group">
                                         <input id="inputPhone" name="PhoneNumber" type="text" class="form-control"  placeholder="PhoneNumber" required>
+                                        <p style="color: red; margin-top: 5px; display:none;">*Dữ Liệu Chưa Được Điền</p>
+
                                     </div>
 
                                     <div class="form-group">
                                         <input id="inputPassword" name="password" type="password" class="form-control" placeholder="Password" required>
+                                        <p style="color: red; margin-top: 5px; display:none;">*Dữ Liệu Chưa Được Điền</p>
+
                                     </div>
                                     <div class="form-group">
                                         <input id="inputConfirm" name="confirmpassword" type="password" class="form-control" placeholder="Confirm Password" required>
+                                        <p style="color: red; margin-top: 5px; display:none;">*Dữ Liệu Chưa Được Điền</p>
+                                        <p id="err_confirm" style="color: red; margin-top: 5px; display:none;">*Mật Khẩu Không Trùng Khớp</p>
+
                                     </div>
                                     <div class="btn login-form__btn submit w-100" id="nextBtn">Next</div>
                                 </div>
@@ -78,8 +90,10 @@
                                     <div class="mt-5 mb-3 login-input">
                                         <div class="form-group">
                                             <input name="UserName" id="businessName" type="text" class="form-control" placeholder="Business Name" required>
+                                            <p id="err_businessname" style="color: red; margin-top: 5px; display:none;">*Dữ Liệu Chưa Được Điền</p>
+                                            <p id="regis_success" style="color: rgb(8, 236, 0); margin-top: 5px; display:none;">*Đăng Ký Tài Khoản Thành Công !!! <a href="/login">Đăng Nhập Ngay</a></p>
                                         </div>
-                                        <button class="btn login-form__btn submit w-100">Sign in</button>
+                                        <div id="submit_btn" class="btn login-form__btn submit w-100">Sign up</div>
                                     </div>
                                 </div>
                             </div>
