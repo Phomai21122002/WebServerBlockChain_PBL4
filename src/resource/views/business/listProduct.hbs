@@ -1,0 +1,43 @@
+<div class="row page-titles mx-0">
+    <div class="col p-md-0">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+            <li class="breadcrumb-item active"><a href="/admin/danhsachsanpham">Danh Sách Sản Phẩm</a></li>
+        </ol>
+    </div>
+</div>
+
+<div class="col">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Danh Sách Sản Phẩm</h4>
+            <div class="table-responsive">
+                <table class="table table-bordered verticle-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tên Sản Phẩm</th>
+                            <th scope="col">Tên Doanh Nghiệp</th>
+                            <th scope="col">Nơi Sản Xuất</th>
+                            <th style="text-align:center ;" scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {{#each data}}
+                            <tr>
+                                <td><a href="/admin/sanpham/{{this._id}}">{{this.TenSanPham}}</a></td>
+                                <td>
+                                    {{this.NhaSanXuat}}
+                                </td>
+                                <td>{{this.NoiSanXuat}}</td>
+                                <td style="text-align: center;"><span><a href="/admin/sanpham/{{this._id}}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="/admin/sanpham/{{this._id}}" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
+                                </td>
+                            </tr>
+                        {{/each}}
+ 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
