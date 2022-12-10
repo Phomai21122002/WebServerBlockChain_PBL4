@@ -7,31 +7,36 @@ const SanPham = require('../models/sanpham')
 
 
 class productController {
-    index(req, res)
+    index(req, response)
     {
-        // request(`http://127.0.0.1:3000/blockchain/chain`, { json: true }, (err, res, body) => {
-        //     if(!err)
-        //     {
-        //         console.log(body)
-        //     }
-        //     else{
-        //         response.render('error/error500.hbs')
-        //     }
-        // });
-        
-        SanPham.find( {}, function(err, data) {
-            
-            if(!err) {
-                res.render('product/productPage.hbs' ,{
-                    layout: 'productLayout.hbs',
-                    data: multipleMongooseToObject(data)
+        request(`http://127.0.0.1:3000/blockchain/chain`, { json: true }, (err, res, body) => {
+            if(!err)
+            {
+                console.log(body)
+                SanPham.find( {}, function(err, data) {
+                    if(!err) {
+                        response.render('product/productPage.hbs' ,{
+                            layout: 'productLayout.hbs',
+                            data: multipleMongooseToObject(data)
+                        })
+                    }
+                    else{
+                        response.render('error/error500.hbs',{
+                            layout: false,
+                        })
+                    }
+                    
                 })
-            } else {    
-                res.render('error/error500.hbs',{
-                    layout: false
+
+            }
+            else{
+                response.render('error/error500.hbs',{
+                    layout: false,
                 })
             }
-        })
+        });
+        
+        
     }
 
     productDetail(req, res)

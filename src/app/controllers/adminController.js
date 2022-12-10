@@ -626,6 +626,7 @@ class adminController {
                 newChain.NoiSanXuat = product.NoiSanXuat
                 newChain.HuongDanSuDung = product.HuongDanSuDung
                 newChain.CongDung = product.CongDung
+                newChain.TenSanPham = product.TenSanPham
 
                 for (let i = 0; i < product.ThanhPhan.length; i++) {
                     const element =  product.ThanhPhan[i]
@@ -640,13 +641,20 @@ class adminController {
                             }
                         }, (err,res) => {
                             if(!err){
-                                Application.findByIdAndUpdate(applicationID, {TrangThai: true , UpdateAt: Date.now}, (err, data) => {} )
-                                response.redirect('/admin')
+                                Application.updateOne({_id: applicationID}, {TrangThai: true})
+                                .then(()=>{
+                                    response.redirect('/admin')
+                                })
+                                .catch(()=>{
+                                    response.render('error/error500.hbs', {layout: false})
+                                })
                             }
                             else{
                                 response.render('error/error500.hbs', {layout: false})
                             }
                         } )
+
+                        
                     }
                 }
                 

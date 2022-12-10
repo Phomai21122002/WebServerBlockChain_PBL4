@@ -23,32 +23,21 @@ class registerController {
         const address = req.body.Address
         const phoneNumber = req.body.PhoneNumber
 
-        User.find({}, (err,data) => {
-            var users = multipleMongooseToObject(data)
-            var result = true
-                for (let i = 0; i < users.length; i++) {
-                    const element = users[i];
-                    if(element.Email == email){
-                        result = false
-                        break
-                    }
-                }
-                if(result === true) {
-                    var newUser = new User({
-                        UserName: UserName,
-                        Password: password,
-                        Email: email,
-                        Address: address,
-                        PhoneNumber: phoneNumber,
-                        Quyen: 2,
-                    })
-                    newUser.save();
-                    res.redirect('/login')
-                }
-                else{
-                    res.redirect('/register')
-                }
-
+        User.findOne({Email: email}, (err,data) =>{
+            if(data){
+                res.status(200).json({result: false})
+            }
+            else{
+                var newUser = new User();
+                newUser.UserName = UserName
+                newUser.Email = email
+                newUser.Password = password
+                newUser.Address = address
+                newUser.PhoneNumber = phoneNumber
+                newUser.Quyen = 2;
+                newUser.save()
+                res.status(200).json({result: true})
+            }
         })
 
         
