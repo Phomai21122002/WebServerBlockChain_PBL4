@@ -32,4 +32,7 @@ router.get('/password',businessController.password)
 
 router.post('/insertmaterial',upload.single('Image'),businessController.insertMaterial)
 router.post('/insertproduct',upload.single('Image'),businessController.insertProduct)
+router.post('/updateprofile',businessController.updateProfile)
+router.post('/changepassword',businessController.changePassword)
+router.post('/insertapplication',businessController.insertApplication)
 module.exports = router;

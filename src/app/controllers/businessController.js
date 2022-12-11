@@ -6,6 +6,7 @@ const Application = require('../models/application')
 
 const {multipleMongooseToObject} = require ('../../util/mongoose')
 const {mongooseToObject} = require('../../util/mongoose')
+const application = require('../models/application')
 
 class businessController{
     index(req, res)
@@ -31,14 +32,34 @@ class businessController{
             }
         })
     }
+
+    updateProfile(req,response)
+    {
+        var UserID = req.session.userid
+        User.updateOne({_id:UserID}, req.body )
+        .then(()=>{
+            response.redirect('/business')
+        })
+        .catch(()=>{
+            response.render('error/error500.hbs',{layout:false})
+        })
+    }
     
 
     donkiemdinh(req,res)
     {
-        res.render('business/listApplication.hbs',{
-            layout: 'businessLayout.hbs'
+        Application.find({UserID: req.session.userid}, (err,data) => {
+            if(!err){
+                res.render('business/listApplication.hbs',{
+                    layout: 'businessLayout.hbs',
+                    data: multipleMongooseToObject(data)
+                })
+            }
         })
+        
     }
+
+    
 
      //GET /business/themdonkiemdinh
      themdonkiemdinh(req,res){
@@ -120,6 +141,35 @@ class businessController{
     {
         res.render('business/password.hbs', {
             layout: 'businessLayout.hbs'
+        })
+    }
+    changePassword(req,res)
+    {
+        var oldPassWord = req.body.oldpass
+        var newPassWord = req.body.newpass
+
+        var UserID = req.session.userid
+
+        User.findById(UserID, (err,data) =>{
+            if(!err){
+                
+            
+                if(oldPassWord == data.Password ){
+                    User.updateOne({_id: UserID}, {Password: newPassWord} , (err,data) =>{
+                        if(!err){
+                            res.status(200).json({result: true})
+                        }
+
+                    })
+                }
+                else{
+                    res.status(200).json({result: false})
+
+                }
+            }
+            else{
+                res.status(200).json({result: false})
+            }
         })
     }
 
@@ -212,6 +262,37 @@ class businessController{
             }
         }
         
+    }
+
+    insertApplication(req,res)
+    {
+        const IDSanPham = req.body.IDSanPham
+        const UserID = req.session.userid
+
+        SanPham.findById(IDSanPham, (err,data) => {
+            const result = mongooseToObject(data)
+            var newApplication = new Application({
+                IDSanPham: result._id,
+                TenSanPham: result.TenSanPham,
+                TrangThai: false,
+            })
+            newApplication.save()
+
+            User.findById(UserID,(err, data) => {
+                const user = mongooseToObject(data)
+                Application.updateOne({IDSanPham: IDSanPham}, {UserID: user._id, UserName: user.UserName}, (err,data) =>{
+                    if(!err){
+                        res.redirect('/business/businessapplication')
+                    }
+                    else{
+                        res.render('error/error500.hbs', {layout: false})
+                    }
+
+                })
+                
+            })
+
+        })
     }
 }
 
