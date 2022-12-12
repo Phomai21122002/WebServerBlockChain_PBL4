@@ -7,16 +7,31 @@ const Application = require('../models/application')
 const {multipleMongooseToObject} = require ('../../util/mongoose')
 const {mongooseToObject} = require('../../util/mongoose')
 const application = require('../models/application')
+const nguyenlieu = require('../models/nguyenlieu')
 
 class businessController{
     index(req, res)
     {
-        SanPham.find({UserID: req.session.userid}, (err, sanphams) => {
-            res.render('business/dashBoard.hbs', {
-                layout: 'businessLayout',
-                sanphams: multipleMongooseToObject(sanphams),
-                UserName: req.session.username
+        SanPham.find({UserID: req.session.userid})
+        .then((sanphams)=>{
+            return sanphams
+        })
+        .then((sanphams)=>{
+            NguyenLieu.find({UserID: req.session.userid}, (err,nguyenlieus) => {
+                if(!err){
+                    res.render('business/dashBoard.hbs', {
+                        layout: 'businessLayout',
+                        sanphams: multipleMongooseToObject(sanphams),
+                        nguyenlieus: multipleMongooseToObject(nguyenlieus),
+                        UserName: req.session.username
+                    })
+                }
             })
+        })
+        .catch(err=>{
+            if(err){
+                res.render('error/error500.hbs', {layout: false})
+            }
         })
     }
 
@@ -95,6 +110,24 @@ class businessController{
         })
     }
 
+    xemthongtinsanpham(req,res)
+    {
+        var IDSanPham = req.query.ID
+        SanPham.findById(IDSanPham)
+        .then((sanpham) =>{
+            res.render('business/infoProduct.hbs', {
+                layout: 'businessLayout.hbs',
+                data: mongooseToObject(sanpham)
+            })
+        })
+        .catch(err=>{
+            if(err){
+                res.render('error/error500.hbs', {layout: false})
+            }
+        })
+
+    }
+
     danhsachnguyenlieu(req,response)
     {
         var UserID = req.session.userid
@@ -110,6 +143,23 @@ class businessController{
                 response.render('error/error500.hbs',{
                     layout: false
                 })
+            }
+        })
+    }
+
+    xemthongtinnguyenlieu(req,res)
+    {
+        var IDNguyenLieu = req.query.ID
+        NguyenLieu.findById(IDNguyenLieu)
+        .then((sanpham)=>{
+            res.render('business/infoOriginProduct.hbs', {
+                layout: 'businessLayout.hbs',
+                data: mongooseToObject(sanpham)
+            })
+        })
+        .catch(err=>{
+            if(err){
+                res.render('error/error500.hbs', {layout: false})
             }
         })
     }

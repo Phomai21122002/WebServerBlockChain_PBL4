@@ -28,6 +28,8 @@ router.get('/themsanpham',businessController.themsanpham)
 router.get('/danhsachnguyenlieu',businessController.danhsachnguyenlieu)
 router.get('/themnguyenlieu',businessController.themnguyenlieu)
 router.get('/password',businessController.password)
+router.get('/nguyenlieu',businessController.xemthongtinnguyenlieu)
+router.get('/sanpham',businessController.xemthongtinsanpham)
 
 
 router.post('/insertmaterial',upload.single('Image'),businessController.insertMaterial)

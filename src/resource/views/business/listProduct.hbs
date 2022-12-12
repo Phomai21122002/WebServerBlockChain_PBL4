@@ -1,8 +1,8 @@
 <div class="row page-titles mx-0">
     <div class="col p-md-0">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-            <li class="breadcrumb-item active"><a href="/admin/danhsachsanpham">Danh Sách Sản Phẩm</a></li>
+            <li class="breadcrumb-item"><a href="/business">Dashboard</a></li>
+            <li class="breadcrumb-item active"><a href="/business/danhsachsanpham">Danh Sách Sản Phẩm</a></li>
         </ol>
     </div>
 </div>
@@ -25,12 +25,12 @@
 
                         {{#each data}}
                             <tr>
-                                <td><a href="/admin/sanpham/{{this._id}}">{{this.TenSanPham}}</a></td>
+                                <td><a href="/business/sanpham?ID={{this._id}}">{{this.TenSanPham}}</a></td>
                                 <td>
                                     {{this.NhaSanXuat}}
                                 </td>
                                 <td>{{this.NoiSanXuat}}</td>
-                                <td style="text-align: center;"><span><a href="/admin/sanpham/{{this._id}}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="/admin/sanpham/{{this._id}}" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
+                                <td style="text-align: center;"><span><a href="/business/sanpham/{{this._id}}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="/business/sanpham/{{this._id}}" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
                                 </td>
                             </tr>
                         {{/each}}
