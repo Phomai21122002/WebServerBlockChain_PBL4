@@ -1,5 +1,4 @@
-const session = require('express-session')
-
+const User = require('../models/user')
 module.exports.requireAuth = function(req, res, next){
 
     if(req.session.userid == undefined){
@@ -11,7 +10,6 @@ module.exports.requireAuth = function(req, res, next){
         res.redirect('/login');
         return;
     }
-    
     next();
 
 }

@@ -13,7 +13,7 @@ const support = require('./support')
 const adminMiddleware = require('../app/middleware/adminMiddleware')
 const centerMiddleware = require('../app/middleware/centerMiddleware')
 const businessMiddleware = require('../app/middleware/businessMiddleware')
-
+const addAvatar = require('../app/middleware/addAvatarMiddleware')
 
 function route(app){
     
@@ -21,7 +21,7 @@ function route(app){
     app.use('/register',register);
     app.use('/product', product)
     app.use('/support',support)
-    app.use('/admin',adminMiddleware.requireAuth,admin);
+    app.use('/admin',adminMiddleware.requireAuth,addAvatar.addAvatar,admin);
     app.use('/business',businessMiddleware.requireAuth,business)
     app.use('/center',centerMiddleware.requireAuth,center)
     app.use('/productOrigin',productOrigin)

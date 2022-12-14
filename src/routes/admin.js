@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer')
 
+
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, './src/public/uploads')
@@ -45,4 +46,5 @@ router.post('/resoleapplication/:id', adminController.resoleApplication)
 router.post('/updatebusiness',adminController.updateBusiness)
 router.post('/updatecenter',adminController.updateCenter)
 router.post('/changepassword',adminController.changePassWord)
+router.post('/changeava',upload.single('Image'),adminController.updateAvatar)
 module.exports = router;

@@ -1,8 +1,6 @@
 const request = require('request')
-const session = require('express-session')
-const { response, json } = require('express')
-const mongoose = require('mongoose')
 
+const fileSystem = require('fs')
 
 const SanPham = require('../models/sanpham')
 const NguyenLieu = require('../models/nguyenlieu')
@@ -15,6 +13,7 @@ class adminController {
 
     //GET /admin
     index(req, res){
+    
         User.find({},(err,data) => {
             var users = multipleMongooseToObject(data)
             var businesses = []
@@ -37,7 +36,8 @@ class adminController {
                     layout: 'adminLayout',
                     centers: centers,
                     businesses: businesses,
-                    sanphams: multipleMongooseToObject(sanphams)
+                    sanphams: multipleMongooseToObject(sanphams),
+                    avatar: req.session.avatar
                 })
             })
 
@@ -57,7 +57,8 @@ class adminController {
             if(!err){
                 response.render('admin/profile.hbs', {
                     layout: 'adminLayout.hbs',
-                    user: mongooseToObject(data)
+                    user: mongooseToObject(data),
+                    avatar: req.session.avatar
                 })
             }
         })
@@ -83,14 +84,42 @@ class adminController {
 
     }
 
+    updateAvatar(req,res){
+        var fileImage = req.file
+        var UserID = req.query.ID
+        User.findById(UserID)
+        .then(doc=>{
+            fileSystem.unlink(`./src/public/uploads/${doc.Avatar}`, (err)=>{
+                if(err){
+                    console.log(err)
+                    res.render('error/error500.hbs', {layout:false})
+                }
+                else{
+                    User.updateOne({_id: UserID}, {Avatar: fileImage.filename})
+                    .then(()=>{
+                        res.redirect('/admin/profile')
+                    })
+                    .catch(err=>{
+                        console.log('error update')
+                        res.render('error/error500.hbs', {layout:false})
+                    })
+                }
+            })
+        })  
+        .catch(err=>{
+            res.render('error/error500.hbs', {layout: false})
+        })
+    }
+
     //GET /admin/danhsachttkd
     danhsachttkd(req,response){
-        user.find({Quyen: 1}, (err,data) => {
+        User.find({Quyen: 1}, (err,data) => {
             if(!err){
                 var result = multipleMongooseToObject(data)
                 response.render('admin/listCenter.hbs', {
                     layout: 'adminLayout',
-                    data: result
+                    data: result,
+                    avatar: req.session.avatar
                 })
             }
             else{
@@ -104,7 +133,8 @@ class adminController {
     // GET /admin/danhsachttkd
     danhsachdoanhnghiep(req, response)
     {
-        user.find({Quyen: 2}, (err, data) =>{
+        
+        User.find({Quyen: 2}, (err, data) =>{
             if(!err){
                 var result = multipleMongooseToObject(data) ;
                 for (let i = 0; i < result.length; i++) {
@@ -113,6 +143,7 @@ class adminController {
                 response.render('admin/listBusiness.hbs',{
                     layout: 'adminLayout.hbs',
                     data: result,
+                    avatar: req.session.avatar
                 })
             }
             else{
@@ -130,7 +161,8 @@ class adminController {
             if(!err){
                 res.render('admin/infoCenter.hbs',{
                     layout: 'adminLayout.hbs',
-                    data: mongooseToObject(data)
+                    data: mongooseToObject(data),
+                    avatar: req.session.avatar
                 })
             }
         })
@@ -171,7 +203,8 @@ class adminController {
             else{
                 response.render('admin/listProduct.hbs',{
                     layout: 'adminLayout.hbs',
-                    data: multipleMongooseToObject(sanphams)
+                    data: multipleMongooseToObject(sanphams),
+                    avatar: req.session.avatar
                 })
             }
         })
@@ -188,7 +221,8 @@ class adminController {
             if(!err){
                 response.render('admin/listMaterial.hbs',{
                     layout: 'adminLayout.hbs',
-                    data: multipleMongooseToObject(data)
+                    data: multipleMongooseToObject(data),
+                    avatar: req.session.avatar
                 })
             }
             else{
@@ -228,6 +262,7 @@ class adminController {
                 response.render('admin/listApplication.hbs',{
                     layout: 'adminLayout.hbs',
                     data: listApplication,
+                    avatar: req.session.avatar
                 })
             }
         })
@@ -264,7 +299,8 @@ class adminController {
     // GET /admin/themttkd
     themttkd(req,res){
         res.render('admin/themttkd.hbs',{
-            layout: 'adminLayout.hbs'
+            layout: 'adminLayout.hbs',
+            avatar: req.session.avatar
         })
     }
 
@@ -305,7 +341,8 @@ class adminController {
 
     themdoanhnghiep(req,res){
         res.render('admin/themdoanhnghiep.hbs',{
-            layout: 'adminLayout.hbs'
+            layout: 'adminLayout.hbs',
+            avatar: req.session.avatar
         })
     }
 
@@ -327,7 +364,8 @@ class adminController {
             if(!err){
                 response.render('admin/addProduct.hbs',{
                     layout:'adminLayout.hbs',
-                    data: multipleMongooseToObject(data)
+                    data: multipleMongooseToObject(data),
+                    avatar: req.session.avatar
                 })
             }
             else{
@@ -342,11 +380,12 @@ class adminController {
     xemthongtindoanhnghiep(req,response)
     {
         const id = req.params.id
-        user.findById(id, (err, data) => {
+        User.findById(id, (err, data) => {
             if(!err){
                 response.render('admin/infoBusiness.hbs',{
                     layout: 'adminLayout.hbs',
-                    data: mongooseToObject(data)
+                    data: mongooseToObject(data),
+                    avatar: req.session.avatar
                 })
             }
             else{
@@ -378,7 +417,8 @@ class adminController {
             if( !err){
                 response.render('admin/infoProduct.hbs',{
                     layout: 'adminLayout.hbs',
-                    data: mongooseToObject(docs)
+                    data: mongooseToObject(docs),
+                    avatar: req.session.avatar
                 })
             }
             else{
@@ -394,9 +434,9 @@ class adminController {
     //GET admin/addmaterial
     themnguyenlieu(req,response)
     {
-
         response.render('admin/addMaterial.hbs',{
             layout: 'adminLayout.hbs',
+            avatar: req.session.avatar
         })
     }
 
@@ -498,7 +538,8 @@ class adminController {
             if(!err) {
                 res.render('admin/themdonkiemdinh.hbs',{
                     layout: 'adminLayout.hbs',
-                    products: multipleMongooseToObject(data)
+                    products: multipleMongooseToObject(data),
+                    avatar: req.session.avatar
                 })
             }
             else{
@@ -569,7 +610,8 @@ class adminController {
     password(req,res)
     {
         res.render('admin/passWord.hbs',{
-            layout: 'adminLayout.hbs'
+            layout: 'adminLayout.hbs',
+            avatar: req.session.avatar
         })
     }
 
