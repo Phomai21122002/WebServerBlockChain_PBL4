@@ -45,6 +45,7 @@ class adminController {
             
         } )
 
+
         
     }
 
@@ -555,31 +556,21 @@ class adminController {
     insertdonkiemdinh(req,res)
     {
         const IDSanPham = req.body.IDSanPham
-        const UserID = req.session.userid
-
-        SanPham.findById(IDSanPham, (err,data) => {
-            const result = mongooseToObject(data)
-            var newApplication = new Application({
-                IDSanPham: result._id,
-                TenSanPham: result.TenSanPham,
-                TrangThai: false,
-            })
-            newApplication.save()
-
-            User.findById(UserID,(err, data) => {
-                const user = mongooseToObject(data)
-                Application.updateOne({IDSanPham: IDSanPham}, {UserID: user._id, UserName: user.UserName}, (err,data) =>{
-                    if(!err){
-                        res.redirect('/admin/danhsachdonkd')
-                    }
-                    else{
-                        res.render('error/error500.hbs', {layout: false})
-                    }
-
-                })
-                
-            })
-
+        
+        SanPham.findById(IDSanPham)
+        .then((product)=>{
+            var application = new Application()
+            application.TenSanPham = product.TenSanPham
+            application.IDSanPham = IDSanPham
+            application.UserID = req.session.userid
+            application.UserName = req.session.username
+            application.save()
+        })
+        .then(()=>{
+            res.redirect('/admin/danhsachdonkd')
+        })
+        .catch(err=>{
+            res.render('error/error500.hbs', {layout: false})
         })
 
     }
