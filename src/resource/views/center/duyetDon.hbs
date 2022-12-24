@@ -1,0 +1,57 @@
+<div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+                        <li class="breadcrumb-item active"><a href="/center/danhsachdonkd">Danh Sách Đơn Kiểm Định</a></li>
+                        <li class="breadcrumb-item active"><a href="/center/donkiemdinh/{{application._id}}">{{application.TenSanPham}}</a></li>
+                    </ol>
+                </div>
+            </div>
+            <!-- row -->
+
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-validation">
+                                    <form class="form-valide" action="/center/resoleapplication/{{application._id}}" method="post">
+
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" for="val-username">Tên Doanh Nghiệp<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-6">
+                                                <input value="{{application.UserName}}"  type="text" class="form-control" id="val-username" name="UserName" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" for="val-username">Tên Sản Phẩm<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-6">
+                                                {{!-- <input value="{{application.TenSanPham}}"  type="text" class="form-control" id="val-username" name="UserName" required> --}}
+                                                <a href="/center/sanpham/{{application.IDSanPham}}"><p>{{application.TenSanPham}}</p></a>
+                                            </div>
+                                        </div>
+                                    
+
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label"><a href="#">Terms &amp; Conditions</a>  <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-8">
+                                                <label class="css-control css-control-primary css-checkbox" for="val-terms">
+                                                    <input type="checkbox" class="css-control-input" id="val-terms" name="agreement" value="1"> <span class="css-control-indicator"></span> Accept this application</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-8 ml-auto">
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
