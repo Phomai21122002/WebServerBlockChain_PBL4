@@ -1,6 +1,8 @@
 const {multipleMongooseToObject} = require ('../../util/mongoose')
 const {mongooseToObject} = require('../../util/mongoose')
 
+const fileSystem = require('fs')
+
 const Application = require('../models/application')
 const product = require('../models/sanpham')
 const material = require('../models/nguyenlieu')
@@ -10,30 +12,110 @@ const user = require('../models/user')
 class centerController{
     index(req, res)
     {
-        res.render('center/dashboardPage.hbs',{layout: 'centerLayout.hbs'})
+        user.find({Quyen:2})
+        .then((docs)=>{
+            return multipleMongooseToObject(docs)
+        })
+        .then(users=>{
+            product.find({})
+            .then((products)=>{
+                res.render('center/dashboardPage.hbs',{
+                    layout: 'centerLayout.hbs',
+                    avatar: req.session.avatar,
+                    users: users,
+                    products: multipleMongooseToObject(products)
+                })
+            })
+            .catch(err=>{
+                res.render('error/error500.hbs',{layout: false})
+            })
+        })
+        .catch(err=>{
+            res.render('error/error500.hbs',{layout: false})
+        })
+       
     }
+
     profile(req, res){
         var userID = req.session.userid
         user.findById(userID, (err,data) => {
             if(!err){
                 res.render('center/profile.hbs', {
                     layout: 'centerLayout.hbs',
-                    user: mongooseToObject(data)
+                    user: mongooseToObject(data),
+                    avatar: req.session.avatar
                 })
 
             }
         })
 
     }
-    listApplication(req,res){
-        Application.find({}, (err, data) => {
+
+    // POST /center/updateprofile
+    updateProfile(req,res)
+    {
+        var userid = req.session.userid
+        var UserName = req.body.UserName
+        var Email = req.body.Email
+        var Address = req.body.Address
+        var PhoneNumber = req.body.PhoneNumber
+
+        user.updateOne({_id: userid}, {UserName: UserName, Email: Email,
+            Address: Address, PhoneNumber: PhoneNumber
+        } ,(err,data)=>{
             if(!err){
-                res.render('center/listApplication.hbs', {
+                res.redirect('/center/profile')
+            }
+            else{
+                res.render('error/error500.hbs')
+            }
+        } )
+
+    }
+
+    updateAvatar(req,res){
+        var fileImage = req.file
+        var UserID = req.query.ID
+        user.findById(UserID)
+        .then(doc=>{
+            fileSystem.unlink(`./src/public/uploads/${doc.Avatar}`, (err)=>{
+                if(err){
+                    console.log(err)
+                    res.render('error/error500.hbs', {layout:false})
+                }
+                else{
+                    user.updateOne({_id: UserID}, {Avatar: fileImage.filename})
+                    .then(()=>{
+                        res.redirect('/center/profile')
+                    })
+                    .catch(err=>{
+                        console.log('error update')
+                        res.render('error/error500.hbs', {layout:false})
+                    })
+                }
+            })
+        })  
+        .catch(err=>{
+            res.render('error/error500.hbs', {layout: false})
+        })
+    }
+
+    listApplication(req,res){
+        
+        Application.find({TrangThai: false}, (err, data) => {
+            if(!err){
+                const listApplication = multipleMongooseToObject(data)
+                for (let i = 0; i < listApplication.length; i++) {
+                    listApplication[i].index = i + 1 ;
+                }
+                res.render('center/listApplication.hbs',{
                     layout: 'centerLayout.hbs',
-                    data: multipleMongooseToObject(data)
+                    data: listApplication,
+                    avatar: req.session.avatar
                 })
             }
         })
+
     }
 
     // GET /center/donkiemdinh/:id
@@ -46,7 +128,8 @@ class centerController{
                 var application = mongooseToObject(data)
                 response.render('center/duyetDon.hbs', {
                     layout: 'centerLayout.hbs',
-                    application: application
+                    application: application,
+                    avatar: req.session.avatar
                 })    
             }
             else{
@@ -54,6 +137,24 @@ class centerController{
             }
         })
 
+    }
+
+
+    // GET /center/deleteapplication?ID=
+
+    deleteApplication(req,res)
+    {
+        const ID = req.query.ID
+        Application.deleteOne({_id: ID})
+        .then(()=>{
+            res.redirect('/center/listapplication')
+        })
+        .catch(err=>{
+            console.log(err)
+            res.render('error/error500.hbs',{
+                layout: false
+            })
+        })
     }
 
 
@@ -66,7 +167,8 @@ class centerController{
             else{
                 res.render('center/listProduct.hbs',{
                     layout: 'centerLayout.hbs',
-                    data: multipleMongooseToObject(sanphams)
+                    data: multipleMongooseToObject(sanphams),
+                    avatar: req.session.avatar
                 })
             }
         })
@@ -101,7 +203,8 @@ class centerController{
             if(!err){
                 res.render('center/listMaterial.hbs', {
                     layout: 'centerLayout.hbs',
-                    data: multipleMongooseToObject(data)
+                    data: multipleMongooseToObject(data),
+                    avatar: req.session.avatar
                 })
             }
         })
@@ -117,7 +220,8 @@ class centerController{
             if(!err){
                 res.render('center/infoOriginProduct.hbs',{
                     layout: 'centerLayout.hbs',
-                    data: mongooseToObject(data)
+                    data: mongooseToObject(data),
+                    avatar: req.session.avatar
                 })
             }
         })
@@ -129,13 +233,14 @@ class centerController{
             if(!err){
                 res.render('center/listBusiness.hbs', {
                     layout: 'centerLayout.hbs',
-                    data: multipleMongooseToObject(data)
+                    data: multipleMongooseToObject(data),
+                    avatar: req.session.avatar
                 })
             }
         } )
     }
 
-    //GET /admin/doanhnghiep/id
+    //GET /center/doanhnghiep/id
     xemthongtindoanhnghiep(req,response)
     {
         const id = req.params.id

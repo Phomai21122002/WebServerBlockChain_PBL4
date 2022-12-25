@@ -17,18 +17,21 @@
                     <thead>
                         <tr>
                             <th>Tên Sản Phẩm</th>
-                            <th>Status</th>
+                            <th>Nơi Sản Xuất</th>
                             <th>Nhà Sản Xuất</th>
                             <th>Price</th>
                         </tr>
                     </thead>
                     <tbody> 
+                        {{#each products}}
                             <tr>
-                                <td><a href="/admin/sanpham/{{this._id}}">Sản Phẩm A</a></td>
-                                <td><span class="badge badge-primary px-2">Sale</span></td>
-                                <td>Nông Sản Sạch Đà Nẵng</td>
+                                <td><a href="/admin/sanpham/{{this._id}}">{{this.TenSanPham}}</a></td>
+                                <td>{{this.NoiSanXuat}}</td>
+                                <td>{{this.NhaSanXuat}}</td>
                                 <td class="color-primary">$21.56</td>
                             </tr>
+                        {{/each}}
+                            
                     </tbody>
                 </table>
             </div>
@@ -37,36 +40,37 @@
 </div>
 
 
-  <div class="col">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="card-title">
-                                    <h4>Doanh Nghiệp</h4>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Tên Doanh Nghiệp</th>
-                                                <th>Email</th>
-                                                <th>Số ĐT</th>
-                                                <th>Địa Chỉ</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                                <tr>
-                                                    <th>{{this.index}}</th>
-                                                    <td> <a href="/admin/doanhnghiep/{{this._id}}">Nông Sản Sạch Đà Nẵng</a> </td>
-                                                    <td>buithiennhan0345@gmail.com</td>
-                                                    <td>0913946875</td>
-                                                    <td class="color-primary">Đà Nẵng</td>
-                                                </tr>
-                                            
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">
+                    <h4>Doanh Nghiệp</h4>
                 </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Tên Doanh Nghiệp</th>
+                                <th>Email</th>
+                                <th>Số ĐT</th>
+                                <th>Địa Chỉ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each users}}
+                                <tr>
+                                    <th>{{this.index}}</th>
+                                    <td> <a href="/admin/doanhnghiep/{{this._id}}">{{this.UserName}}</a> </td>
+                                    <td>{{this.Email}}</td>
+                                    <td>{{this.PhoneNumber}}</td>
+                                    <td class="color-primary">{{this.Address}}</td>
+                                </tr>
+
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -8,6 +8,14 @@
 </div>
 
 <div class="col">
+
+    <form action="/admin/searchttkd" method="post" class="input-group mb-3">
+        <input name="searchinput" type="text" class="form-control" placeholder="Tên Doanh Nghiệp">
+        <div class="input-group-append">
+            <button class="btn btn-outline-dark" type="submit">Search</button>
+        </div>
+    </form>
+
     <div class="card">
 
         <div class="card-body">
@@ -28,12 +36,12 @@
                         {{#each data}}
 
                         <tr>
-                            <th></th>
+                            <th>{{this.index}}</th>
                             <td> <a href="/admin/ttkd/{{this._id}}"> {{this.UserName}}</a></td>
                             <td>{{this.Email}}</td>
                             <td>{{this.Address}}</td>
                             <td>{{this.PhoneNumber}}</td>
-                            <td style="text-align: center;"><span><a href="/admin/ttkd/{{this._id}}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a onclick="return confirm('Are you sure?')" href="/admin/deletecenter?ID={{this._id}}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-close color-danger"></i></a></span>
+                            <td style="text-align: center;"><span><a href="/admin/ttkd/{{this._id}}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a onclick="return confirm('Are you sure?')" href="/admin/deletecenter?ID={{this._id}}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash color-danger"></i></a></span>
                             </td>
                         </tr>
 

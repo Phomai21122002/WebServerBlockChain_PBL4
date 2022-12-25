@@ -28,7 +28,7 @@
 
                     <h4 class="card-title">Thông Tin Người Dùng</h4>
                     <div class="form-validation">
-                        <form class="form-valide" action="/admin/updateprofile" method="post">
+                        <form class="form-valide" action="/center/updateprofile" method="post">
                             <div class="form-group row">
                                 <label class="col-lg-4 col-form-label" for="val-username">Tên Người Dùng<span class="text-danger">*</span>
                                 </label>
@@ -63,14 +63,14 @@
 
                             <div class="form-group row">
                                 <div class="col-lg-8 ml-auto">
-                                    <a href="/admin" class="btn btn-primary">Back</a>
+                                    <a href="/center" class="btn btn-primary">Back</a>
 
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
                         </form>
 
-                        <form id="form_avatar" action="/admin/changeava?ID={{user._id}}" method="post" enctype="multipart/form-data" style="display: none;">
+                        <form id="form_avatar" action="/center/changeava?ID={{user._id}}" method="post" enctype="multipart/form-data" style="display: none;">
                             <input name="Image" type="file" id="input_avatar" >
                         </form>
                     </div>

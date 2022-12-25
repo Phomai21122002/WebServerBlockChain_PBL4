@@ -117,6 +117,9 @@ class adminController {
         User.find({Quyen: 1}, (err,data) => {
             if(!err){
                 var result = multipleMongooseToObject(data)
+                for (let i = 0; i < result.length; i++) {
+                    result[i].index = i+1
+                }
                 response.render('admin/listCenter.hbs', {
                     layout: 'adminLayout',
                     data: result,
@@ -128,6 +131,39 @@ class adminController {
             }
         })
        
+    }
+
+    // POST /admin/searchttkd
+    searchTtkd(req,res)
+    {
+        var searchInput = req.body.searchinput
+        User.find({Quyen: 1})
+            .then(docs=>{
+                const users = multipleMongooseToObject(docs)
+                var data = []
+                var count = 1
+                for (let index = 0; index < users.length; index++) {
+                    const element = users[index];
+                    if(element.UserName.toLowerCase().includes(searchInput.toLowerCase()) || searchInput == element._id){
+                        element.index = count
+                        data.push(element)
+                        count ++
+                    }
+
+                    if(index == users.length - 1){
+                        res.render('admin/listCenter.hbs',{
+                            layout: 'adminLayout.hbs',
+                            data: data,
+                            avatar: req.session.avatar
+                        })
+                    }
+                }
+                
+            })
+            .catch(err=>{
+                console.log(err)
+                res.render('error/error500.hbs',{layout: false})
+            })
     }
 
 
@@ -146,12 +182,46 @@ class adminController {
                     data: result,
                     avatar: req.session.avatar
                 })
+                
             }
             else{
                 response.render('error,error500.hbs',{ layout: false})
             }
         })
         
+    }
+
+    //POST /admin/searchbusiness
+    searchBusiness(req,res)
+    {
+        var userName = req.body.searchinput
+
+        User.find({Quyen: 2})
+        .then((docs)=>{
+            const users = multipleMongooseToObject(docs)
+            var data = []
+            var count = 1
+            for (let index = 0; index < users.length; index++) {
+                const element = users[index];
+                if(element.UserName.toLowerCase().includes(userName.toLowerCase())){
+                    element.index = count
+                    data.push(element)
+                    count ++
+                }
+
+                if(index == users.length - 1){
+                    res.render('admin/listBusiness.hbs',{
+                        layout: 'adminLayout.hbs',
+                        data: data,
+                        avatar: req.session.avatar
+                    })
+                }
+            }
+        })
+        .catch(err=>{
+            console.log(err)
+            res.status(500).json({result: false})
+        })
     }
 
 
@@ -209,9 +279,37 @@ class adminController {
                 })
             }
         })
+    }
 
-
-
+    // POST /admin/searchproduct
+    searchSanPham(req,res)
+    {
+        var searchInput = req.body.searchinput
+        var data = []
+        var count = 1
+        SanPham.find({})
+            .then((docs)=>{
+                var sanPhams = multipleMongooseToObject(docs)                       
+                for (let i = 0; i < sanPhams.length; i++) {
+                    const element = sanPhams[i];
+                    if(element.TenSanPham.toLowerCase().includes(searchInput.toLowerCase()) || element._id == searchInput){
+                        element.index = count
+                        count++ 
+                        data.push(element)
+                    }
+                    if(i == sanPhams.length - 1 ){
+                        res.render('admin/listProduct.hbs',{
+                            layout: 'adminLayout.hbs',
+                            data: data,
+                            avatar: req.session.avatar
+                        })
+                    }
+                }
+            })
+            .catch(err=>{
+                console.log(err)
+                res.render('error/error500.hbs',{layout: false})
+            })
     }
 
     // GET /admin/danhsachnguyenlieu
@@ -288,6 +386,23 @@ class adminController {
             }
         })
 
+    }
+
+    // GET /admin/deleteapplication?ID=
+
+    deleteApplication(req,res)
+    {
+        const ID = req.query.ID
+        Application.deleteOne({_id: ID})
+        .then(()=>{
+            res.redirect('/admin/danhsachdonkd')
+        })
+        .catch(err=>{
+            console.log(err)
+            res.render('error/error500.hbs',{
+                layout: false
+            })
+        })
     }
 
     danhsachquytrinhsx(req,response)

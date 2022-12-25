@@ -34,6 +34,7 @@ router.get('/donkiemdinh/:id',adminController.thongtindonkiemdinh)
 router.get('/sanpham/:id',adminController.xemthongtinsanpham)
 router.get('/deletecenter',adminController.deleteCenter)
 router.get('/deletebusiness',adminController.deleteBusiness)
+router.get('/deleteapplication',adminController.deleteApplication)
 router.get('/password',adminController.password)
 router.get('/nguyenlieu',adminController.thongtinnguyenlieu)
 
@@ -47,4 +48,9 @@ router.post('/updatebusiness',adminController.updateBusiness)
 router.post('/updatecenter',adminController.updateCenter)
 router.post('/changepassword',adminController.changePassWord)
 router.post('/changeava',upload.single('Image'),adminController.updateAvatar)
+
+router.post('/searchbusiness',adminController.searchBusiness)
+router.post('/searchproduct',adminController.searchSanPham)
+router.post('/searchttkd',adminController.searchTtkd)
+
 module.exports = router;

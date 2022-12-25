@@ -31,7 +31,7 @@
                                 <td><span class="badge badge-success px-2">Sale</span></td>
                                 <td>{{this.UserName}}</td>
                                 <td>{{this.CreateAt}}</td>
-                                <td style="text-align: center;"><span><a href="/admin/donkiemdinh/{{this._id}}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
+                                <td style="text-align: center;"><span><a href="/admin/donkiemdinh/{{this._id}}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="/admin/deleteapplication?ID={{this._id}}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-close color-danger"></i></a></span>
                                 </td>
                             </tr>
                         {{/each}}
