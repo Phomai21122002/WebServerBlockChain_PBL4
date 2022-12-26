@@ -333,6 +333,12 @@ class adminController {
         
     }
 
+    // POST /admin/searchmaterial
+    searchMaterial(req,res)
+    {
+        
+    }
+
     // GET /admin/nguyenlieu?ID=
     thongtinnguyenlieu(req,res)
     {
