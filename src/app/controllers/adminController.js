@@ -9,6 +9,7 @@ const Application = require('../models/application')
 
 const {multipleMongooseToObject} = require ('../../util/mongoose')
 const {mongooseToObject} = require('../../util/mongoose')
+const user = require('../models/user')
 class adminController { 
 
     //GET /admin
@@ -71,18 +72,19 @@ class adminController {
     {
         var userid = req.session.userid
         var UserName = req.body.UserName
-        var Email = req.body.Email
         var Address = req.body.Address
         var PhoneNumber = req.body.PhoneNumber
 
-        User.updateOne({_id: userid}, {UserName: UserName, Email: Email,
-            Address: Address, PhoneNumber: PhoneNumber
-        } ,(err,data)=>{
-            if(!err){
-                res.redirect('/admin/profile')
-            }
-        } )
 
+        User.updateOne({_id: userid}, {UserName: UserName, Address:Address, PhoneNumber:PhoneNumber})
+            .then(()=>{
+                res.redirect('/admin/profile')
+            })
+            .catch(err=>{
+                console.log(err)
+                res.render('error/error500.hbs',{layout: false})
+            })
+     
     }
 
     updateAvatar(req,res){
@@ -90,24 +92,39 @@ class adminController {
         var UserID = req.query.ID
         User.findById(UserID)
         .then(doc=>{
-            fileSystem.unlink(`./src/public/uploads/${doc.Avatar}`, (err)=>{
-                if(err){
+            if(doc.Avatar != 'pngwing.com (2).png'){
+
+                fileSystem.unlink(`./src/public/uploads/${doc.Avatar}`, (err)=>{
+                    if(err){
+                        console.log(err)
+                        res.render('error/error500.hbs', {layout:false})
+                    }
+                    else{
+                        User.updateOne({_id: UserID}, {Avatar: fileImage.filename})
+                        .then(()=>{
+                            res.redirect('/admin/profile')
+                        })
+                        .catch(err=>{
+                            console.log(err)
+                            res.render('error/error500.hbs', {layout:false})
+                        })
+                    }
+                })
+            }
+            else{
+                User.updateOne({_id: UserID}, {Avatar: fileImage.filename})
+                .then(()=>{
+                    res.redirect('/admin/profile')
+                })
+                .catch(err=>{
                     console.log(err)
                     res.render('error/error500.hbs', {layout:false})
-                }
-                else{
-                    User.updateOne({_id: UserID}, {Avatar: fileImage.filename})
-                    .then(()=>{
-                        res.redirect('/admin/profile')
-                    })
-                    .catch(err=>{
-                        console.log('error update')
-                        res.render('error/error500.hbs', {layout:false})
-                    })
-                }
-            })
+                })
+            }
+           
         })  
         .catch(err=>{
+            console.log(err)
             res.render('error/error500.hbs', {layout: false})
         })
     }
@@ -348,7 +365,8 @@ class adminController {
             if(!err){
                 res.render('admin/infoOriginProduct.hbs',{
                     layout: 'adminLayout.hbs',
-                    data: mongooseToObject(data)
+                    data: mongooseToObject(data),
+                    avatar: req.session.avatar
                 })
             }
         })
@@ -378,19 +396,31 @@ class adminController {
     thongtindonkiemdinh(req,response)
     {
         const IDDonKiemDinh = req.params.id
-        Application.findById(IDDonKiemDinh, (err, data) => {
-            if(!err)
-            {
-                var application = mongooseToObject(data)
-                response.render('admin/duyetDon.hbs', {
-                    layout: 'adminLayout.hbs',
-                    application: application
-                })    
-            }
-            else{
-                response.render('error/error500.hbs', {layout: false})
-            }
-        })
+        Application.findById(IDDonKiemDinh)
+            .then((doc) =>{
+                var application = mongooseToObject(doc)
+                application.timeSend =  application.CreateAt.getDate() +'/'+ application.CreateAt.getMonth() + '/'
+                    + application.CreateAt.getFullYear() + ' - ' + application.CreateAt.getHours()+':'
+                    + application.CreateAt.getMinutes() + ':' +  application.CreateAt.getSeconds();
+                
+                return application
+            })
+            .then((application)=>{
+                SanPham.findById(application.IDSanPham)
+                    .then((sanpham)=>{
+                        response.render('admin/duyetDon.hbs', {
+                            layout: 'adminLayout.hbs',
+                            application: application,
+                            sanpham: mongooseToObject(sanpham),
+                            avatar: req.session.avatar
+                        }) 
+                    })
+                
+            })
+            .catch(err=>{
+                console.log(err)
+                response.render('error/error500.hbs',{layout: false})
+            })
 
     }
 

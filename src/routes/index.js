@@ -22,7 +22,7 @@ function route(app){
     app.use('/product', product)
     app.use('/support',support)
     app.use('/admin',adminMiddleware.requireAuth,addAvatar.addAvatar,admin);
-    app.use('/business',businessMiddleware.requireAuth,business)
+    app.use('/business',businessMiddleware.requireAuth,addAvatar.addAvatar,business)
     app.use('/center',centerMiddleware.requireAuth,addAvatar.addAvatar,center)
     app.use('/productOrigin',productOrigin)
     app.use('/news',news)

@@ -6,8 +6,8 @@ const Application = require('../models/application')
 
 const {multipleMongooseToObject} = require ('../../util/mongoose')
 const {mongooseToObject} = require('../../util/mongoose')
-const application = require('../models/application')
-const nguyenlieu = require('../models/nguyenlieu')
+
+const fileSystem = require('fs')
 
 class businessController{
     index(req, res)
@@ -23,7 +23,8 @@ class businessController{
                         layout: 'businessLayout',
                         sanphams: multipleMongooseToObject(sanphams),
                         nguyenlieus: multipleMongooseToObject(nguyenlieus),
-                        UserName: req.session.username
+                        UserName: req.session.username,
+                        avatar: req.session.avatar
                     })
                 }
             })
@@ -42,21 +43,71 @@ class businessController{
             if(!err){
                 response.render('business/profile.hbs', {
                     layout: 'businessLayout.hbs',
-                    user: mongooseToObject(data)
+                    user: mongooseToObject(data),
+                    avatar: req.session.avatar
                 })
             }
         })
     }
 
+    // POST /business/updateprofile
     updateProfile(req,response)
     {
-        var UserID = req.session.userid
-        User.updateOne({_id:UserID}, req.body )
-        .then(()=>{
-            response.redirect('/business')
-        })
-        .catch(()=>{
-            response.render('error/error500.hbs',{layout:false})
+        var userid = req.session.userid
+        var UserName = req.body.UserName
+        var TypeBusiness = req.body.TypeBusiness
+        var Address = req.body.Address
+        var PhoneNumber = req.body.PhoneNumber
+
+        User.updateOne({_id: userid}, {UserName: UserName, LoaiHinhKinhDoanh: TypeBusiness,
+            Address: Address, PhoneNumber: PhoneNumber
+        } ,(err,data)=>{
+            if(!err){
+                response.redirect('/business/profile')
+            }
+        } )
+    }
+
+    //POST /business/updateavatar
+    updateAvatar(req,res){
+        var fileImage = req.file
+        var UserID = req.query.ID
+        User.findById(UserID)
+        .then(doc=>{
+            if(doc.Avatar != 'pngwing.com (2).png'){
+
+                fileSystem.unlink(`./src/public/uploads/${doc.Avatar}`, (err)=>{
+                    if(err){
+                        console.log(err)
+                        res.render('error/error500.hbs', {layout:false})
+                    }
+                    else{
+                        User.updateOne({_id: UserID}, {Avatar: fileImage.filename})
+                        .then(()=>{
+                            res.redirect('/business/profile')
+                        })
+                        .catch(err=>{
+                            console.log(err)
+                            res.render('error/error500.hbs', {layout:false})
+                        })
+                    }
+                })
+            }
+            else{
+                User.updateOne({_id: UserID}, {Avatar: fileImage.filename})
+                .then(()=>{
+                    res.redirect('/business/profile')
+                })
+                .catch(err=>{
+                    console.log(err)
+                    res.render('error/error500.hbs', {layout:false})
+                })
+            }
+           
+        })  
+        .catch(err=>{
+            console.log(err)
+            res.render('error/error500.hbs', {layout: false})
         })
     }
     
@@ -67,7 +118,8 @@ class businessController{
             if(!err){
                 res.render('business/listApplication.hbs',{
                     layout: 'businessLayout.hbs',
-                    data: multipleMongooseToObject(data)
+                    data: multipleMongooseToObject(data),
+                    avatar: req.session.avatar
                 })
             }
         })
@@ -83,7 +135,8 @@ class businessController{
             if(!err) {
                 res.render('business/addApplication.hbs',{
                     layout: 'businessLayout.hbs',
-                    products: multipleMongooseToObject(data)
+                    products: multipleMongooseToObject(data),
+                    avatar: req.session.avatar
                 })
             }
             else{
@@ -104,7 +157,8 @@ class businessController{
             else{
                 response.render('business/listProduct.hbs',{
                     layout: 'businessLayout.hbs',
-                    data: multipleMongooseToObject(sanphams)
+                    data: multipleMongooseToObject(sanphams),
+                    avatar: req.session.avatar
                 })
             }
         })
@@ -112,12 +166,13 @@ class businessController{
 
     xemthongtinsanpham(req,res)
     {
-        var IDSanPham = req.query.ID
+        var IDSanPham = req.params.ID
         SanPham.findById(IDSanPham)
         .then((sanpham) =>{
             res.render('business/infoProduct.hbs', {
                 layout: 'businessLayout.hbs',
-                data: mongooseToObject(sanpham)
+                data: mongooseToObject(sanpham),
+                avatar: req.session.avatar
             })
         })
         .catch(err=>{
@@ -136,7 +191,8 @@ class businessController{
             if(!err){
                 response.render('business/listMaterial.hbs',{
                     layout: 'businessLayout.hbs',
-                    data: multipleMongooseToObject(data)
+                    data: multipleMongooseToObject(data),
+                    avatar: req.session.avatar
                 })
             }
             else{
@@ -154,7 +210,8 @@ class businessController{
         .then((sanpham)=>{
             res.render('business/infoOriginProduct.hbs', {
                 layout: 'businessLayout.hbs',
-                data: mongooseToObject(sanpham)
+                data: mongooseToObject(sanpham),
+                avatar: req.session.avatar
             })
         })
         .catch(err=>{
@@ -172,7 +229,8 @@ class businessController{
             if(!err){
                 res.render('business/addProduct.hbs',{
                     layout:'businessLayout.hbs',
-                    data: multipleMongooseToObject(data)
+                    data: multipleMongooseToObject(data),
+                    avatar: req.session.avatar
                 })
             }
             else{
@@ -184,15 +242,18 @@ class businessController{
     themnguyenlieu(req,res)
     {
         res.render('business/addMaterial.hbs',{
-            layout: 'businessLayout.hbs'
+            layout: 'businessLayout.hbs',
+            avatar: req.session.avatar
         })
     }
     password(req,res)
     {
         res.render('business/password.hbs', {
-            layout: 'businessLayout.hbs'
+            layout: 'businessLayout.hbs',
+            avatar: req.session.avatar
         })
     }
+    //POST /business/changepassword
     changePassword(req,res)
     {
         var oldPassWord = req.body.oldpass

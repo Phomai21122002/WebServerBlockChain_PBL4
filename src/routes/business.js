@@ -30,6 +30,7 @@ router.get('/themnguyenlieu',businessController.themnguyenlieu)
 router.get('/password',businessController.password)
 router.get('/nguyenlieu',businessController.xemthongtinnguyenlieu)
 router.get('/sanpham',businessController.xemthongtinsanpham)
+router.get('/sanpham/:ID',businessController.xemthongtinsanpham)
 
 
 router.post('/insertmaterial',upload.single('Image'),businessController.insertMaterial)
@@ -37,4 +38,5 @@ router.post('/insertproduct',upload.single('Image'),businessController.insertPro
 router.post('/updateprofile',businessController.updateProfile)
 router.post('/changepassword',businessController.changePassword)
 router.post('/insertapplication',businessController.insertApplication)
+router.post('/changeava',upload.single('Image'),businessController.updateAvatar)
 module.exports = router;

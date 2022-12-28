@@ -73,29 +73,62 @@ class centerController{
 
     }
 
+    updateProfile(req,res)
+    {
+        var userid = req.session.userid
+        var UserName = req.body.UserName
+        var Email = req.body.Email
+        var Address = req.body.Address
+        var PhoneNumber = req.body.PhoneNumber
+
+        User.updateOne({_id: userid}, {UserName: UserName, Email: Email,
+            Address: Address, PhoneNumber: PhoneNumber
+        } ,(err,data)=>{
+            if(!err){
+                res.redirect('/admin/profile')
+            }
+        } )
+
+    }
+
     updateAvatar(req,res){
         var fileImage = req.file
         var UserID = req.query.ID
         user.findById(UserID)
         .then(doc=>{
-            fileSystem.unlink(`./src/public/uploads/${doc.Avatar}`, (err)=>{
-                if(err){
+            if(doc.Avatar != 'pngwing.com (2).png'){
+
+                fileSystem.unlink(`./src/public/uploads/${doc.Avatar}`, (err)=>{
+                    if(err){
+                        console.log(err)
+                        res.render('error/error500.hbs', {layout:false})
+                    }
+                    else{
+                        user.updateOne({_id: UserID}, {Avatar: fileImage.filename})
+                        .then(()=>{
+                            res.redirect('/center/profile')
+                        })
+                        .catch(err=>{
+                            console.log(err)
+                            res.render('error/error500.hbs', {layout:false})
+                        })
+                    }
+                })
+            }
+            else{
+                user.updateOne({_id: UserID}, {Avatar: fileImage.filename})
+                .then(()=>{
+                    res.redirect('/center/profile')
+                })
+                .catch(err=>{
                     console.log(err)
                     res.render('error/error500.hbs', {layout:false})
-                }
-                else{
-                    user.updateOne({_id: UserID}, {Avatar: fileImage.filename})
-                    .then(()=>{
-                        res.redirect('/center/profile')
-                    })
-                    .catch(err=>{
-                        console.log('error update')
-                        res.render('error/error500.hbs', {layout:false})
-                    })
-                }
-            })
+                })
+            }
+           
         })  
         .catch(err=>{
+            console.log(err)
             res.render('error/error500.hbs', {layout: false})
         })
     }

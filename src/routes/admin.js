@@ -46,6 +46,7 @@ router.post('/insertdonkiemdinh',adminController.insertdonkiemdinh)
 router.post('/resoleapplication/:id', adminController.resoleApplication)
 router.post('/updatebusiness',adminController.updateBusiness)
 router.post('/updatecenter',adminController.updateCenter)
+router.post('/updateprofile',adminController.updateProfile)
 router.post('/changepassword',adminController.changePassWord)
 router.post('/changeava',upload.single('Image'),adminController.updateAvatar)
 

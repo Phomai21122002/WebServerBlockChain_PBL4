@@ -21,6 +21,7 @@
                         <div class="media-body">
                             <h3 class="mb-0">{{user.UserName}}</h3>
                             <p class="text-muted mb-0">{{user.Address}}</p>
+                            <p class="text-muted mb-0">{{user.Email}}</p>
                             <button id="saveBtn" style="padding: 5px 10px; display:none;" class="btn btn-primary">Lưu</button>
                         </div>
                         
@@ -36,15 +37,6 @@
                                     <input value="{{user.UserName}}"  type="text" class="form-control" id="val-username" name="UserName" required>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-lg-4 col-form-label" for="val-email">Email <span class="text-danger">*</span>
-                                </label>
-                                <div class="col-lg-6">
-                                    <input value="{{user.Email}}"  type="text" class="form-control" id="val-email" name="Email"  required>
-                                </div>
-                            </div>
-     
-
                             <div class="form-group row">
                                 <label class="col-lg-4 col-form-label" for="val-confirm-password">Địa Chỉ<span class="text-danger">*</span>
                                 </label>
