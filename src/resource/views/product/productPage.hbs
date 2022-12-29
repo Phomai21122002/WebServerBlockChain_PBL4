@@ -36,13 +36,13 @@
         {{#each data}}
         <div class="form-item">
             <div class="form-item_product">
-                <img src="/uploads/{{this.Image}}" alt="anh" class="form-item_img">
+                <img src="/uploads/{{this.data.Image}}" alt="anh" class="form-item_img">
                 <div class="form-item_position">
-                    <a href="/product/{{this._id}}" class="form-item_position-link">Chi tiết</a>
+                    <a href="/product/{{this.data.IDSanPham}}" class="form-item_position-link">Chi tiết</a>
                 </div>
             </div>
-            <h3 class="form-item_heading"> <a href="/product/{{this._id}}">{{this.TenSanPham}}</a> </h3>
-            <p class="form-item_desc">{{this._id}}</p>
+            <h3 class="form-item_heading"> <a href="/product/{{this.data.IDSanPham}}">{{this.data.TenSanPham}}</a> </h3>
+            <p class="form-item_desc">{{this.data.IDSanPham}}</p>
         </div> 
         {{/each}}
         

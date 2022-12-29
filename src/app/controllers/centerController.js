@@ -8,6 +8,8 @@ const product = require('../models/sanpham')
 const material = require('../models/nguyenlieu')
 const user = require('../models/user')
 
+const request = require('request')
+
 
 class centerController{
     index(req, res)
@@ -339,6 +341,65 @@ class centerController{
     productDetail(req,res){
         
     }
+
+    // POST /center/resoleApplication
+
+    resoleApplication(req, response ) {
+        var applicationID = req.params.id
+        
+        Application.findById(applicationID, (err,application) => {
+            product.findById(application.IDSanPham, (err, data) => {
+                var newChain = {}
+                var product = mongooseToObject(data)
+
+                newChain.IDSanPham = application.IDSanPham
+                newChain.UserID = product.UserID
+                newChain.ThanhPhan = []
+                newChain.MoTa = product.MoTa
+                newChain.NhaSanXuat = product.NhaSanXuat
+                newChain.Image = product.Image
+                newChain.NoiSanXuat = product.NoiSanXuat
+                newChain.HuongDanSuDung = product.HuongDanSuDung
+                newChain.CongDung = product.CongDung
+                newChain.TenSanPham = product.TenSanPham
+
+                for (let i = 0; i < product.ThanhPhan.length; i++) {
+                    const element =  product.ThanhPhan[i]
+                    var id = element.IDNguyenLieu.toString()
+                    newChain.ThanhPhan.push({IDNguyenLieu: id, TenNguyenLieu: element.TenNguyenLieu})
+                    if(i == product.ThanhPhan.length -1)
+                    {
+                        request.post({
+                            url: 'http://127.0.0.1:3000/blockchain/mine',
+                            form: {
+                                data: newChain
+                            }
+                        }, (err,res) => {
+                            if(!err){
+                                Application.updateOne({_id: applicationID}, {TrangThai: true})
+                                .then(()=>{
+                                    response.redirect('/admin')
+                                })
+                                .catch(()=>{
+                                    response.render('error/error500.hbs', {layout: false})
+                                })
+                            }
+                            else{
+                                response.render('error/error500.hbs', {layout: false})
+                            }
+                        } )
+
+                        
+                    }
+                }
+                
+            })
+        })
+        
+        
+    }
+
+
 }
 
 module.exports = new centerController

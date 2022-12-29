@@ -12,12 +12,11 @@ class productController {
         request(`http://127.0.0.1:3000/blockchain/chain`, { json: true }, (err, res, body) => {
             if(!err)
             {
-                // console.log(body)
                 SanPham.find( {}, function(err, data) {
                     if(!err) {
                         response.render('product/productPage.hbs' ,{
                             layout: 'productLayout.hbs',
-                            data: multipleMongooseToObject(data)
+                            data: body
                         })
                     }
                     else{
