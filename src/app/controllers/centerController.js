@@ -9,6 +9,7 @@ const material = require('../models/nguyenlieu')
 const user = require('../models/user')
 
 const request = require('request')
+const { MulterError } = require('multer')
 
 
 class centerController{
@@ -136,20 +137,56 @@ class centerController{
     }
 
     listApplication(req,res){
-        
-        Application.find({TrangThai: false}, (err, data) => {
-            if(!err){
-                const listApplication = multipleMongooseToObject(data)
-                for (let i = 0; i < listApplication.length; i++) {
-                    listApplication[i].index = i + 1 ;
+
+        var searchInput = req.query.searchinput
+
+        if(searchInput == null)
+        {
+            Application.find({TrangThai: false}, (err, data) => {
+                if(!err){
+                    const listApplication = multipleMongooseToObject(data)
+                    for (let i = 0; i < listApplication.length; i++) {
+                        listApplication[i].index = i + 1 ;
+                    }
+                    res.render('center/listApplication.hbs',{
+                        layout: 'centerLayout.hbs',
+                        data: listApplication,
+                        avatar: req.session.avatar
+                    })
                 }
-                res.render('center/listApplication.hbs',{
-                    layout: 'centerLayout.hbs',
-                    data: listApplication,
-                    avatar: req.session.avatar
+            })
+        }
+        else{
+            
+            Application.find({TrangThai: false})
+                .then((docs)=>{
+                    var applications = multipleMongooseToObject(docs)
+                    var data = []
+                    for (let i = 0; i < applications.length; i++) {
+                        const element = applications[i];
+                        if(element.TenSanPham.toLowerCase().includes(searchInput.toLowerCase()) || element._id == searchInput || 
+                            element.UserName.toLowerCase().includes(searchInput.toLowerCase())
+                        )
+                        {
+                            data.push(element)
+                        }
+                    }
+                    return data
                 })
-            }
-        })
+                .then(data=>{
+                    res.render('center/listApplication.hbs',{
+                        layout: 'centerLayout.hbs',
+                        data: data,
+                        avatar: req.session.avatar
+                    })
+                })
+                .catch(err=>{
+                    console.log(err)
+                    res.render('error/error500.hbs', {layout: false})
+                })
+        }
+        
+        
 
     }
 
@@ -194,19 +231,53 @@ class centerController{
 
 
     listProduct(req,res){
+        
+        var searchInput = req.query.searchinput
 
-        product.find({}, function (err, sanphams) {
-            if(err){
-                console.log(err)
-            }
-            else{
-                res.render('center/listProduct.hbs',{
-                    layout: 'centerLayout.hbs',
-                    data: multipleMongooseToObject(sanphams),
-                    avatar: req.session.avatar
+        if(searchInput == null)
+        {
+            product.find({}, function (err, sanphams) {
+                if(err){
+                    console.log(err)
+                    res.render('error/error500.hbs',{layout: false})
+                }
+                else{
+                    res.render('center/listProduct.hbs',{
+                        layout: 'centerLayout.hbs',
+                        data: multipleMongooseToObject(sanphams),
+                        avatar: req.session.avatar
+                    })
+                }
+            })
+        }
+        else{
+            product.find({})
+                .then(docs=>{
+                    var products = multipleMongooseToObject(docs)
+                    var data = []
+                    for (let i = 0; i < products.length; i++) {
+                        const element = products[i];
+                        if(element.TenSanPham.toLowerCase().includes(searchInput.toLowerCase()) || element._id == searchInput){
+                            data.push(element)
+                        }
+                        if(i == products.length -1 )
+                        {
+                            res.render('center/listProduct.hbs',{
+                                layout: 'centerLayout.hbs',
+                                data: data,
+                                avatar: req.session.avatar
+                            })
+                        }
+                        
+                    }
                 })
-            }
-        })
+                .catch(err=>{
+                    console.log(err)
+                    res.render('error/error500.hbs',{layout: false})
+                })
+        }
+
+        
     }
 
 
@@ -234,15 +305,53 @@ class centerController{
 
 
     listMaterial(req,res){
-        material.find({}, (err, data) => {
-            if(!err){
-                res.render('center/listMaterial.hbs', {
-                    layout: 'centerLayout.hbs',
-                    data: multipleMongooseToObject(data),
-                    avatar: req.session.avatar
+
+        var searchInput = req.query.searchinput
+
+        if(searchInput == null)
+        {
+            material.find({}, function (err, materials) {
+                if(err){
+                    console.log(err)
+                    res.render('error/error500.hbs',{layout: false})
+                }
+                else{
+                    res.render('center/listMaterial.hbs',{
+                        layout: 'centerLayout.hbs',
+                        data: multipleMongooseToObject(materials),
+                        avatar: req.session.avatar
+                    })
+                }
+            })
+        }
+        else{
+            material.find({})
+                .then(docs=>{
+                    var materials = multipleMongooseToObject(docs)
+                    var data = []
+                    for (let i = 0; i < materials.length; i++) {
+                        const element = materials[i];
+                        if(element.TenNguyenLieu.toLowerCase().includes(searchInput.toLowerCase()) || element._id == searchInput){
+                            data.push(element)
+                        }
+                        if(i == materials.length -1 )
+                        {
+                            res.render('center/listMaterial.hbs',{
+                                layout: 'centerLayout.hbs',
+                                data: data,
+                                avatar: req.session.avatar
+                            })
+                        }
+                        
+                    }
                 })
-            }
-        })
+                .catch(err=>{
+                    console.log(err)
+                    res.render('error/error500.hbs',{layout: false})
+                })
+        }
+
+
     }
 
 
@@ -264,15 +373,44 @@ class centerController{
     }
 
     listBusiness(req,res){
-        user.find({Quyen: 2}, (err, data) => {
-            if(!err){
-                res.render('center/listBusiness.hbs', {
-                    layout: 'centerLayout.hbs',
-                    data: multipleMongooseToObject(data),
-                    avatar: req.session.avatar
+        var searchInput = req.query.searchinput
+        if(searchInput == null){
+            user.find({Quyen: 2}, (err, data) => {
+                if(!err){
+                    res.render('center/listBusiness.hbs', {
+                        layout: 'centerLayout.hbs',
+                        data: multipleMongooseToObject(data),
+                        avatar: req.session.avatar
+                    })
+                }
+            } )
+        }
+        else{
+            user.find({Quyen:2})
+                .then(docs =>{
+                    var users = multipleMongooseToObject(docs)
+                    var data = []
+                    for (let i = 0; i < users.length; i++) {
+                        const element = users[i];
+                        if(element.UserName.toLowerCase().includes(searchInput.toLowerCase()) || element._id == searchInput){
+                            data.push(element)
+                        }
+                        if(i == users.length -1)
+                        {
+                            res.render('center/listBusiness.hbs', {
+                                layout: 'centerLayout.hbs',
+                                data: data,
+                                avatar: req.session.avatar
+                            })
+                        }
+                    }
                 })
-            }
-        } )
+                .catch(err=>{
+                    res.render('error/error500.hbs', {layout: false})
+                })
+        }
+
+        
     }
 
     //GET /center/doanhnghiep/id

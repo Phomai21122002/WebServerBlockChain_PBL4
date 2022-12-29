@@ -9,7 +9,7 @@ const user = new Schema ({
     Address: {type: String, default: ''},
     PhoneNumber: {type: String, default: ''},
     LoaiHinhKinhDoanh: {type: String, default: ''},
-    Avatar: {type: String , default: ''},
+    Avatar: {type: String , default: 'pngwing.com (2).png'},
 });
 
 module.exports = mongoose.model('user', user)
