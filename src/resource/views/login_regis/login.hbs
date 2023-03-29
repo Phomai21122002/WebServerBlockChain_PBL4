@@ -71,7 +71,7 @@
 
         function HandleLogin (){
             
-            http.open('POST','http://localhost:3005/login/checklogin')
+            http.open('POST','/login/checklogin')
             http.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
             http.send('email='+inputEmail.value+'&password='+inputPassWord.value)
 
@@ -80,11 +80,11 @@
                     var response = JSON.parse(this.responseText)
                     if(response.result == true){
                         if(response.permission == 0 )
-                            window.location.href = "http://localhost:3005/admin"
+                            window.location.href = "/admin"
                         if(response.permission == 1)
-                            window.location.href = "http://localhost:3005/center"
+                            window.location.href = "/center"
                         if(response.permission == 2)
-                            window.location.href = "http://localhost:3005/business"
+                            window.location.href = "/business"
                     }
                     else{
                         loginFail.style.display = 'block'
