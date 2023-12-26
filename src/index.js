@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
 const hbs = require("express-handlebars");
+const handlebarsHelpers = require("handlebars-helpers")();
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
@@ -33,6 +34,7 @@ app.engine(
   "hbs",
   hbs.engine({
     extname: ".hbs",
+    helpers: handlebarsHelpers,
   })
 );
 app.set("view engine", "hbs");
